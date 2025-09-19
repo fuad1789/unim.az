@@ -71,7 +71,7 @@ function levenshtein(a: string, b: string): number {
   const prev = new Array(n + 1);
   for (let j = 0; j <= n; j++) prev[j] = j;
   for (let i = 1; i <= m; i++) {
-    let curr = new Array(n + 1);
+    const curr = new Array(n + 1);
     curr[0] = i;
     const aChar = a.charCodeAt(i - 1);
     for (let j = 1; j <= n; j++) {
@@ -282,10 +282,6 @@ export default function Home() {
 
   const handleShare = async () => {
     if (!selectedUniversity) return;
-    const origin =
-      typeof window !== "undefined"
-        ? window.location.origin
-        : "https://unim.az";
 
     // Template message with university and week info
     const template = `${selectedUniversity.name}\n\n🗓 Bu həftə: ${resultText}\n\n🔗 Mənbə: unim.az`;
@@ -296,14 +292,14 @@ export default function Home() {
     try {
       window.open(waUrl, "_blank", "noopener,noreferrer");
       return;
-    } catch (_) {
+    } catch {
       // fall through to clipboard
     }
 
     try {
       await navigator.clipboard.writeText(fullMessage);
       alert("Mətn və link kopyalandı ✨");
-    } catch (err) {
+    } catch {
       alert("Paylaşmaq alınmadı. Zəhmət olmasa özünüz kopyalayın.");
     }
   };
@@ -480,7 +476,6 @@ export default function Home() {
                               className={`w-full text-left px-3 py-2 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none transition flex items-center gap-3 overflow-hidden ${
                                 idx === activeIndex ? "bg-gray-50" : ""
                               }`}
-                              aria-selected={idx === activeIndex}
                               tabIndex={-1}
                             >
                               <div className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-full overflow-hidden bg-gray-100 ring-1 ring-black/5 flex items-center justify-center shrink-0">
