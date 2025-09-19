@@ -1,0 +1,250 @@
+[
+  {
+    "id": 1,
+    "name": "Bakı Dövlət Universiteti",
+    "shortName": "BDU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/az/5/56/BDU_yeni.jpeg"
+  },
+  {
+    "id": 2,
+    "name": "Azərbaycan Dövlət Neft və Sənaye Universiteti",
+    "shortName": "ADNSU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5KU6ZIffYUM3tzDE2whXbLMqndRfdnQQveJ3TFeVAfso_NMFzGzh-q4tf_fWeHy8OO0w&usqp=CAU"
+  },
+  {
+    "id": 3,
+    "name": "Azərbaycan Texniki Universiteti",
+    "shortName": "AzTU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnnGJ-deMEa7wrwUxDLBu0ISOjRJillFTAHQ&s"
+  },
+  {
+    "id": 4,
+    "name": "Azərbaycan Dövlət İqtisad Universiteti (UNEC)",
+    "shortName": "UNEC",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/az/6/61/UNEC_1.png"
+  },
+  {
+    "id": 5,
+    "name": "Azərbaycan Dövlət Pedaqoji Universiteti",
+    "shortName": "ADPU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/az/7/7c/ADPU.jpeg?20200701134258"
+  },
+  {
+    "id": 6,
+    "name": "Azərbaycan Memarlıq və İnşaat Universiteti",
+    "shortName": "AzMİU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/az/e/e8/Az.MIU_logo.png"
+  },
+  {
+    "id": 7,
+    "name": "Bakı Slavyan Universiteti",
+    "shortName": "BSU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://glc.edu.az/storage/baki-slavyan-universiteti.webp"
+  },
+  {
+    "id": 8,
+    "name": "Azərbaycan Dillər Universiteti",
+    "shortName": "ADU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/az/5/5b/ADU-nun_loqosu.png"
+  },
+  {
+    "id": 9,
+    "name": "Bakı Mədəniyyət və İncəsənət Universiteti",
+    "shortName": "ADMİU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/az/6/64/ADM%C4%B0U1.png"
+  },
+  {
+    "id": 10,
+    "name": "Azərbaycan Respublikasının Prezidenti yanında Dövlət İdarəçilik Akademiyası (DİA)",
+    "shortName": "DİA",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/az/0/03/D%C4%B0A.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Sumqayıt Dövlət Universiteti",
+    "shortName": "SDU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7ihNFCBNlxCxERuR62Qb42WP5jAV0RLTzyw&s"
+  },
+  {
+    "id": 12,
+    "name": "Lənkəran Dövlət Universiteti",
+    "shortName": "LDU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7ImSc43UgLiuUrOaEVkL4k1WguJ3whBHGsg&s"
+  },
+  {
+    "id": 13,
+    "name": "Gəncə Dövlət Universiteti",
+    "shortName": "GDU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://fed.az/upload/news/14163.png"
+  },
+  {
+    "id": 14,
+    "name": "Azərbaycan Texnoloji Universiteti",
+    "shortName": "AzTU (Texnologiya)",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlEYJiKZKXxraDk5Wb4fcqhJgNgcSDi3lTgQ&s"
+  },
+  {
+    "id": 15,
+    "name": "Naxçıvan Dövlət Universiteti",
+    "shortName": "NDU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/az/6/63/NDU_loqo.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Mingəçevir Dövlət Universiteti",
+    "shortName": "MDU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://mdu.edu.az/wp-content/uploads/2022/08/Logo2_eng.jpg"
+  },
+  {
+    "id": 17,
+    "name": "Bakı Mühəndislik Universiteti",
+    "shortName": "BMU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqCe9a4E6X5pxAhQoyU9FrHye2SaWJCSBzBg&s"
+  },
+  {
+    "id": 18,
+    "name": "Azərbaycan Tibb Universiteti",
+    "shortName": "ATU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Emblem_of_the_Azerbaijan_Medical_University.jpg"
+  },
+  {
+    "id": 19,
+    "name": "ADA Universiteti",
+    "shortName": "ADA",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8b3Zws9qRbPBNSfvbo8R0h7OIycqCHG5x-A&s"
+  },
+  {
+    "id": 20,
+    "name": "Azərbaycan Dövlət Dəniz Akademiyası",
+    "shortName": "ADDA",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/az/thumb/7/75/ADDA_logo.jpg/1200px-ADDA_logo.jpg"
+  },
+  {
+    "id": 21,
+    "name": "Azərbaycan Dövlət Bədən Tərbiyəsi və İdman Akademiyası",
+    "shortName": "ADBTİA",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/az/thumb/8/86/Idman_Akademiyasi.jpg/1200px-Idman_Akademiyasi.jpg"
+  },
+  {
+    "id": 22,
+    "name": "Azərbaycan Dövlət Aqrar Universiteti",
+    "shortName": "ADAU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/az/5/5a/ADAU-logo.png"
+  },
+  {
+    "id": 23,
+    "name": "Azərbaycan Universiteti",
+    "shortName": "AzU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Azerbaijan_University_logo.png/960px-Azerbaijan_University_logo.png"
+  },
+  {
+    "id": 24,
+    "name": "Xəzər Universiteti",
+    "shortName": "Xəzər",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://khazar.jis.az/site/templates/img/500x500.png"
+  },
+  {
+    "id": 25,
+    "name": "Qərbi Kaspi Universiteti",
+    "shortName": "Qərbi Kaspi",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/az/thumb/d/dc/Western_Caspian_Univercity.jpeg/1200px-Western_Caspian_Univercity.jpeg"
+  },
+  {
+    "id": 26,
+    "name": "Odlar Yurdu Universiteti",
+    "shortName": "Odlar yurdu",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwlikY9v8FFlIMDSGnV0XsMoP9OQtbINeTWg&s"
+  },
+  {
+    "id": 27,
+    "name": "Bakı Avrasiya Universiteti",
+    "shortName": "BAU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://upload.wikimedia.org/wikipedia/az/6/6e/Bak%C4%B1_Avrasiya_Universiteti.jpeg"
+  },
+  {
+    "id": 28,
+    "name": "Bakı Qızlar Universiteti",
+    "shortName": "BQU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqjicVd3MbVCjVQZt0cz0JsrpX6y8Wj5_kKA&s"
+  },
+  {
+    "id": 29,
+    "name": "Azərbaycan Universiteti Əmək və Sosial Münasibətlər Akademiyası",
+    "shortName": "AESMA",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://aesma.edu.az/images/aesma-logo.png"
+  },
+  {
+    "id": 30,
+    "name": "Bakı Biznes Universiteti",
+    "shortName": "BBU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://bbu.edu.az/images/30il.png"
+  },
+  {
+    "id": 31,
+    "name": "Bakı İslam Universiteti",
+    "shortName": "BİU",
+    "startWeekType": "ust",
+    "startDate": "2024-09-16",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxYYlmt06nt7PN2ph7V4tBmFnfMWZ--TmqGA&s"
+  }
+]
