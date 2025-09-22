@@ -366,7 +366,7 @@ export default function Home() {
             className="fixed left-1/2 -translate-x-1/2 mx-auto flex items-center gap-2 sm:gap-3"
             style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 14px)" }}
           >
-            <div className="flex items-center gap-2 sm:gap-3 text-gray-700 bg-white/90 backdrop-blur-md ring-1 ring-black/5 shadow-md rounded-full px-3 py-2 sm:px-4 sm:py-2.5 max-w-[78vw]">
+            <div className="flex items-center gap-2 sm:gap-3 text-gray-700 bg-white/90 backdrop-blur-md ring-1 ring-black/5 shadow-md rounded-full px-3 py-1 sm:px-4 sm:py-2.5 max-w-[78vw]">
               <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-1 ring-black/5 overflow-hidden bg-gray-100 flex items-center justify-center shrink-0">
                 {selectedUniversity.img ? (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -396,7 +396,7 @@ export default function Home() {
             <button
               onClick={handleShare}
               aria-label="Paylaş"
-              className="h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-white/90 backdrop-blur-md ring-1 ring-black/5 shadow-md flex items-center justify-center text-blue-600 hover:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              className="h-11 w-11 sm:h-11 sm:w-11 rounded-full cursor-pointer bg-white/90 backdrop-blur-md ring-1 ring-black/5 shadow-md flex items-center justify-center text-blue-600 hover:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
             >
               <Share2 className="h-5 w-5" aria-hidden="true" />
             </button>
