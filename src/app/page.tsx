@@ -501,9 +501,11 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.2 }}
           onClick={handleOpenGroupSelector}
-          className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-200 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+          className="fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 sm:px-6 sm:py-3 rounded-full shadow-lg transition-all duration-200 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 max-w-[90vw]"
         >
-          <span className="text-base font-semibold">📅 Cədvəlini Əlavə Et</span>
+          <span className="text-sm sm:text-base font-semibold whitespace-nowrap">
+            📅 Cədvəlini Əlavə Et
+          </span>
         </motion.button>
       )}
 
