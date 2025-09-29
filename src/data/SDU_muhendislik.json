@@ -1,0 +1,4954 @@
+[
+  {
+    "group": "681",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "VAK",
+            "room": "201"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Kompüter mühəndisliyinin əsasları (mühazirə)",
+            "teacher": "Allahverdiyeva K.",
+            "room": "323"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Proqramlaş. əsas. (məş.)",
+            "teacher": "Hüseynova L.",
+            "room": "109"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Xətti cəbr və analitik həndəsə (mühazirə)",
+                "teacher": "Hətəmova R.",
+                "room": "303"
+              },
+              "lower": {
+                "subject": "X/d işgüzar. və akad. kom.",
+                "teacher": "VAK",
+                "room": "203"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proqramlaşdırmanın əsasları (mühazirə)",
+            "teacher": "Rəhimov Ş.",
+            "room": "323"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {
+                "subject": "Az. dil. işg. və ak. kom.(məş)",
+                "teacher": "Məhərrəmova M.",
+                "room": "201"
+              },
+              "lower": {
+                "subject": "Xətti cəbr və an. hən.(məş)",
+                "teacher": "Hətəmova R.",
+                "room": "201"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Komp. müh. əsas. (lab.)",
+            "teacher": "Məmmədova R.",
+            "room": "205"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Azərbaycan dilində işgüzar və akademik kommunikasiya (müh)",
+            "teacher": "Məhərrəmova M.",
+            "room": "323"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "VAK",
+            "room": "203"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Proqramlaş. əsas. (lab.)",
+            "teacher": "İbrahimova N.",
+            "room": "202"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Komp. müh. əsas.(məş.)",
+            "teacher": "Allahverdiyeva K.",
+            "room": "213"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "681a",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Proqramlaş. əsas. (lab.)",
+            "teacher": "İbrahimova N.",
+            "room": "202"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Kompüter mühəndisliyinin əsasları (mühazirə)",
+            "teacher": "Allahverdiyeva K.",
+            "room": "323"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {
+                "subject": "X/d işgüzar. və akad. kom.",
+                "teacher": "İsmayılova P.",
+                "room": "203"
+              },
+              "lower": {
+                "subject": "Xətti cəbr və an. hən.(məş)",
+                "teacher": "Babayeva Ü.",
+                "room": "203"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Xətti cəbr və analitik həndəsə (mühazirə)",
+                "teacher": "Hətəmova R.",
+                "room": "303"
+              },
+              "lower": {
+                "subject": "Az. dil. işg. və ak. kom.(məş)",
+                "teacher": "Məhərrəmova M.",
+                "room": "201"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proqramlaşdırmanın əsasları (mühazirə)",
+            "teacher": "Rəhimov Ş.",
+            "room": "323"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "İsmayılovaP.",
+            "room": "212"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Komp. müh. əsas. (məş.)",
+            "teacher": "Allahverdiyeva K.",
+            "room": "213"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Azərbaycan dilində işgüzar və akademik kommunikasiya (müh)",
+            "teacher": "Məhərrəmova M.",
+            "room": "323"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Komp. müh. əsas. (lab.)",
+            "teacher": "Məmmədova R.",
+            "room": "205"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "İsmayılovaP.",
+            "room": "213"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proqramlaş. əsas. (məş.)",
+            "teacher": "Hüseynova L.",
+            "room": "203"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "681b",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Proqramlaş. əsas. (lab.)",
+            "teacher": "Zeynalabdiyeva I.",
+            "room": "202"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Komp. müh. əsas. (lab.)",
+            "teacher": "Quliyeva L.",
+            "room": "205"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "VAK",
+            "room": "203"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Proqramlaş. əsas. (məş.)",
+            "teacher": "Zeynalabdiyeva İ.",
+            "room": "212"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Kompüter mühəndisliyinin əsasları (mühazirə)",
+            "teacher": "Allahverdiyeva K.",
+            "room": "323"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {
+                "subject": "Az. dil. işg. və ak. kom.(məş)",
+                "teacher": "Məhərrəmova M.",
+                "room": "213"
+              },
+              "lower": {
+                "subject": "X/d işgüzar. və akad. kom.",
+                "teacher": "VAK",
+                "room": "213"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Xətti cəbr və analitik həndəsə (mühazirə)",
+                "teacher": "Hətəmova R.",
+                "room": "303"
+              },
+              "lower": {
+                "subject": "Xətti cəbr və an. hən.(məş)",
+                "teacher": "Babayeva Ü.",
+                "room": "212"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proqramlaşdırmanın əsasları (mühazirə)",
+            "teacher": "Rəhimov Ş.",
+            "room": "323"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "VAK",
+            "room": "204"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Azərbaycan dilində işgüzar və akademik kommunikasiya (müh)",
+            "teacher": "Məhərrəmova M.",
+            "room": "323"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Komp. müh. əsas. (məş.)",
+            "teacher": "Allahverdiyeva K.",
+            "room": "212"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "682b",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Həsənova G.",
+            "room": "201"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proqramlaşdırmanın əsasları (mühazirə)",
+            "teacher": "Zeynalabdiyeva İ.",
+            "room": "102"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "İnform. təhlük. əsas. (məş.)",
+            "teacher": "Əliyeva A.",
+            "room": "212"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Xətti cəbr (müh)",
+            "teacher": "Əliyeva K.",
+            "room": "102"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Həsənova G.",
+            "room": "201"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Azərbaycan tarixi (məş.)",
+            "teacher": "Qasımbəyli C.",
+            "room": "210"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Azərbaycan tarixi (müh.)",
+            "teacher": "Əfəndiyeva A.",
+            "room": "102"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Xətti cəbr.(məş)",
+            "teacher": "Hətəmova R.",
+            "room": "203"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "X/d işgüzar. və akad. kom.",
+                "teacher": "Həsənova G.",
+                "room": "213"
+              },
+              "lower": {}
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {},
+              "lower": {
+                "subject": "Proqramlaş. əsas. (lab.)",
+                "teacher": "İbrahimova N.",
+                "room": "135"
+              }
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "İnform. təhlük. əsas. (müh.)",
+            "teacher": "Əliyeva A.",
+            "room": "212"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "682c",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Proqramlaş. əsas. (lab.)",
+            "teacher": "İbrahimova N.",
+            "room": "135"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proqramlaşdırmanın əsasları (mühazirə)",
+            "teacher": "Zeynalabdiyeva İ.",
+            "room": "102"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Nəcəfova Ş.",
+            "room": "109"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Xətti cəbr (müh)",
+            "teacher": "Əliyeva K.",
+            "room": "102"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Azərbaycan tarixi (məş.)",
+            "teacher": "Qasımbəyli C.",
+            "room": "107"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Nəcəfova Ş.",
+            "room": "212"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Azərbaycan tarixi (müh.)",
+            "teacher": "Əfəndiyeva A.",
+            "room": "102"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "İnform. təhlük. əsas. (məş.)",
+            "teacher": "Əliyeva A.",
+            "room": "212"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {},
+              "lower": {}
+            }
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {},
+              "lower": {
+                "subject": "X/d işgüzar. və akad. kom.",
+                "teacher": "Nəcəfova Ş.",
+                "room": "213"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Xətti cəbr.(məş)",
+            "teacher": "Hətəmova R.",
+            "room": "215"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "İnform. təhlük. əsas. (müh.)",
+            "teacher": "Əliyeva A.",
+            "room": "212"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "682b",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Həsənova G.",
+            "room": "201"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proqramlaşdırmanın əsasları (mühazirə)",
+            "teacher": "Zeynalabdiyeva İ.",
+            "room": "102"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "İnform. təhlük. əsas. (məş.)",
+            "teacher": "Əliyeva A.",
+            "room": "212"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Xətti cəbr (müh)",
+            "teacher": "Əliyeva K.",
+            "room": "102"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Həsənova G.",
+            "room": "201"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Azərbaycan tarixi (məş.)",
+            "teacher": "Qasımbəyli C.",
+            "room": "210"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Azərbaycan tarixi (müh.)",
+            "teacher": "Əfəndiyeva A.",
+            "room": "102"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Xətti cəbr.(məş)",
+            "teacher": "Hətəmova R.",
+            "room": "203"
+          },
+          {}
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "X/d işgüzar. və akad. kom.",
+                "teacher": "Həsənova G.",
+                "room": "213"
+              },
+              "lower": {}
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {},
+              "lower": {
+                "subject": "Proqramlaş. əsas. (lab.)",
+                "teacher": "İbrahimova N.",
+                "room": "135"
+              }
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "İnform. təhlük. əsas. (müh.)",
+            "teacher": "Əliyeva A.",
+            "room": "212"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "682c",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Proqramlaş. əsas. (lab.)",
+            "teacher": "İbrahimova N.",
+            "room": "135"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proqramlaşdırmanın əsasları (mühazirə)",
+            "teacher": "Zeynalabdiyeva İ.",
+            "room": "102"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Nəcəfova Ş.",
+            "room": "109"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Xətti cəbr (müh)",
+            "teacher": "Əliyeva K.",
+            "room": "102"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Azərbaycan tarixi (məş.)",
+            "teacher": "Qasımbəyli C.",
+            "room": "107"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Nəcəfova Ş.",
+            "room": "212"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Azərbaycan tarixi (müh.)",
+            "teacher": "Əfəndiyeva A.",
+            "room": "102"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "İnform. təhlük. əsas. (məş.)",
+            "teacher": "Əliyeva A.",
+            "room": "212"
+          },
+          {}
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {},
+              "lower": {
+                "subject": "X/d işgüzar. və akad. kom.",
+                "teacher": "Nəcəfova Ş.",
+                "room": "213"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Xətti cəbr.(məş)",
+            "teacher": "Hətəmova R.",
+            "room": "215"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "İnform. təhlük. əsas. (müh.)",
+            "teacher": "Əliyeva A.",
+            "room": "212"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "682",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {},
+          {
+            "time": "10:05-11:25",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Nəcəfova Ş.",
+            "room": "109"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Xətti cəbr və analitik həndəsə (mühazirə)",
+            "teacher": "Əliyeva K.",
+            "room": "215"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Yunusova Ş.",
+            "room": "107"
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {
+                "subject": "Multikultur. giriş (məş.)",
+                "teacher": "Behbudov S.",
+                "room": "215"
+              },
+              "lower": {
+                "subject": "Xətti cəbr və an. hən.(məş)",
+                "teacher": "Hətəmova R.",
+                "room": "215"
+              }
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "FİZİKA (mühazirə)",
+            "teacher": "Həşimova A.",
+            "room": "323"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Yunusova Ş.",
+            "room": "107"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Fizika (lab.)",
+            "teacher": "Həşimova A.",
+            "room": "1209"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Proqramlaşdırmanın əsasları (mühazirə)",
+            "teacher": "Rəhimov Ş.",
+            "room": "303"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Proqramlaş. əsas. (məş.)",
+                "teacher": "VAK 13",
+                "room": "213"
+              },
+              "lower": {
+                "subject": "X/d işgüzar. və akad. kom.",
+                "teacher": "Yunusova Ş.",
+                "room": "102"
+              }
+            }
+          },
+          {},
+          {
+            "time": "11:40-13:00",
+            "subject": "Azərbaycan tarixi (mühazirə)",
+            "teacher": "Cəfərov P.",
+            "room": "323"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Multikulturalizmə giriş (mühazirə)",
+            "teacher": "Behbudov S.",
+            "room": "303"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proqramlaş. əsas. (lab.)",
+            "teacher": "Səlimova M.",
+            "room": "202"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Azərbaycan tarixi (məş.)",
+            "teacher": "Əfəndiyeva A.",
+            "room": "215"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "682a",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {},
+          {
+            "time": "10:05-11:25",
+            "subject": "KT və proq. (lab.)",
+            "teacher": "İbrahimova P.",
+            "room": "202"
+          },
+          {}
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Xətti cəbr və an. hən.(məş)",
+                "teacher": "Babayeva Ü.",
+                "room": "215"
+              },
+              "lower": {
+                "subject": "Proqramlaş. əsas. (məş.)",
+                "teacher": "Hüseynova L.",
+                "room": ""
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proqramlaş. əsas. (lab.)",
+            "teacher": "Hüseynzadə A.",
+            "room": "135"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "FİZİKA (mühazirə)",
+            "teacher": "Həşimova A.",
+            "room": "323"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Fizika (lab.)",
+            "teacher": "Hüseynova",
+            "room": "1209"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Yunusova Ş.",
+            "room": "102"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Proqramlaşdırmanın əsasları (mühazirə)",
+            "teacher": "Rəhimov Ş.",
+            "room": "303"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Yunusova Ş.",
+            "room": "109"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Azərbaycan tarixi (məş.)",
+            "teacher": "Əfəndiyeva A.",
+            "room": "109"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Azərbaycan tarixi (mühazirə)",
+            "teacher": "Cəfərov P.",
+            "room": "323"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Xətti cəbr və analitik həndəsə (mühazirə)",
+            "teacher": "Allahverdiyeva N.",
+            "room": "303"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Yunusova Ş.",
+            "room": "102"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Multikultur. giriş (məş.)",
+            "teacher": "Behbudov S.",
+            "room": "102"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "682d",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {},
+          {
+            "time": "10:05-11:25",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Yunusova Ş.",
+            "room": "201"
+          },
+          {}
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "",
+            "room": "204"
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {
+                "subject": "Xətti cəbr və an. hən.(məş)",
+                "teacher": "Babayeva Ü.",
+                "room": "215"
+              },
+              "lower": {
+                "subject": "Proqramlaş. əsas. (məş.)",
+                "teacher": "Hüseynova L.",
+                "room": ""
+              }
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Azərbaycan tarixi (mühazirə)",
+            "teacher": "Vəliyeva X.",
+            "room": "102"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "",
+            "room": "204"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Azərbaycan tarixi (məş.)",
+            "teacher": "Mirzəyeva K.",
+            "room": "204"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Proqramlaşdırmanın əsasları (mühazirə)",
+            "teacher": "Rəhimov Ş.",
+            "room": "303"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Yunusova Ş.",
+            "room": "102"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proqramlaş. əsas. (lab.)",
+            "teacher": "Hüseynzadə A.",
+            "room": "135"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {
+                "subject": "Azərbaycan tarixi (məş.)",
+                "teacher": "Əfəndiyeva A.",
+                "room": "213"
+              },
+              "lower": {
+                "subject": "KT və proq. (lab.)",
+                "teacher": "İbrahimova P.",
+                "room": "202"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Xətti cəbr və an. hən.(məş)",
+                "teacher": "Babayeva Ü.",
+                "room": "201"
+              },
+              "lower": {
+                "subject": "KT və proq. (məş.)",
+                "teacher": "Zeynalova S.",
+                "room": "201"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Fizika (lab.)",
+            "teacher": "Hüseynova",
+            "room": "1209"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Multikultur. giriş (məş.)",
+            "teacher": "Behbudov S.",
+            "room": "102"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "683",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Fizikanın əsasları (məş.)",
+                "teacher": "Şahsuvarova Q.",
+                "room": "109"
+              },
+              "lower": {
+                "subject": "Fizikanın əsasları (məş.)",
+                "teacher": "Şahsuvarova Q.",
+                "room": "109"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {
+                "subject": "Fizikanın əsasları (lab.)",
+                "teacher": "Şahsuvarova Q.",
+                "room": "1201"
+              },
+              "lower": {
+                "subject": "X/d işgüzar. və akad. kom.",
+                "teacher": "Yunusova Ş.",
+                "room": "102"
+              }
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Azərbaycan tarixi (mühazirə)",
+            "teacher": "Vəliyeva X.",
+            "room": "102"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Kompüter texnologiyaları və proqramlaşdırma (mühazirə)",
+            "teacher": "Zeynalova S.",
+            "room": "215"
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {
+                "subject": "X/d işgüzar. və akad. kom.",
+                "teacher": "Nəcəfova Ş.",
+                "room": "213"
+              },
+              "lower": {
+                "subject": "KT və proq. (məş.)",
+                "teacher": "Zeynalova S.",
+                "room": "215"
+              }
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {},
+              "lower": {
+                "subject": "Xətti cəbr və an. hən.(məş)",
+                "teacher": "Babayeva Ü.",
+                "room": "215"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {},
+          {
+            "time": "10:05-11:25",
+            "subject": "Fizikanın əsasları (mühazirə)",
+            "teacher": "Sərdarova N.",
+            "room": "215"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {
+                "subject": "X/d işgüzar. və akad. kom.",
+                "teacher": "Nəcəfova Ş.",
+                "room": "109"
+              },
+              "lower": {
+                "subject": "Fizikanın əsasları (lab.)",
+                "teacher": "Mustafayeva Ü.",
+                "room": "1201"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "683a",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Azərbaycan tarixi (məş.)",
+            "teacher": "Mirzəyeva K.",
+            "room": "212"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Yunusova Ş.",
+            "room": "201"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Xətti cəbr və analitik həndəsə (mühazirə)",
+            "teacher": "Əliyeva K.",
+            "room": "215"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "III",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Xətti cəbr və an. hən.(məş)",
+            "teacher": "Yunusova Ş.",
+            "room": "102"
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {
+                "subject": "KT və proq. (məş.)",
+                "teacher": "Zeynalova S.",
+                "room": "215"
+              },
+              "lower": {
+                "subject": "Xətti cəbr və an. hən.(məş)",
+                "teacher": "Babayeva Ü.",
+                "room": "215"
+              }
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {
+                "subject": "Azərbaycan tarixi (məş.)",
+                "teacher": "Əfəndiyeva A.",
+                "room": "213"
+              },
+              "lower": {
+                "subject": "KT və proq. (lab.)",
+                "teacher": "İbrahimova P.",
+                "room": "202"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Xətti cəbr və an. hən.(məş)",
+                "teacher": "Babayeva Ü.",
+                "room": "201"
+              },
+              "lower": {
+                "subject": "KT və proq. (məş.)",
+                "teacher": "Zeynalova S.",
+                "room": "201"
+              }
+            }
+          },
+          {},
+          {
+            "time": "11:40-13:00",
+            "subject": "Multikultur. giriş (məş.)",
+            "teacher": "Behbudov S.",
+            "room": "102"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "683b",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Mexatr. və rob. əsas. (müh.)",
+            "teacher": "Salmanov M.",
+            "room": "113"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Nəcəfova Ş.",
+            "room": "204"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {
+                "subject": "Fizika(məş.)",
+                "teacher": "Şahsuvarova Q",
+                "room": "204"
+              },
+              "lower": {
+                "subject": "Fizika (lab.)",
+                "teacher": "Ələsgərova D.",
+                "room": "1209"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Nəcəfova Ş.",
+            "room": "111"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Fizika (müh.)",
+            "teacher": "Həşimova A",
+            "room": "111"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Proqramlaş. əsas. (müh.)",
+            "teacher": "Cəfərova Ş.",
+            "room": "204"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Xətti cəbr və an. hən.(məş)",
+            "teacher": "Babayeva Ü.",
+            "room": "113"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proqramlaş. əsas. (məş.)",
+            "teacher": "Cəfərova Ş.",
+            "room": "204"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Nəcəfova Ş.",
+            "room": ".204"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Xətti cəbr və an. hən.(məş)",
+            "teacher": "Allahverdiyeva N.",
+            "room": "212"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proqr. əsas. (lab.)",
+            "teacher": "Zeynalova S.",
+            "room": "135"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Mexatr. və rob. əsas. (məş.)",
+            "teacher": "Əliyeva S.",
+            "room": "107"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "684",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Xətti cəbr və analitik həndəsə (mühazirə)",
+            "teacher": "Əliyeva K.",
+            "room": "102"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Tərsimi həndəsə (müh.)",
+            "teacher": "Bağırov Z.",
+            "room": "107"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "İsmayılova P.",
+            "room": "212"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Kimya (məş.)",
+                "teacher": "Əhmədov V.",
+                "room": "201"
+              },
+              "lower": {
+                "subject": "Kimya (lab.)",
+                "teacher": "Rzaxanova S.",
+                "room": "1401"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "İxtisasa giriş (məş.) (müh/məş)",
+            "teacher": "Süleymanova N.",
+            "room": "107"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Tərsimi həndəsə (məş.)",
+            "teacher": "Bağırov Z.",
+            "room": "107"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Materialşünaslıq (müh.)",
+            "teacher": "Süleymanova N.",
+            "room": "107"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "İsmayılova P.",
+            "room": "212"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Xətti cəbr və an. hən. (məş)",
+            "teacher": "Hətəmova R.",
+            "room": "107"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Materialşünaslıq (lab.)",
+                "teacher": "Süleymanova N.",
+                "room": "107"
+              },
+              "lower": {
+                "subject": "Materialşünaslıq (lab.)",
+                "teacher": "Süleymanova N.",
+                "room": "107"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Kimya (müh.)",
+            "teacher": "Əhmədov V.",
+            "room": "107"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "İsmayılova P.",
+            "room": "212"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "684b",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Xətti cəbr və analitik həndəsə (mühazirə)",
+            "teacher": "Əliyeva K.",
+            "room": "102"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Məmməd İ.",
+            "room": "102"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {
+                "subject": "Fizikanın əsasları (lab.)",
+                "teacher": "Şahsuvarova Q.",
+                "room": ""
+              },
+              "lower": {
+                "subject": "Az.dil.işg. və ak.kom. (məş)",
+                "teacher": "İmaməliyeva G.",
+                "room": "213"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "X/d işgüzar. və akad. kom",
+            "teacher": "Məmməd İ.",
+            "room": ""
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Komp. qrafikası (müh.)",
+            "teacher": "Səlimova M.",
+            "room": "201"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Fizikanın əsasları(müh)",
+            "teacher": "Sərdarova N.",
+            "room": "102"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Az.dil.işg. və ak.kom. (müh)",
+            "teacher": "İmaməliyeva G.",
+            "room": ""
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "X/d işgüzar. və akad. kom.",
+            "teacher": "Məmməd İ.",
+            "room": "203"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Komp. qrafikası (məş.)",
+            "teacher": "Səlimova M.",
+            "room": "109"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Xətti cəbr və an. hən.(məş)",
+                "teacher": "Babayeva Ü.",
+                "room": "203"
+              },
+              "lower": {
+                "subject": "Fizikanın əsasları(məş)",
+                "teacher": "Şahsuvarova Q.",
+                "room": "212"
+              }
+            }
+          },
+          {},
+          {
+            "time": "11:40-13:00",
+            "subject": "Komp. qrafikası (lab.)",
+            "teacher": "Zeynalova S.",
+            "room": "202"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "671",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Ölçmə texnikasının əsasları (mühazirə)",
+            "teacher": "Məmmədova R.",
+            "room": "215"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Elektronikanın əsasları (lab.)",
+            "teacher": "Məmmədova Ş.",
+            "room": "205"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Əməliyyat sistemləri (lab.)",
+            "teacher": "Kamalova G.",
+            "room": "202"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Əməliyyat sistemləri (mühazirə)",
+            "teacher": "Əmiraslanov B.",
+            "room": "215"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Diferensial tənliklər (mühazirə)",
+            "teacher": "Nəsibzadə V.",
+            "room": "215"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Ölçmə texnika. əsas. (lab.)",
+            "teacher": "Məmmədova R.",
+            "room": "205"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Azərbaycan tarixi (məş.)",
+            "teacher": "Qasımbəyli C.",
+            "room": "213"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Ölçmə texnika. əsas. (məş.)",
+            "teacher": "Məmmədova R.",
+            "room": "212"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Azərbaycan tarixi (mühazirə)",
+            "teacher": "Məhərrəmov S.",
+            "room": "215"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "lesson": {
+              "upper": {
+                "subject": "Diferensial tənliklər (məş.)",
+                "teacher": "Yaqnaliyeva A.",
+                "room": "201"
+              },
+              "lower": {
+                "subject": "Diskret riyaziyyat (məş.)",
+                "teacher": "Zülfəliyeva G.",
+                "room": "212"
+              }
+            }
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Elektronikanın əsasları (mühazirə)",
+            "teacher": "Talifli A.",
+            "room": "215"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Əməliyyat sistemləri (məş.)",
+            "teacher": "Əmiraslanov B.",
+            "room": "215"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "671a",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Diferensial tənliklər (mühazirə)",
+            "teacher": "Nəsibzadə V.",
+            "room": "303"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Azərbaycan tarixi (məş.)",
+            "teacher": "Qasımbəyli C.",
+            "room": "201"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Əməliyyat sistemləri (məş.)",
+            "teacher": "Əmiraslanov B.",
+            "room": "213"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {},
+          {
+            "time": "14:50-16:10",
+            "subject": "Diskret riyaziyyat (mühazirə)",
+            "teacher": "Nəsirova L.",
+            "room": "215"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Ölçmə texnika. əsas. (lab.)",
+            "teacher": "Məmmədova R.",
+            "room": "205"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Elektronikanın əsasları (lab.)",
+            "teacher": "Qüdrətli İ.",
+            "room": "207"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Elektronikanın əsasları (məş.)",
+            "teacher": "Talifli A",
+            "room": "109"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Azərbaycan tarixi (mühazirə)",
+            "teacher": "Məhərrəmov S.",
+            "room": "215"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "lesson": {
+              "upper": {
+                "subject": "Diskret riyaziyyat (məş.)",
+                "teacher": "Zülfəliyeva G.",
+                "room": "212"
+              },
+              "lower": {
+                "subject": "Diferensial tənliklər (məş.)",
+                "teacher": "Yaqnaliyeva A.",
+                "room": "201"
+              }
+            }
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Diferensial tənliklər (məş.)",
+            "teacher": "Yaqnaliyeva A.",
+            "room": "201"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Əməliyyat sistemləri (lab.)",
+            "teacher": "Əhmədova S.",
+            "room": "202"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "672",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Kompüter arxitekturası (mühazirə)",
+            "teacher": "Mürşüdov E.",
+            "room": "303"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Kompüter arxitekturası (mühazirə)",
+            "teacher": "Mürşüdov E.",
+            "room": "303"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Multimediya texnologiyaları (mühazirə)",
+            "teacher": "Məmmədova G.",
+            "room": "303"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "İnformasiya texnolog. əsas. (lab.)",
+            "teacher": "Kamalova G.",
+            "room": "135"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Multimediya texnologiyaları (mühazirə)",
+            "teacher": "Məmmədova G.",
+            "room": "215"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Kompüter arxitekturası (lab.)",
+            "teacher": "Hüseynzadə A.",
+            "room": "135"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {},
+          {
+            "time": "14:50-16:10",
+            "subject": "Elektronikanın əsasları (məş.)",
+            "teacher": "Talifli A",
+            "room": "212."
+          },
+          {}
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Multimediya texnolog. (lab.)",
+            "teacher": "İbrahimova P",
+            "room": "135"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "İnformasiya texnologiyalarının əsasları (mühazirə)",
+            "teacher": "Məmmədova G.",
+            "room": "215"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Elektronikanın əsasları (mühazirə)",
+            "teacher": "Talifli A.",
+            "room": "215"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Elektronikanın əsasları (lab.)",
+            "teacher": "Talifli A.",
+            "room": "205"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "İnformasiya texnolog. əsas. (məş.)",
+            "teacher": "İbrahimova P",
+            "room": "102"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Kompüter arxitekturası (məş.)",
+            "teacher": "Mürşüdov E.",
+            "room": "212"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "672a",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Diferensial tənliklər (mühazirə)",
+            "teacher": "Nəsibzadə V.",
+            "room": "303"
+          },
+          {},
+          {
+            "time": "16:25-17:45",
+            "subject": "İnformasiya texnologiyalarının əsasları (mühazirə)",
+            "teacher": "Məmmədova G.",
+            "room": "303"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Multimediya texnolog. (lab.)",
+            "teacher": "İbrahimova P",
+            "room": "202"
+          },
+          {},
+          {
+            "time": "16:25-17:45",
+            "subject": "Elektronikanın əsasları (lab.)",
+            "teacher": "Talifli A.",
+            "room": "205"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {},
+          {
+            "time": "14:50-16:10",
+            "subject": "Ölçmə texnika. əsas. (məş.)",
+            "teacher": "Məmmədova R.",
+            "room": "109"
+          },
+          {}
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "İnformasiya texnolog. əsas. (lab.)",
+            "teacher": "Kamalova G.",
+            "room": "202"
+          },
+          {},
+          {}
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Kompüter arxitekturası (lab.)",
+            "teacher": "Hüseynzadə A.",
+            "room": "202"
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "İnformasiya texnolog. əsas. (məş.)",
+                "teacher": "İbrahimova P",
+                "room": "102"
+              },
+              "lower": {
+                "subject": "Diferensial tənliklər (məş.)",
+                "teacher": "Yaqnaliyeva A.",
+                "room": "201"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Kompüter arxitekturası (məş.)",
+            "teacher": "Mürşüdov E.",
+            "room": "212"
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "group": "672b",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Şəbəkələrin təhlükəsizliyi(müh)",
+            "teacher": "Əmiraslanov B.",
+            "room": "212"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Əməliyyat sistemləri (lab)",
+            "teacher": "Zeynalabdiyeva I.",
+            "room": "135"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "İnformasiya təhlükəsizliyi və kibertəhlükəsizliyin hüquqi aspektləri (müh)",
+            "teacher": "Səfərova T.",
+            "room": "215"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Diskret riyaziyyat (məş.)",
+            "teacher": "Nəsirova L.",
+            "room": "213"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Diskret riyaziyyat (məş.)",
+            "teacher": "Zülfəliyeva G.",
+            "room": "213"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Əməliyyat sistemləri(müh)",
+            "teacher": "Əmiraslanov B.",
+            "room": "212"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Təhlükəsiz proqramlaşdırma (müh)",
+            "teacher": "Cəfərova Ş.",
+            "room": "102"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "İnformasiya təhlükəsizliyi və kibertəhlükəsizliyin hüquqi aspektləri (müh)",
+            "teacher": "Səfərova T.",
+            "room": "212"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Kriptoqrafiyanın əsasları (məş)",
+            "teacher": "Sefa Bakan",
+            "room": "212"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Şəbəkələrin təhlükəsizliyi(lab)",
+            "teacher": "Əmiraslanov B.",
+            "room": "135"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Təhlükəsiz proqramlaşdırma(lab)",
+            "teacher": "Kamalova G.",
+            "room": "135"
+          },
+          {
+            "time": "16:25-17:45",
+            "subgroups": [
+              {
+                "subject": "Kriptoqrafiyanın əsasları (lab)",
+                "teacher": "Sefa Bakan",
+                "room": "202"
+              },
+              {
+                "subject": "İnfor.təhlükəs və kibertəh. Hüq.aspek(lab)",
+                "teacher": "İbrahimova P.",
+                "room": "208"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "673",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "lesson": {
+              "upper": {
+                "subject": "Avtomatlaş. texniki vasitə. (məş.)",
+                "teacher": "Əsgərova S.",
+                "room": "206"
+              },
+              "lower": {
+                "subject": "Fəlsəfə (müh.)",
+                "teacher": "Yusifova N.",
+                "room": "102"
+              }
+            }
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Tətbiqi riyaziyyat (mühazirə)",
+            "teacher": "Nəsibzadə V.",
+            "room": "215"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Avtomatlaş. texniki vasitə. (müh.)",
+            "teacher": "Salmanov M.",
+            "room": "102"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "lesson": {
+              "upper": {
+                "subject": "Kimya (məş.)",
+                "teacher": "Rzaxanova S.",
+                "room": "102"
+              },
+              "lower": {
+                "subject": "Kimya (lab.)",
+                "teacher": "Rzaxanova S.",
+                "room": ""
+              }
+            }
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Ölçmə texnikasının əsas. (müh.)",
+            "teacher": "Məmmədova R.",
+            "room": "102"
+          },
+          {}
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "lesson": {
+              "upper": {
+                "subject": "Ölçmə texnikasının əsas. (məş.)",
+                "teacher": "Məmmədova R.",
+                "room": "102"
+              },
+              "lower": {
+                "subject": "Fəlsəfə (məş.)",
+                "teacher": "Nəbiyeva",
+                "room": "102"
+              }
+            }
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Döv.nəz. (lab)",
+                "teacher": "Hacıyeva K",
+                "room": ""
+              },
+              "lower": {
+                "subject": "Kimya (lab.)",
+                "teacher": "Rzaxanova S.",
+                "room": ""
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Kimya (müh)",
+            "teacher": "Əhmədov V.",
+            "room": "102"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {},
+          {
+            "time": "14:50-16:10",
+            "subject": "İst. tex. və pr. (müh.)",
+            "teacher": "Məmmədov C.",
+            "room": "102"
+          },
+          {}
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Dövrələr nəzəriyyəsi (müh.)",
+            "teacher": "Hacıyeva K.",
+            "room": "102"
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Avtomatlaş. texniki vasitə. (lab.)",
+                "teacher": "Əsgərova S.",
+                "room": "111"
+              },
+              "lower": {
+                "subject": "Ölçmə texnikasının əsas. (lab.)",
+                "teacher": "Məmmədova R.",
+                "room": "205"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "lesson": {
+              "upper": {
+                "subject": "Ölçmə texnikasının əsas. (lab.)",
+                "teacher": "Məmmədova R.",
+                "room": "205"
+              },
+              "lower": {
+                "subject": "Tətbiqi riyaziyyat (məş.)",
+                "teacher": "Yaqnaliyeva A.",
+                "room": "201"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "673a",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "lesson": {
+              "upper": {
+                "subject": "Fəlsəfə (məş.)",
+                "teacher": "Nəbiyeva",
+                "room": "102"
+              },
+              "lower": {
+                "subject": "Fəlsəfə (müh.)",
+                "teacher": "Yusifova N.",
+                "room": "102"
+              }
+            }
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Tətbiqi riyaziyyat (mühazirə)",
+            "teacher": "Nəsibzadə V.",
+            "room": "215"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Avtomatlaş. texniki vasitə. (müh.)",
+            "teacher": "Salmanov M.",
+            "room": "102"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "lesson": {
+              "upper": {
+                "subject": "Döv.nəz. (lab)",
+                "teacher": "Hacıyeva K",
+                "room": ""
+              },
+              "lower": {
+                "subject": "Dövrələr nəzəriyyəsi (məş.)",
+                "teacher": "Hacıyeva K.",
+                "room": "102"
+              }
+            }
+          },
+          {},
+          {}
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Avtomatlaş. texniki vasitə. (lab.)",
+            "teacher": "Həşimova H.",
+            "room": "111"
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Dövrələr nəzəriyyəsi (məş.)",
+                "teacher": "Hacıyeva K.",
+                "room": "109"
+              },
+              "lower": {
+                "subject": "Kimya (məş.)",
+                "teacher": "Rzaxanova S.",
+                "room": "102"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Kimya (müh)",
+            "teacher": "Əhmədov V.",
+            "room": "102"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Dövrələr nəzəriyyəsi (müh.)",
+            "teacher": "Hacıyeva K.",
+            "room": "102"
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Ölçmə texnikasının əsas. (məş.)",
+                "teacher": "Məmmədova R.",
+                "room": "102"
+              },
+              "lower": {
+                "subject": "Ölçmə texnikasının əsas. (lab.)",
+                "teacher": "Məmmədova R.",
+                "room": "205"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "lesson": {
+              "upper": {},
+              "lower": {
+                "subject": "Tətbiqi riyaziyyat (məş.)",
+                "teacher": "Yaqnaliyeva A.",
+                "room": "201"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "673b",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "lesson": {
+              "upper": {
+                "subject": "Sensorlar və aktuatorlar (məş)",
+                "teacher": "Quliyeva N.",
+                "room": "210"
+              },
+              "lower": {
+                "subject": "Riyazi analiz (müh.)",
+                "teacher": "Səfərli İ.",
+                "room": "213"
+              }
+            }
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Azərbaycan tarixi (müh.)",
+            "teacher": "Vəliyeva D.",
+            "room": "210"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Sensorlar və aktuatorlar (lab.)",
+            "teacher": "Hacıyeva E.",
+            "room": "113"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Riyazi analiz (məş.)",
+            "teacher": "Abdullayeva K.",
+            "room": "203"
+          },
+          {},
+          {
+            "time": "16:25-17:45",
+            "lesson": {
+              "upper": {
+                "subject": "Verilən. struk. və alqoritm. (lab.)",
+                "teacher": "İbrahimova P.",
+                "room": "202"
+              },
+              "lower": {
+                "subject": "İst. tex. və pr. (lab.)",
+                "teacher": "Əliyeva S.",
+                "room": "113"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Verilən. strukturu və alqor. (müh.)",
+            "teacher": "Orucova G.",
+            "room": "203"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "İst. tex. və pr. (müh.)",
+            "teacher": "Məmmədov C.",
+            "room": "102"
+          },
+          {}
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "İst. tex. və pr. (məş.)",
+            "teacher": "Əliyeva S.",
+            "room": "111"
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Ölçmə texnikasının əsas. (məş.)",
+                "teacher": "Məmmədova R.",
+                "room": "102"
+              },
+              "lower": {
+                "subject": "Azərbaycan tarixi (məş.)",
+                "teacher": "Vəliyeva D.",
+                "room": "210"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "lesson": {
+              "upper": {
+                "subject": "Sensorlar və aktuatorlar (müh.)",
+                "teacher": "Quliyeva N.",
+                "room": "113"
+              },
+              "lower": {
+                "subject": "Avtomatlaş. texniki vasitə. (məş.)",
+                "teacher": "Əsgərova S.",
+                "room": "113"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "group": "674",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Proqramlaşdırmanın əsas. (müh.)",
+            "teacher": "Cəfərova Ş.",
+            "room": "111"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Tətbiqi riyaziyyat (mühazirə)",
+            "teacher": "Nəsibzadə V.",
+            "room": "215"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Materiallar müqaviməti (məş.)",
+            "teacher": "Mustafayeva N.",
+            "room": "213"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Fizika (müh.)",
+            "teacher": "Sadıqova S",
+            "room": "111"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Azərb. dil. işg. və ak. kom. (müh.)",
+            "teacher": "İmaməliyeva G.",
+            "room": "210"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Fizika (lab.)",
+            "teacher": "Mustafayeva Ü.",
+            "room": ""
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Materiallar müqaviməti (müh.)",
+            "teacher": "Məmmədova Ş.",
+            "room": "203"
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Proq. əsas. (lab.)",
+                "teacher": "Zeynalova S",
+                "room": "136"
+              },
+              "lower": {
+                "subject": "Proq. əsas. (məş.)",
+                "teacher": "Cəfərova Ş.",
+                "room": "136"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "lesson": {
+              "upper": {
+                "subject": "Fizika (müh)",
+                "teacher": "Sadıqova S",
+                "room": "203"
+              },
+              "lower": {
+                "subject": "Fizika (məş.)",
+                "teacher": "Ələsgərova D.",
+                "room": ""
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Azərb. dil. işg. və ak. kom. (məş.)",
+            "teacher": "İmaməliyeva G.",
+            "room": "204"
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Materiallar müqaviməti (lab.)",
+                "teacher": "Mustafayeva N.",
+                "room": "101"
+              },
+              "lower": {
+                "subject": "Tətbiqi riyaziyyat (məş.)",
+                "teacher": "Yaqnaliyeva A.",
+                "room": "201"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "lesson": {
+              "upper": {
+                "subject": "İnformasiya texnolog. (müh)",
+                "teacher": "İbrahimova N",
+                "room": "210"
+              },
+              "lower": {
+                "subject": "İnformasiya texnolog. (məş.)",
+                "teacher": "İbrahimova P.",
+                "room": "210"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Avtomatlaşdırmanın əsasları (lab.)",
+            "teacher": "Hacıyeva E.",
+            "room": "113"
+          },
+          {},
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "group": "674b",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Tətbiqi fizika (müh.)",
+            "teacher": "Lətifova S.",
+            "room": "113"
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Vahid nəqliyyat sistemi (müh.)",
+                "teacher": "Allahverdiyev B.",
+                "room": "102"
+              },
+              "lower": {
+                "subject": "Nəql. növ. konstr. xüs. (müh.)",
+                "teacher": "Allahverdiyev B.",
+                "room": "102"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Nəqliyyat ekologiyası (məş.)",
+            "teacher": "Əliyeva N.",
+            "room": "206"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Vahid nəqliyyat sistemi (müh.)",
+            "teacher": "Allahverdiyev B.",
+            "room": "203"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Avtomatlaşdırmanın əsasları (müh.)",
+            "teacher": "Gəncəliyeva G",
+            "room": "113"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Nəqliyyat ekologiyası (müh.)",
+            "teacher": "Əliyeva N.",
+            "room": "102"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "lesson": {
+              "upper": {
+                "subject": "Fizika (lab.)",
+                "teacher": "Lətifova S.",
+                "room": ""
+              },
+              "lower": {
+                "subject": "Fizika (məş.)",
+                "teacher": "Şahsuvarova Q.",
+                "room": "206"
+              }
+            }
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Nəql. növ. konstr. xüs. (müh.)",
+            "teacher": "Allahverdiyev B.",
+            "room": "107"
+          },
+          {
+            "time": "16:25-17:45",
+            "lesson": {
+              "upper": {
+                "subject": "Vahid nəqliyyat sistemi (məş.)",
+                "teacher": "Allahverdiyev B.",
+                "room": "107"
+              },
+              "lower": {
+                "subject": "Nəqliyyat ekologiyası (müh.)",
+                "teacher": "Əliyeva N.",
+                "room": "107"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Avtomatlaşdırmanın əsasları (lab.)",
+            "teacher": "Hacıyeva E.",
+            "room": "113"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Vahid nəqliyyat sistemi (məş.)",
+            "teacher": "Allahverdiyev B.",
+            "room": "107"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Nəql. növ. konstr. xüs. (məş.)",
+            "teacher": "Allahverdiyev B.",
+            "room": "107"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "661",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Multikulturalizmə giriş (müh.)",
+                "teacher": "Behbudov S",
+                "room": "215"
+              },
+              "lower": {
+                "subject": "Sensor sistemlər (məş.)",
+                "teacher": "Ağayeva F.",
+                "room": "213"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {
+                "subject": "Mülki müdafiə (mühazirə)",
+                "teacher": "Məmmədov İ.",
+                "room": "215"
+              },
+              "lower": {
+                "subject": "Mülki müdafiə (məş.)",
+                "teacher": "Məmmədov İ",
+                "room": "213"
+              }
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "İnternet texnologiyaları (mühazirə)",
+            "teacher": "Cəfərova Ş.",
+            "room": "201"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Komp. arxite.(lab.)",
+            "teacher": "Ağayeva F.",
+            "room": "205"
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {
+                "subject": "Komp.qraf. (lab.)",
+                "teacher": "Zeynalova S.",
+                "room": "202"
+              },
+              "lower": {
+                "subject": "İnt. tex. (lab.)",
+                "teacher": "Dövlətzadə A.",
+                "room": "202"
+              }
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Sensor sistemləri (mühazirə)",
+            "teacher": "Ağayeva F.",
+            "room": "201"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Sensor sist. (lab)",
+                "teacher": "Ağayeva F.",
+                "room": "205"
+              },
+              "lower": {
+                "subject": "Komp.qraf. (lab.)",
+                "teacher": "Zeynalova S.",
+                "room": "202"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {
+                "subject": "İnternet texnologiyaları (məş.)",
+                "teacher": "Cəfərova Ş.",
+                "room": "213"
+              },
+              "lower": {
+                "subject": "Kompüter qarafikası (məş.)",
+                "teacher": "Quliyeva L.",
+                "room": "213"
+              }
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Kompüter arxitekturası (məş.)",
+            "teacher": "Ağayeva F.",
+            "room": "203"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Multikulturalizmə giriş (məş.)",
+            "teacher": "Behbudov S",
+            "room": "213"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Kompüter arxitekturası (mühazirə)",
+            "teacher": "Ağayeva F.",
+            "room": "201"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Kompüter qrafikası (mühazirə)",
+            "teacher": "Məmmədova G.",
+            "room": "102"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [{}, {}, {}]
+      }
+    ]
+  },
+  {
+    "group": "661a",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Multikulturalizmə giriş (müh.)",
+                "teacher": "Behbudov S",
+                "room": "215"
+              },
+              "lower": {
+                "subject": "Kompüter qarafikası (məş.)",
+                "teacher": "Quliyeva L.",
+                "room": "203"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {
+                "subject": "Mülki müdafiə (mühazirə)",
+                "teacher": "Məmmədov İ.",
+                "room": "215"
+              },
+              "lower": {
+                "subject": "Sensor sistemlər (məş.)",
+                "teacher": "Ağayeva F.",
+                "room": "203"
+              }
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "İnternet texnologiyaları (mühazirə)",
+            "teacher": "Cəfərova Ş.",
+            "room": "201"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Mülki müdafiə (məş.)",
+                "teacher": "Məmmədov İ",
+                "room": "203"
+              },
+              "lower": {
+                "subject": "Multikulturalizmə giriş (məş.)",
+                "teacher": "Behbudov S",
+                "room": "210"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Komp. arxit. (lab.)",
+            "teacher": "Ağayeva F.",
+            "room": "205"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Sensor sistemləri (mühazirə)",
+            "teacher": "Ağayeva F.",
+            "room": "201"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Komp.qraf. (lab.)",
+            "teacher": "Zeynalova S.",
+            "room": "202"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Sensor sist. (lab)",
+            "teacher": "Ağayeva F.",
+            "room": "205"
+          },
+          {}
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "İnternet texnologiyaları (məş.)",
+            "teacher": "Cəfərova Ş.",
+            "room": "213"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Kompüter arxitekturası (mühazirə)",
+            "teacher": "Ağayeva F.",
+            "room": "201"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Kompüter qrafikası (mühazirə)",
+            "teacher": "Məmmədova G.",
+            "room": "102"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [{}, {}, {}]
+      }
+    ]
+  },
+  {
+    "group": "662",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Sis. anal. və komp. model. (məş.)",
+                "teacher": "Dövlətzadə A.",
+                "room": "206"
+              },
+              "lower": {
+                "subject": "İnf. texn. riyazi elem. (məş.)",
+                "teacher": "Əmiraslanov B.",
+                "room": "206"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Məntiqi proqramlaşdırma dilləri (mühazirə)",
+            "teacher": "Rəhimov Ş.",
+            "room": "212"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Süni intellekt (məş.)",
+            "teacher": "Zeynalabdiyeva İ.",
+            "room": "213"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Mənt.pr.dil. (məş.)",
+                "teacher": "Zeynalova S.",
+                "room": "213"
+              },
+              "lower": {
+                "subject": "Ehtimal nəzəriyyəsi (məş.)",
+                "teacher": "Rzayeva V",
+                "room": "203"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Sistemli analiz və kompüterdə modelləşdirmə (mühazirə)",
+            "teacher": "Rəhimov Ş.",
+            "room": "212"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Sis. anal. və komp. model.(lab)",
+            "teacher": "Dövlətzadə A",
+            "room": "135"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "İnf.texnol.riyazi elem. (lab.)",
+            "teacher": "Səlimova M.",
+            "room": "135"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "İnformasiya texnologiyalarının riyazi elementləri (mühazirə)",
+            "teacher": "Əmiraslanov B.",
+            "room": "212"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Mənt.pr.dil. (lab.)",
+            "teacher": "Zeynalova S",
+            "room": "202"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Kompüter arxitekturası (məş.)",
+            "teacher": "Ağayeva F.",
+            "room": "204"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Ehtimal nəzəriyyəsi (mühazirə)",
+            "teacher": "İsmayılova G.",
+            "room": "212"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Süni intellekt (mühazirə)",
+            "teacher": "Rəhimov Ş.",
+            "room": "201"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [{}, {}, {}]
+      }
+    ]
+  },
+  {
+    "group": "662a",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "İnf. texn. riyazi elem. (məş.)",
+                "teacher": "Əmiraslanov B.",
+                "room": "204"
+              },
+              "lower": {
+                "subject": "Sis. anal. və komp. model. (məş.)",
+                "teacher": "Dövlətzadə A.",
+                "room": "204"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Məntiqi proqramlaşdırma dilləri (mühazirə)",
+            "teacher": "Rəhimov Ş.",
+            "room": "212"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "İnf.texnol.riyazi elem. (lab.)",
+            "teacher": "Səlimova M",
+            "room": "202"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Mənt.pr.dil. (məş.)",
+            "teacher": "Zeynalova S.",
+            "room": "213"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Sistemli analiz və kompüterdə modelləşdirmə (mühazirə)",
+            "teacher": "Rəhimov Ş.",
+            "room": "212"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {
+                "subject": "Mənt.pr.dil. (lab.)",
+                "teacher": "Zeynalova S",
+                "room": "202"
+              },
+              "lower": {
+                "subject": "Ehtimal nəzəriyyəsi (məş.)",
+                "teacher": "Rzayeva V",
+                "room": "203"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Ehtimal nəzəriyyəsi (məş.)",
+            "teacher": "Rzayeva V",
+            "room": "203"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "İnformasiya texnologiyalarının riyazi elementləri (mühazirə)",
+            "teacher": "Əmiraslanov B.",
+            "room": "212"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Sis. anal. və komp. model.(lab)",
+            "teacher": "Dövlətzadə A",
+            "room": "135"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Süni intellekt (məş.)",
+            "teacher": "Hüseynzadə A.",
+            "room": "210"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Məntiqi proqramlaşdırma dilləri (mühazirə)",
+            "teacher": "Rəhimov Ş.",
+            "room": "212"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Süni intellekt (mühazirə)",
+            "teacher": "Rəhimov Ş.",
+            "room": "201"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [{}, {}, {}]
+      }
+    ]
+  },
+  {
+    "group": "663",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Kimya və NK tex. pros. və qur. (lab)",
+            "teacher": "Əsgərova S.",
+            "room": "113"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Texnoloji ölçmələr (müh.)",
+            "teacher": "Salmanov M.",
+            "room": "109"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Rəqəmsal elektronika (lab.)",
+            "teacher": "Hüseynova A.",
+            "room": "205"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Sistemlər nəzəriy. əsasları (məş.)",
+            "teacher": "Quliyva N.",
+            "room": "109"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proseslərin identifikasiyası (müh.)",
+            "teacher": "Salmanov M.",
+            "room": "113"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Texnoloji ölçmələr (lab.)",
+            "teacher": "Hacıyeva E.",
+            "room": "113"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Rəqəmsal elektronika (müh.)",
+            "teacher": "Hüseynova A.",
+            "room": "109"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Sistemlər nəzəriy. əsasları (müh.)",
+            "teacher": "Ələkbərli F.",
+            "room": "102"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {
+                "subject": "Texnoloji ölçmələr (məş.)",
+                "teacher": "Salmanov M.",
+                "room": "109"
+              },
+              "lower": {
+                "subject": "Kimya və NK tex. pros. və qur. (məş.)",
+                "teacher": "Həşimova H.",
+                "room": "109"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Proseslərin identifikasiyası (məş.)",
+                "teacher": "Salmanov M.",
+                "room": "109"
+              },
+              "lower": {
+                "subject": "Rəqəmsal elektronika (məş.)",
+                "teacher": "Hüseynova A.",
+                "room": "113"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Kimya və NK tex. pros. və qur. (müh)",
+            "teacher": "Həşimova H.",
+            "room": "109"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {
+                "subject": "Pros. ident.(lab)",
+                "teacher": "Salmanov M.",
+                "room": "111"
+              },
+              "lower": {
+                "subject": "Pros. ident.(lab)",
+                "teacher": "Salmanov M.",
+                "room": "111"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "664",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Materiallar texnologiyası (müh)",
+            "teacher": "Süleymanova N.",
+            "room": "101"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Maş. ist. tex..(müh)",
+            "teacher": "Məmmədova Ş.",
+            "room": "101"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Həyat fəaliy. təhlükəsiz. (müh.)",
+            "teacher": "Seyidova G.",
+            "room": "101"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Maşın dizaynı (müh.)",
+            "teacher": "Quliyeva H.",
+            "room": "101"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Avtomatlaşdırmanın əsasları(müh)",
+            "teacher": "Gəncəliyeva G.",
+            "room": "101"
+          },
+          {
+            "time": "11:40-13:00",
+            "lesson": {
+              "upper": {
+                "subject": "Materiallar texnologiyası (lab.)",
+                "teacher": "Süleymanova N.",
+                "room": "101"
+              },
+              "lower": {
+                "subject": "Həyat fəaliy. təhlükəsiz. (lab.)",
+                "teacher": "Seyidova G.",
+                "room": "1313"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Maş. ist. tex..(məş)",
+            "teacher": "Məmmədova Ş.",
+            "room": "101"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Maşın dizaynı (məş.)",
+            "teacher": "Quliyeva H.",
+            "room": "101"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Mühəndis iqtisadiyyatı (müh.)",
+            "teacher": "Hüseynova M.",
+            "room": "101"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Mühəndis iqtisadiyyatı (məş.)",
+                "teacher": "Hüseynova M.",
+                "room": "101"
+              },
+              "lower": {
+                "subject": "Maş. ist. tex..(lab.)",
+                "teacher": "Məmmədova Ş.",
+                "room": "101"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {
+                "subject": "Avtomat. əsasları (lab.)",
+                "teacher": "Əliyeva S.",
+                "room": "111"
+              },
+              "lower": {
+                "subject": "Maşın dizaynı (müh.)",
+                "teacher": "Quliyeva H.",
+                "room": "101"
+              }
+            }
+          },
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "group": "665",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Multikulturalizmə giriş (müh.)",
+                "teacher": "Behbudov S",
+                "room": "215"
+              },
+              "lower": {
+                "subject": "Multikulturalizmə giriş (məş.)",
+                "teacher": "Behbudov S",
+                "room": "210"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {
+                "subject": "Mülki müdafiə (mühazirə)",
+                "teacher": "Məmmədov İ.",
+                "room": "215"
+              },
+              "lower": {
+                "subject": "İstehsal logistikası (məş.)",
+                "teacher": "Quliyeva H.",
+                "room": "210"
+              }
+            }
+          },
+          {}
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Nəqliyyatda sığorta (məş)",
+                "teacher": "Seyidova S",
+                "room": "206"
+              },
+              "lower": {
+                "subject": "Mülki müdafiə (məş.)",
+                "teacher": "Məmmədov İ",
+                "room": "206"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "İstehsal logistikası (müh.)",
+            "teacher": "Quliyeva H.",
+            "room": "206"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Logistika sis. id. əsas. (müh)",
+            "teacher": "Quliyeva H.",
+            "room": "206"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Logistika sistem. id. əsas. (məş.)",
+            "teacher": "Quliyeva H.",
+            "room": "206"
+          },
+          {
+            "time": "10:05-11:25",
+            "lesson": {
+              "upper": {
+                "subject": "Nəqliyyatda sığorta (müh)",
+                "teacher": "Məmmədova Ş",
+                "room": "210"
+              },
+              "lower": {
+                "subject": "İstehsal logistikası (məş.)",
+                "teacher": "Quliyeva H.",
+                "room": "206"
+              }
+            }
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Nəqliyyatda sığorta (müh)",
+            "teacher": "Məmmədova Ş",
+            "room": "206"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [{}, {}, {}]
+      },
+      {
+        "day": "V",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Logistika sistem. id. əsas. (müh./məş.)",
+            "teacher": "Quliyeva H.",
+            "room": "206"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Nəqliyyatda sığorta (məş)",
+            "teacher": "Seyidova S",
+            "room": "206"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "İstehsal logistikası (məş.)",
+            "teacher": "Quliyeva H.",
+            "room": "206"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "667",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {},
+          {
+            "time": "10:05-11:25",
+            "subject": "Mobil robotlar (lab.)",
+            "teacher": "Quliyeva N.",
+            "room": "111"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Mobil robotlar (müh.)",
+            "teacher": "Nəcəfova L",
+            "room": "107"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Rəqəmsal siq. və təsv. işlən. (məş.)",
+            "teacher": "Rəsulov R.",
+            "room": "203"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Rəqəmsal siq. və təsv. işlən. (müh.)",
+            "teacher": "Rəsulov R.",
+            "room": "203"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Robot elektr. (lab.)",
+            "teacher": "Hacıyev Z.",
+            "room": "205"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "lesson": {
+              "upper": {
+                "subject": "Robot elektr. (müh)",
+                "teacher": "Harunov A.",
+                "room": "111"
+              },
+              "lower": {
+                "subject": "Proqramlaş. məntiqi kontroller (müh)",
+                "teacher": "Həşimova H.",
+                "room": "111"
+              }
+            }
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Rəqəmsal siq. və təsv. işlən. (lab.)",
+            "teacher": "Rəsulov R.",
+            "room": "205"
+          },
+          {}
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "08:30-09:50",
+            "subject": "Komp. qraf. (lab.)",
+            "teacher": "Bayramova İ.",
+            "room": "202"
+          },
+          {
+            "time": "10:05-11:25",
+            "subject": "Proqramlaş. məntiqi kontroller (lab.)",
+            "teacher": "Həşimova H.",
+            "room": "111"
+          },
+          {
+            "time": "11:40-13:00",
+            "subject": "Kompüter qrafikası (mühazirə)",
+            "teacher": "Məmmədova G.",
+            "room": "102"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [{}, {}, {}]
+      }
+    ]
+  },
+  {
+    "group": "651",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Ver. baz.sis.. (lab)",
+            "teacher": "Səlimova M.",
+            "room": "202"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Əməliyyatların tədqiqi (mühazirə)",
+            "teacher": "Məmmədova G.",
+            "room": "212"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Mikroprosessorlar (müh.)",
+            "teacher": "Rəsulov R.",
+            "room": "212"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Verilənlər bazası sistemləri (mühazirə)",
+            "teacher": "Orucova G.",
+            "room": "212"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Komp. model. (lab.)",
+            "teacher": "Quliyeva R.",
+            "room": "205"
+          },
+          {
+            "time": "16:25-17:45",
+            "lesson": {
+              "upper": {
+                "subject": "Komp. model. (məş.)",
+                "teacher": "Quliyev R.",
+                "room": "203"
+              },
+              "lower": {
+                "subject": "Əməliy. tədqiqi (məş.)",
+                "teacher": "Məmmədova G.",
+                "room": "203"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Kompüterdə modelləşdirmə ((mühazirə)",
+            "teacher": "Quliyev R.",
+            "room": "212"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Əməliy. tədqiqi (lab.)",
+            "teacher": "Hüseynova L.",
+            "room": "202"
+          },
+          {
+            "time": "16:25-17:45",
+            "lesson": {
+              "upper": {
+                "subject": "Ver. baz.sis.. (məş)",
+                "teacher": "Orucova G.",
+                "room": "210"
+              },
+              "lower": {
+                "subject": "Mikrorosessorlar (məş.)",
+                "teacher": "Rəsulov R.",
+                "room": "210"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Kompüterlərin tətbiqi nəzəriyyəsinin əsasları (mühazirə)",
+            "teacher": "Rəsulov R.",
+            "room": "212"
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Mikroprosessorlar (lab.)",
+                "teacher": "Rəsulov R.",
+                "room": "205"
+              },
+              "lower": {
+                "subject": "KTNƏ (lab)",
+                "teacher": "Quliyeva L.",
+                "room": "205"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "KTNƏ (məş.)",
+            "teacher": "Rəsulov R.",
+            "room": "109"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [{}, {}, {}]
+      }
+    ]
+  },
+  {
+    "group": "651a",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Komp. model. (lab.)",
+            "teacher": "Quliyev R.",
+            "room": "205"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Veril. baz. sist. (lab.)",
+            "teacher": "Səlimova M.",
+            "room": "202"
+          },
+          {}
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {},
+          {
+            "time": "14:50-16:10",
+            "subject": "Əməliy. tədqiqi (lab.)",
+            "teacher": "Hüseynova L.",
+            "room": "135"
+          },
+          {
+            "time": "16:25-17:45",
+            "lesson": {
+              "upper": {
+                "subject": "KTNƏ (məş.)",
+                "teacher": "Rəsulov R.",
+                "room": "213"
+              },
+              "lower": {
+                "subject": "Mikrorosessorlar (məş.)",
+                "teacher": "Rəsulov R.",
+                "room": "213"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {},
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Mikroprosessorlar (lab.)",
+                "teacher": "Rəsulov R.",
+                "room": "205"
+              },
+              "lower": {
+                "subject": "KTNƏ (lab)",
+                "teacher": "Quliyeva L.",
+                "room": "205"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "lesson": {
+              "upper": {
+                "subject": "Əməliy. tədqiqi (məş.)",
+                "teacher": "Məmmədova G.",
+                "room": "213"
+              },
+              "lower": {
+                "subject": "Ver. baz.sis.. (məş)",
+                "teacher": "Orucova G.",
+                "room": "213"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Verilənlər bazası sistemləri (müh.)",
+            "teacher": "Səlimova M.",
+            "room": "201"
+          },
+          {},
+          {
+            "time": "16:25-17:45",
+            "subject": "Komp. model. (məş.)",
+            "teacher": "Quliyev R",
+            "room": "201"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [{}, {}, {}]
+      }
+    ]
+  },
+  {
+    "group": "652",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Proqram mühəndisliynin əsasları və layihələndirilməsi (müh.)",
+            "teacher": "Hüseynov A.",
+            "room": "201"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Veril. baz. sist. (lab.)",
+            "teacher": "Səlimova M.",
+            "room": "202"
+          },
+          {}
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {},
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Proq. müh. əsas. (məş.)",
+                "teacher": "Hüseynov A.",
+                "room": "204"
+              },
+              "lower": {
+                "subject": "ÜTPV (məş.)",
+                "teacher": "Cəfərova Ş.",
+                "room": "204"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "ÜTPV (lab.)",
+            "teacher": "İbrahimova P.",
+            "room": "208"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Ümumi təyinatlı proqram vasitələri (müh)",
+            "teacher": "Cəfərova Ş.",
+            "room": "201"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Kompüter texnologiyasının nəzər .əsasları(müh)",
+            "teacher": "Əmiraslanov B.",
+            "room": "201"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Kom.tex.nəz.əsas. (lab.)",
+            "teacher": "Zeynalova S.",
+            "room": "202"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "İntellektual texnologiyalar(lab.)",
+            "teacher": "İbrahimova P.",
+            "room": "135"
+          },
+          {},
+          {
+            "time": "16:25-17:45",
+            "subject": "Proq. müh. əsas. (lab.)",
+            "teacher": "Zeynalova S.",
+            "room": "202"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [{}, {}, {}]
+      }
+    ]
+  },
+  {
+    "group": "652a",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Proqram mühəndisliynin əsasları və layihələndirilməsi (müh.)",
+            "teacher": "Hüseynov A.",
+            "room": "201"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Kom.tex.nəz.əsas. (lab.)",
+            "teacher": "Dövlətzadə A",
+            "room": "208"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "İntellektual texnologiyalar (müh.)",
+            "teacher": "Hüseynov A.",
+            "room": "201"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Verilənlər bazası sistemləri (müh.)",
+            "teacher": "Səlimova M.",
+            "room": "201"
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "ÜTPV (məş.)",
+                "teacher": "Cəfərova Ş.",
+                "room": "206"
+              },
+              "lower": {
+                "subject": "Proq. müh. əsas. (məş.)",
+                "teacher": "Hüseynov A.",
+                "room": "206"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "ÜTPV (lab.)",
+            "teacher": "İbrahimova P.",
+            "room": "208"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Ümumi təyinatlı proqram vasitələri (müh)",
+            "teacher": "Cəfərova Ş.",
+            "room": "201"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Kompüter texnologiyasının nəzər .əsasları(müh)",
+            "teacher": "Əmiraslanov B.",
+            "room": "201"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "İntellektual texnologiyalar(lab.)",
+            "teacher": "Dövlətzadə A.",
+            "room": "136"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Verilənlər bazası sistemləri (müh.)",
+            "teacher": "Səlimova M.",
+            "room": "201"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Veril. baz. sist. (lab.)",
+            "teacher": "Zeynalova S.",
+            "room": "208"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Proq. müh. əsas. (lab.)",
+            "teacher": "Hüseynzadə A.",
+            "room": "208"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [{}, {}, {}]
+      }
+    ]
+  },
+  {
+    "group": "653",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Sənaye avtomat. (müh.)",
+            "teacher": "Gəncəliyeva G.",
+            "room": "109"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Rəqəmli idarəetmə (məş)",
+            "teacher": "Gəncəliyeva G.",
+            "room": "109"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "İdarəet.sis.lay.avt. (müh.)",
+            "teacher": "Məmmədov C.",
+            "room": "109"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Rəqəmli idarəetmə (müh)",
+            "teacher": "Gəncəliyeva G.",
+            "room": "109"
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Məntiqi idarəet. sistem. (lab.)",
+                "teacher": "Həşimova H.",
+                "room": "111"
+              },
+              "lower": {
+                "subject": "İdarəet. əməl. təd. (lab.)",
+                "teacher": "Əsgərova S.",
+                "room": "113"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "lesson": {
+              "upper": {
+                "subject": "Sənaye avtomat. (məş.)",
+                "teacher": "Gəncəliyeva G.",
+                "room": "109"
+              },
+              "lower": {
+                "subject": "İdarəet.sis.lay.avt. (məş.)",
+                "teacher": "Əliyeva S.",
+                "room": "109"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Məntiqi idarəet. sis. (müh)",
+            "teacher": "Ələkbərli F.",
+            "room": "109"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Sənaye avtomat. (lab.)",
+            "teacher": "Gəncəliyeva G.",
+            "room": "111"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "İdarəet. əməl. təd. (məş.)",
+            "teacher": "Salmanov M.",
+            "room": "109"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "İdarəet. əməl. təd. (müh)",
+            "teacher": "Salmanov M.",
+            "room": "109"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "İdarəet.sis.lay.avt. (lab.)",
+            "teacher": "Gəncəliyeva G.",
+            "room": "111"
+          },
+          {
+            "time": "16:25-17:45",
+            "lesson": {
+              "upper": {
+                "subject": "Rəqəmli idarəetmə(lab.)",
+                "teacher": "Gəncəliyeva G.",
+                "room": "111"
+              },
+              "lower": {
+                "subject": "Məntiqi idarəet. sistem (məş)",
+                "teacher": "Quliyeva N.",
+                "room": "109"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [{}, {}, {}]
+      }
+    ]
+  },
+  {
+    "group": "654",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Maş. av. diaq. (müh.)",
+            "teacher": "Süleymanova N.",
+            "room": "101"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Maş. hidrav. sis. (müh.)",
+            "teacher": "Mustafayeva N.",
+            "room": "101"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "İst. maş. və av. (müh.)",
+            "teacher": "Bağırov Z.",
+            "room": "101"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Maş. av. diaq. (məş.)",
+            "teacher": "Süleymanova N.",
+            "room": "101"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Maş. hidrav. sis. (məş.)",
+            "teacher": "Mustafayeva N.",
+            "room": "101"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "İst. maş. və av. (məş.)",
+            "teacher": "Bağırov Z.",
+            "room": ""
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Maş. av. diaq. (lab.)",
+            "teacher": "Əsgərova S.",
+            "room": "101"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Neft-məd. av.et. (müh.)",
+            "teacher": "Bağırov Z.",
+            "room": "101"
+          },
+          {}
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Neft-məd. av.et. (məş.)",
+            "teacher": "İsmayılova Ş.",
+            "room": "101"
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Neft-məd. av.et. (müh.)",
+                "teacher": "Bağırov Z.",
+                "room": "101"
+              },
+              "lower": {
+                "subject": "Maş. hid.sis. (müh.)",
+                "teacher": "Mustafayeva N.",
+                "room": "101"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "İst. maş. və av. (lab.)",
+            "teacher": "Bağırov Z.",
+            "room": "101"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [{}, {}, {}]
+      }
+    ]
+  },
+  {
+    "group": "655",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Log. inf. sis. və tex. (müh.)",
+            "teacher": "Əliyeva A.",
+            "room": "107"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Nəql. ris. id. ed. (müh/məş)",
+            "teacher": "Süleymanova N.",
+            "room": "107"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Anbar log. (müh.)",
+            "teacher": "Quliyeva H.",
+            "room": "107"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Log. inf. sis. və tex. (məş.)",
+            "teacher": "Əliyeva A.",
+            "room": "210"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Texniki sənədlərə norma nəzarət və metroloji ekspertiza (müh.)",
+            "teacher": "Bağırov Z.",
+            "room": "107"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Təchizat zəncirinin idarə edilməsi (müh.)",
+            "teacher": "Allahverdiyev B.",
+            "room": "107"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "lesson": {
+              "upper": {
+                "subject": "Tex. sən. NN və ME (müh.)",
+                "teacher": "Bağırov Z.",
+                "room": "107"
+              },
+              "lower": {
+                "subject": "Log. inf. sis. və tex. (müh.)",
+                "teacher": "Əliyeva A.",
+                "room": "107"
+              }
+            }
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Anbar log. (məş..)",
+            "teacher": "Quliyeva H.",
+            "room": "206"
+          },
+          {}
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Anbar log. (məş./müh.)",
+            "teacher": "Quliyeva H.",
+            "room": "107"
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Təc.zən. id. ed. (müh.)",
+                "teacher": "Allahverdiyev B.",
+                "room": "107"
+              },
+              "lower": {
+                "subject": "Tex. sən. NN və ME(məş)",
+                "teacher": "Quliyeva H.",
+                "room": "107"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Təchizat zəncirinin idarə edilməsi (məş.)",
+            "teacher": "Allahverdiyev B.",
+            "room": "206"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [{}, {}, {}]
+      }
+    ]
+  },
+  {
+    "group": "657",
+    "week": [
+      {
+        "day": "I",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Süni intellekt (mühazirə)",
+            "teacher": "Rəhimov Ş.",
+            "room": "203"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Mexatronika və robotexnika sistemlərinin layihələndirilməsi (lab)",
+            "teacher": "Əliyeva S.,",
+            "room": "111"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Rəqəmsal kommunikasiya(lab)",
+            "teacher": "Əsgərova S.",
+            "room": "111"
+          }
+        ]
+      },
+      {
+        "day": "II",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Rəqəmsal kommunikasiya (müh)",
+            "teacher": "Əliyeva S.,",
+            "room": "107"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Robotların idarə olunması(müh)",
+            "teacher": "Nəcəfova L.",
+            "room": "213"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Mexatronika və robotexnika sistemlərinin layihələndirilməsi (müh)",
+            "teacher": "Nəcəfova L.",
+            "room": "111"
+          }
+        ]
+      },
+      {
+        "day": "III",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Süni intellekt (lab)",
+            "teacher": "Zeynalabdiyeva İ",
+            "room": "202"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Robotların idarə olunması (məş)",
+            "teacher": "Əliyeva S.",
+            "room": "109"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Rəqəmsal kommunikasiya(lab)",
+            "teacher": "Əsgərova S.",
+            "room": "111"
+          }
+        ]
+      },
+      {
+        "day": "IV",
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Mexatronika və robotexnika sistemlərinin layihələndirilməsi(məş)",
+            "teacher": "Nəcəfova L.",
+            "room": "213"
+          },
+          {
+            "time": "14:50-16:10",
+            "subject": "Klassik qeyri-səlis məntiq (müh/məş)",
+            "teacher": "Əsgərova S.",
+            "room": "109"
+          },
+          {
+            "time": "16:25-17:45",
+            "subject": "Süni intellekt (məş.)",
+            "teacher": "Rəhimov Ş.",
+            "room": "213"
+          }
+        ]
+      },
+      {
+        "day": "V",
+        "lessons": [{}, {}, {}]
+      }
+    ]
+  }
+]

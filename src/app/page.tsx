@@ -5,6 +5,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import universitiesData from "@/data/universities.json";
 import { calculateCurrentWeekType, University } from "@/utils/weekCalculator";
 import { Share2 } from "lucide-react";
+import Dashboard from "@/components/Dashboard";
+import { UserPreferences } from "@/types";
+import {
+  loadUserPreferences,
+  clearUserPreferences,
+  saveUserPreferences,
+  getAvailableGroups,
+} from "@/utils/dataManager";
 
 // Azerbaijani-aware normalizer: maps special letters to Latin counterparts and lowercases
 function normalizeAz(input: string): string {
@@ -160,6 +168,35 @@ function findNormalizedMatchRange(
   return [startOrig, endOrig];
 }
 
+// Rank groups smartly (handles numeric + letter suffix like 681a)
+function scoreGroup(queryRaw: string, groupName: string): number {
+  const q = normalizeAz(queryRaw).trim();
+  if (!q) return 0;
+
+  const g = normalizeAz(groupName);
+
+  // Exact match
+  if (g === q) return 200;
+
+  // Starts with and substring boosts (prefer prefix)
+  if (g.startsWith(q)) return 190 - (g.length - q.length);
+  if (g.includes(q)) return 160 - (g.indexOf(q) || 0);
+
+  // If query is numeric portion, compare numeric distance
+  const numQ = parseInt(q.replace(/[^0-9]/g, ""), 10);
+  const numG = parseInt(g.replace(/[^0-9]/g, ""), 10);
+  if (!Number.isNaN(numQ) && !Number.isNaN(numG)) {
+    const diff = Math.abs(numQ - numG);
+    // closer numbers score higher (cap at 150)
+    return Math.max(0, 150 - Math.min(diff, 150));
+  }
+
+  // Soft fuzzy fallback: Levenshtein normalized
+  const d = levenshtein(q, g);
+  const n = 1 - d / Math.max(g.length, q.length, 1);
+  return n > 0.3 ? n * 100 : 0;
+}
+
 function HighlightedText({ text, query }: { text: string; query: string }) {
   const range = findNormalizedMatchRange(text, query);
   if (!query || !range) return <>{text}</>;
@@ -183,16 +220,32 @@ export default function Home() {
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [isSelectorOpen, setIsSelectorOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [userPreferences, setUserPreferences] =
+    useState<UserPreferences | null>(null);
+  const [isGroupSelectorOpen, setIsGroupSelectorOpen] = useState(false);
+  const [groupQuery, setGroupQuery] = useState("");
+  const [debouncedGroupQuery, setDebouncedGroupQuery] = useState("");
+  const [groupActiveIndex, setGroupActiveIndex] = useState(0);
+  const [availableGroups, setAvailableGroups] = useState<string[]>([]);
+  const [isLoadingGroups, setIsLoadingGroups] = useState(false);
+  const groupItemRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   const universities: University[] =
     universitiesData as unknown as University[];
 
+  const selectedUniversity = useMemo(() => {
+    return universities.find((u) => u.id === selectedUniversityId) || null;
+  }, [selectedUniversityId, universities]);
+
   useEffect(() => {
     try {
       const stored = localStorage.getItem("universityId");
-      if (stored) {
+      const preferences = loadUserPreferences();
+
+      if (stored && preferences) {
         setSelectedUniversityId(Number(stored));
+        setUserPreferences(preferences);
         setIsSelectorOpen(false);
       } else {
         setIsSelectorOpen(true);
@@ -208,9 +261,28 @@ export default function Home() {
     return () => clearTimeout(id);
   }, [query]);
 
-  const selectedUniversity = useMemo(() => {
-    return universities.find((u) => u.id === selectedUniversityId) || null;
-  }, [selectedUniversityId, universities]);
+  // Debounce group query
+  useEffect(() => {
+    const id = setTimeout(() => setDebouncedGroupQuery(groupQuery), 200);
+    return () => clearTimeout(id);
+  }, [groupQuery]);
+
+  // Load groups when university is selected and group selector opens
+  useEffect(() => {
+    if (selectedUniversity && isGroupSelectorOpen) {
+      setIsLoadingGroups(true);
+      getAvailableGroups(selectedUniversity.id)
+        .then((groups) => {
+          setAvailableGroups(groups);
+          setIsLoadingGroups(false);
+        })
+        .catch((error) => {
+          console.error("Error loading groups:", error);
+          setAvailableGroups([]);
+          setIsLoadingGroups(false);
+        });
+    }
+  }, [selectedUniversity, isGroupSelectorOpen]);
 
   const filtered = useMemo(() => {
     const q = debouncedQuery.trim();
@@ -236,10 +308,34 @@ export default function Home() {
     return scored.map(({ u }) => u);
   }, [debouncedQuery, universities]);
 
+  // Filter groups based on search query (smart ranking)
+  const filteredGroups = useMemo(() => {
+    const base = availableGroups.slice();
+    const q = debouncedGroupQuery.trim();
+    if (!q) return base.sort((a, b) => a.localeCompare(b, "az"));
+
+    const scored = base
+      .map((g) => ({ g, s: scoreGroup(q, g) }))
+      .filter(({ s }) => s > 0)
+      .sort((a, b) => b.s - a.s || a.g.localeCompare(b.g, "az"))
+      .map(({ g }) => g);
+
+    if (scored.length === 0) {
+      const qn = normalizeAz(q);
+      return base.filter((g) => normalizeAz(g).includes(qn));
+    }
+    return scored;
+  }, [availableGroups, debouncedGroupQuery]);
+
   // Ensure active index stays within bounds when list changes
   useEffect(() => {
     if (activeIndex >= filtered.length) setActiveIndex(0);
   }, [filtered.length, activeIndex]);
+
+  // Ensure group active index stays within bounds when list changes
+  useEffect(() => {
+    if (groupActiveIndex >= filteredGroups.length) setGroupActiveIndex(0);
+  }, [filteredGroups.length, groupActiveIndex]);
 
   // Scroll active item into view on change
   useEffect(() => {
@@ -249,19 +345,76 @@ export default function Home() {
     }
   }, [activeIndex, filtered.length]);
 
+  // Scroll active group item into view on change
+  useEffect(() => {
+    const el = groupItemRefs.current[groupActiveIndex];
+    if (el) {
+      el.scrollIntoView({ block: "nearest" });
+    }
+  }, [groupActiveIndex, filteredGroups.length]);
+
   const handleSelectUniversity = (value: University) => {
     localStorage.setItem("universityId", String(value.id));
     setSelectedUniversityId(value.id);
     setIsSelectorOpen(false);
+
+    // If we have user preferences, show dashboard
+    const preferences = loadUserPreferences();
+    if (preferences && preferences.universityId === value.id) {
+      setUserPreferences(preferences);
+    }
   };
 
   const handleChangeUniversity = () => {
     localStorage.removeItem("universityId");
+    clearUserPreferences();
     setSelectedUniversityId(null);
+    setUserPreferences(null);
     setQuery("");
     setDebouncedQuery("");
     setIsSelectorOpen(true);
     setActiveIndex(0);
+  };
+
+  const handleSelectGroup = (groupName: string) => {
+    if (selectedUniversity) {
+      const newPreferences: UserPreferences = {
+        universityId: selectedUniversity.id,
+        groupName: groupName,
+      };
+      saveUserPreferences(newPreferences);
+      setUserPreferences(newPreferences);
+      setIsGroupSelectorOpen(false);
+      setGroupQuery("");
+      setDebouncedGroupQuery("");
+    }
+  };
+
+  const handleOpenGroupSelector = () => {
+    const preferences = loadUserPreferences();
+    if (preferences && preferences.universityId === selectedUniversity?.id) {
+      setUserPreferences(preferences);
+    } else {
+      setIsGroupSelectorOpen(true);
+    }
+  };
+
+  const onGroupKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!isGroupSelectorOpen) return;
+    if (filteredGroups.length === 0) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setGroupActiveIndex((i) => (i + 1) % filteredGroups.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setGroupActiveIndex(
+        (i) => (i - 1 + filteredGroups.length) % filteredGroups.length
+      );
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      const group = filteredGroups[groupActiveIndex];
+      if (group) handleSelectGroup(group);
+    }
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -324,8 +477,36 @@ export default function Home() {
     return (first + last).toUpperCase();
   };
 
+  // If user has preferences, show dashboard
+  if (userPreferences && selectedUniversity) {
+    return (
+      <main className="min-h-screen bg-gray-50">
+        <div className="container mx-auto px-4 py-8">
+          <Dashboard
+            preferences={userPreferences}
+            universities={universities}
+            onReset={handleChangeUniversity}
+          />
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-dvh flex items-center justify-center p-4">
+      {/* Top-Center Button - Add Schedule */}
+      {selectedUniversity && !isSelectorOpen && (
+        <motion.button
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
+          onClick={handleOpenGroupSelector}
+          className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-200 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+        >
+          <span className="text-base font-semibold">📅 Cədvəlini Əlavə Et</span>
+        </motion.button>
+      )}
+
       <div className="relative w-full max-w-2xl">
         {/* Result View */}
         <AnimatePresence mode="wait">
@@ -367,7 +548,7 @@ export default function Home() {
             style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 14px)" }}
           >
             <div className="flex items-center gap-2 sm:gap-3 text-gray-700 bg-white/90 backdrop-blur-md ring-1 ring-black/5 shadow-md rounded-full px-3 py-1 sm:px-4 sm:py-2.5 max-w-[78vw]">
-              <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-1 ring-black/5 overflow-hidden bg-gray-100 flex items-center justify-center shrink-0">
+              <div className="h-9 w-8 sm:h-10 sm:w-9 rounded-full   overflow-hidden  flex items-center justify-center shrink-0">
                 {selectedUniversity.img ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -402,6 +583,141 @@ export default function Home() {
             </button>
           </div>
         )}
+
+        {/* Group Selection Overlay */}
+        <AnimatePresence>
+          {isGroupSelectorOpen && (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                key="group-backdrop"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+                onClick={() => setIsGroupSelectorOpen(false)}
+              />
+
+              {/* Centered Modal */}
+              <motion.div
+                key="group-card"
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="fixed inset-0 flex items-center justify-center p-4 z-50"
+              >
+                <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden">
+                  {/* Header */}
+                  <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
+                    <h2 className="text-xl font-bold text-white text-center">
+                      Qrup Seçimi
+                    </h2>
+                    <p className="text-blue-100 text-sm text-center mt-1">
+                      {selectedUniversity?.name}
+                    </p>
+                  </div>
+
+                  {/* Search Input */}
+                  <div className="p-6">
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg
+                          className="h-5 w-5 text-gray-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                          />
+                        </svg>
+                      </div>
+                      <input
+                        autoFocus
+                        value={groupQuery}
+                        onChange={(e) => setGroupQuery(e.target.value)}
+                        onKeyDown={onGroupKeyDown}
+                        placeholder="Qrup nömrəsini yazın..."
+                        className="w-full pl-12 pr-4 py-4 text-lg border-2 border-gray-200 rounded-2xl focus:border-blue-500 focus:ring-0 transition-colors"
+                      />
+                      {isLoadingGroups && (
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                          <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Results */}
+                    <div className="mt-4 max-h-80 overflow-y-auto">
+                      {filteredGroups.length === 0 ? (
+                        <div className="text-center py-8">
+                          <div className="text-gray-400 text-4xl mb-2">🔍</div>
+                          <p className="text-gray-500">
+                            {isLoadingGroups ? "Yüklənir..." : "Qrup tapılmadı"}
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="space-y-2">
+                          {filteredGroups.map((group, idx) => (
+                            <button
+                              key={group}
+                              ref={(el) => {
+                                groupItemRefs.current[idx] = el;
+                              }}
+                              onClick={() => handleSelectGroup(group)}
+                              className={`w-full p-4 rounded-2xl text-left transition-all duration-200 ${
+                                idx === groupActiveIndex
+                                  ? "bg-blue-50 border-2 border-blue-200 shadow-md"
+                                  : "bg-gray-50 hover:bg-gray-100 border-2 border-transparent"
+                              }`}
+                              tabIndex={-1}
+                            >
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-3">
+                                  <div className="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center font-bold text-lg">
+                                    {group}
+                                  </div>
+                                  <div>
+                                    <div className="font-semibold text-gray-900">
+                                      Qrup {group}
+                                    </div>
+                                    <div className="text-sm text-gray-500">
+                                      Mühəndislik fakültəsi
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="text-blue-600">
+                                  <svg
+                                    className="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M9 5l7 7-7 7"
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
 
         {/* Selection Overlay */}
         <AnimatePresence>
@@ -478,7 +794,7 @@ export default function Home() {
                               }`}
                               tabIndex={-1}
                             >
-                              <div className="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-full overflow-hidden bg-gray-100 ring-1 ring-black/5 flex items-center justify-center shrink-0">
+                              <div className="h-9 w-8 sm:h-10 sm:w-9 md:h-11 md:w-10 rounded-full overflow-hidden bg-gray-100 ring-1 ring-black/5 flex items-center justify-center shrink-0">
                                 {u.img ? (
                                   // eslint-disable-next-line @next/next/no-img-element
                                   <img
