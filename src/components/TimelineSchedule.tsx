@@ -88,7 +88,12 @@ export default function TimelineSchedule({
         }
         return null;
       })
-      .filter(Boolean)
+      .filter(
+        (
+          lesson
+        ): lesson is Lesson & { colorClass: string; isCurrentWeek: boolean } =>
+          lesson !== null
+      )
       .map((lesson) => {
         const timeData = parseTime(lesson.time || "");
         return {

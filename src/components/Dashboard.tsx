@@ -136,7 +136,9 @@ export default function Dashboard({
         }
         return null;
       })
-      .filter(Boolean);
+      .filter(
+        (lesson): lesson is Lesson & { colorClass: string } => lesson !== null
+      );
   }, [group, selectedDay, weekType]);
 
   const handleLessonClick = (lesson: Lesson) => {
