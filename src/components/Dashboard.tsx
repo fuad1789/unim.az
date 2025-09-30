@@ -2,20 +2,9 @@
 
 import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  University,
-  Group,
-  UserPreferences,
-  Lesson,
-  WeekType,
-  Day,
-} from "@/types";
-import {
-  getGroupData,
-  getCurrentDayLessons,
-  parseTime,
-  getCurrentTimeInMinutes,
-} from "@/utils/dataManager";
+import Image from "next/image";
+import { University, Group, UserPreferences, Lesson, WeekType } from "@/types";
+import { getGroupData, getCurrentTimeInMinutes } from "@/utils/dataManager";
 import { calculateCurrentWeekType } from "@/utils/weekCalculator";
 import {
   Clock,
@@ -62,27 +51,20 @@ export default function Dashboard({
   const [group, setGroup] = useState<Group | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [currentTime, setCurrentTime] = useState(getCurrentTimeInMinutes());
-  const [selectedDay, setSelectedDay] = useState(0);
+  const [selectedDay, setSelectedDay] = useState(() => {
+    const today = new Date().getDay();
+    // Convert Sunday (0) to 6, Monday (1) to 0, etc.
+    return today === 0 ? 6 : today - 1;
+  });
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
-
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const university = universities.find(
     (u) => u.id === preferences.universityId
   );
-
-  // Update current time every minute
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(getCurrentTimeInMinutes());
-    }, 60000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     if (university) {
@@ -147,10 +129,16 @@ export default function Dashboard({
   };
 
   const handleDayChange = (direction: "prev" | "next") => {
+    if (isTransitioning) return;
+
     if (direction === "prev" && selectedDay > 0) {
+      setIsTransitioning(true);
       setSelectedDay(selectedDay - 1);
+      setTimeout(() => setIsTransitioning(false), 300);
     } else if (direction === "next" && selectedDay < DAYS.length - 1) {
+      setIsTransitioning(true);
       setSelectedDay(selectedDay + 1);
+      setTimeout(() => setIsTransitioning(false), 300);
     }
   };
 
@@ -165,17 +153,21 @@ export default function Dashboard({
   };
 
   const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
+    if (!touchStart || !touchEnd || isTransitioning) return;
 
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > 50;
     const isRightSwipe = distance < -50;
 
     if (isLeftSwipe && selectedDay < DAYS.length - 1) {
+      setIsTransitioning(true);
       setSelectedDay(selectedDay + 1);
+      setTimeout(() => setIsTransitioning(false), 300);
     }
     if (isRightSwipe && selectedDay > 0) {
+      setIsTransitioning(true);
       setSelectedDay(selectedDay - 1);
+      setTimeout(() => setIsTransitioning(false), 300);
     }
   };
 
@@ -236,7 +228,7 @@ export default function Dashboard({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 safe-area-inset-bottom">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40 safe-area-inset-top">
         <div className="px-4 py-3">
@@ -244,9 +236,11 @@ export default function Dashboard({
             <div className="flex items-center space-x-3 min-w-0 flex-1">
               <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
                 {university.img ? (
-                  <img
+                  <Image
                     src={university.img}
                     alt={university.name}
+                    width={32}
+                    height={32}
                     className="w-8 h-8 object-contain"
                   />
                 ) : (
@@ -294,8 +288,10 @@ export default function Dashboard({
         <div className="flex items-center justify-between px-4 py-3">
           <button
             onClick={() => handleDayChange("prev")}
-            disabled={selectedDay === 0}
-            className="p-2 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            disabled={selectedDay === 0 || isTransitioning}
+            className={`p-2 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 ${
+              isTransitioning ? "scale-95" : "scale-100"
+            }`}
           >
             <ChevronLeft className="w-5 h-5 text-gray-600" />
           </button>
@@ -314,8 +310,10 @@ export default function Dashboard({
 
           <button
             onClick={() => handleDayChange("next")}
-            disabled={selectedDay === DAYS.length - 1}
-            className="p-2 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            disabled={selectedDay === DAYS.length - 1 || isTransitioning}
+            className={`p-2 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 ${
+              isTransitioning ? "scale-95" : "scale-100"
+            }`}
           >
             <ChevronRight className="w-5 h-5 text-gray-600" />
           </button>
@@ -341,56 +339,64 @@ export default function Dashboard({
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {currentDayLessons.length === 0 ? (
-          <div className="text-center py-12">
-            <div className="text-6xl mb-4">📚</div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              Bu gün dərs yoxdur
-            </h3>
-            <p className="text-gray-600">
-              {DAYS[selectedDay]?.name} günü üçün dərs cədvəli yoxdur
-            </p>
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {currentDayLessons.map((lesson, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                onClick={() => handleLessonClick(lesson)}
-                className="bg-white rounded-xl p-4 shadow-sm border border-gray-200 hover:shadow-md transition-all duration-200 cursor-pointer active:scale-95"
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="flex items-start space-x-3">
-                  <div
-                    className={`w-3 h-3 rounded-full ${lesson.colorClass} mt-2 flex-shrink-0`}
-                  />
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-gray-900 text-base mb-2 line-clamp-2">
-                      {lesson.subject}
-                    </h4>
-                    <div className="space-y-1">
-                      <div className="flex items-center space-x-2 text-sm text-gray-600">
-                        <Users className="w-4 h-4 flex-shrink-0" />
-                        <span className="truncate">{lesson.teacher}</span>
-                      </div>
-                      <div className="flex items-center space-x-2 text-sm text-gray-600">
-                        <MapPin className="w-4 h-4 flex-shrink-0" />
-                        <span>Otaq: {lesson.room}</span>
-                      </div>
-                      <div className="flex items-center space-x-2 text-sm text-gray-600">
-                        <Clock className="w-4 h-4 flex-shrink-0" />
-                        <span>{lesson.time}</span>
+        <motion.div
+          key={selectedDay}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        >
+          {currentDayLessons.length === 0 ? (
+            <div className="text-center py-12">
+              <div className="text-6xl mb-4">📚</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Bu gün dərs yoxdur
+              </h3>
+              <p className="text-gray-600">
+                {DAYS[selectedDay]?.name} günü üçün dərs cədvəli yoxdur
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {currentDayLessons.map((lesson, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  onClick={() => handleLessonClick(lesson)}
+                  className="bg-white rounded-xl p-4 shadow-sm border border-gray-200 hover:shadow-md transition-all duration-200 cursor-pointer active:scale-95"
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <div className="flex items-start space-x-3">
+                    <div
+                      className={`w-3 h-3 rounded-full ${lesson.colorClass} mt-2 flex-shrink-0`}
+                    />
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-semibold text-gray-900 text-base mb-2 line-clamp-2">
+                        {lesson.subject}
+                      </h4>
+                      <div className="space-y-1">
+                        <div className="flex items-center space-x-2 text-sm text-gray-600">
+                          <Users className="w-4 h-4 flex-shrink-0" />
+                          <span className="truncate">{lesson.teacher}</span>
+                        </div>
+                        <div className="flex items-center space-x-2 text-sm text-gray-600">
+                          <MapPin className="w-4 h-4 flex-shrink-0" />
+                          <span>Otaq: {lesson.room}</span>
+                        </div>
+                        <div className="flex items-center space-x-2 text-sm text-gray-600">
+                          <Clock className="w-4 h-4 flex-shrink-0" />
+                          <span>{lesson.time}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        )}
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </motion.div>
       </div>
 
       {/* Lesson Detail Modal */}
@@ -408,10 +414,10 @@ export default function Dashboard({
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="bg-white rounded-t-2xl w-full max-w-md mx-4 mb-4"
+              className="bg-white rounded-t-2xl w-full max-w-md mx-4"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="p-6">
+              <div className="p-6 pb-4">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-xl font-bold text-gray-900">
                     Dərs Təfərrüatları
@@ -424,12 +430,12 @@ export default function Dashboard({
                   </button>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div>
                     <h4 className="font-semibold text-gray-900 text-lg mb-2">
                       {selectedLesson.subject}
                     </h4>
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                       <div className="flex items-center space-x-3">
                         <Users className="w-5 h-5 text-gray-500" />
                         <div>

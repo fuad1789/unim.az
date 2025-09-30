@@ -6,7 +6,7 @@ import { Day, Group, Lesson } from "@/types";
 
 type Mutable<T> = { -readonly [K in keyof T]: Mutable<T[K]> };
 
-interface EditableGroup extends Mutable<Group> {}
+type EditableGroup = Mutable<Group>;
 
 export default function EditorPage() {
   const [search, setSearch] = useState("");
@@ -16,7 +16,9 @@ export default function EditorPage() {
   // load once
   useEffect(() => {
     try {
-      const initial: EditableGroup[] = Array.isArray(data) ? (data as any) : [];
+      const initial: EditableGroup[] = Array.isArray(data)
+        ? (data as EditableGroup[])
+        : [];
       setGroups(initial);
     } catch {
       setGroups([]);
@@ -67,7 +69,7 @@ export default function EditorPage() {
       if (field === "lesson") {
         // ignore here; handled via nested fields below
       } else {
-        (lesson as any)[field] = value;
+        (lesson as Record<string, unknown>)[field] = value;
       }
       lessons[lIdx] = lesson;
       days[dIdx] = { ...days[dIdx], lessons };
@@ -97,8 +99,8 @@ export default function EditorPage() {
         upper: { ...current.upper },
         lower: { ...current.lower },
       };
-      next[half] = { ...next[half], [field]: value } as any;
-      lesson.lesson = next as any;
+      next[half] = { ...next[half], [field]: value };
+      lesson.lesson = next;
       lessons[lIdx] = lesson;
       days[dIdx] = { ...days[dIdx], lessons };
       draft[gIdx] = { ...draft[gIdx], week: days };

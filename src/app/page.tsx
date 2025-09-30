@@ -481,13 +481,11 @@ export default function Home() {
   if (userPreferences && selectedUniversity) {
     return (
       <main className="min-h-screen bg-gray-50">
-        <div className="container mx-auto px-4 py-8">
-          <Dashboard
-            preferences={userPreferences}
-            universities={universities}
-            onReset={handleChangeUniversity}
-          />
-        </div>
+        <Dashboard
+          preferences={userPreferences}
+          universities={universities}
+          onReset={handleChangeUniversity}
+        />
       </main>
     );
   }
