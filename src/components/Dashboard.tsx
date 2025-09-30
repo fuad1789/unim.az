@@ -132,6 +132,13 @@ export default function Dashboard({
     return weekTypeText === "ÜST HƏFTƏDİR" ? "ust" : "alt";
   }, [university]);
 
+  // Whether the currently selected day is today
+  const isTodaySelected = useMemo(() => {
+    const jsDow = new Date().getDay(); // 0..6, Sun..Sat
+    const todayIndex = jsDow === 0 ? 6 : jsDow - 1; // Monday=0..Sunday=6
+    return selectedDay === todayIndex;
+  }, [selectedDay]);
+
   // Determine lesson status (past | current | upcoming) and live progress
   function getLessonStatus(timeRange: string | undefined): {
     status: "past" | "current" | "upcoming";
@@ -345,6 +352,7 @@ export default function Dashboard({
         </div>
       </div>
 
+
       {/* Day Navigation */}
       <div className="bg-white border-b border-gray-200">
         <div className="flex items-center justify-between px-4 py-3">
@@ -418,8 +426,9 @@ export default function Dashboard({
             </div>
           ) : (
             <div className="space-y-3">
-              {/* Next lesson countdown (only if no ongoing lesson) */}
+              {/* Next lesson countdown (only today, and only if no ongoing lesson) */}
               {(() => {
+                if (!isTodaySelected) return null;
                 const anyCurrent = currentDayLessons.some(
                   (l) => getLessonStatus(l.time).status === "current"
                 );
@@ -449,9 +458,9 @@ export default function Dashboard({
                 );
               })()}
               {currentDayLessons.map((lesson, index) => {
-                const { status, progress, remainingMinutes } = getLessonStatus(
-                  lesson.time
-                );
+                const { status, progress, remainingMinutes } = isTodaySelected
+                  ? getLessonStatus(lesson.time)
+                  : { status: "upcoming" as const, progress: 0 };
                 const isCurrent = status === "current";
                 const isPast = status === "past";
                 return (
