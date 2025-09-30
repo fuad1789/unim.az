@@ -32,6 +32,32 @@ const DAYS = [
   { id: "VII", name: "Bazar", short: "B" },
 ];
 
+// Azerbaijani month abbreviations
+const AZ_MONTHS_SHORT = [
+  "Yan",
+  "Fev",
+  "Mar",
+  "Apr",
+  "May",
+  "İyn",
+  "İyl",
+  "Avq",
+  "Sen",
+  "Okt",
+  "Noy",
+  "Dek",
+];
+
+function formatAzDateShort(d: Date): string {
+  const year = d.getFullYear();
+  const month = AZ_MONTHS_SHORT[d.getMonth()];
+  const day = String(d.getDate()).padStart(2, "0");
+  const jsDow = d.getDay(); // 0..6, Sun..Sat
+  const dowIndex = jsDow === 0 ? 6 : jsDow - 1; // Monday=0..Sunday=6
+  const dowShort = DAYS[dowIndex]?.short || "";
+  return `${year} ${month} ${day}, ${dowShort}`;
+}
+
 const SUBJECT_COLORS = [
   "bg-blue-500",
   "bg-green-500",
@@ -61,6 +87,18 @@ export default function Dashboard({
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [nowMinutes, setNowMinutes] = useState<number>(
+    getCurrentTimeInMinutes()
+  );
+
+  // Tick every 30s to keep countdowns fresh
+  useEffect(() => {
+    const id = setInterval(
+      () => setNowMinutes(getCurrentTimeInMinutes()),
+      30000
+    );
+    return () => clearInterval(id);
+  }, []);
 
   const university = universities.find(
     (u) => u.id === preferences.universityId
@@ -93,6 +131,35 @@ export default function Dashboard({
     const weekTypeText = calculateCurrentWeekType(university);
     return weekTypeText === "ÜST HƏFTƏDİR" ? "ust" : "alt";
   }, [university]);
+
+  // Determine lesson status (past | current | upcoming) and live progress
+  function getLessonStatus(timeRange: string): {
+    status: "past" | "current" | "upcoming";
+    progress: number; // 0..100 for current, otherwise 0
+    remainingMinutes?: number; // for current state
+  } {
+    const now = getCurrentTimeInMinutes();
+    const [startStr, endStr] = (timeRange || "").split("-");
+    const toMin = (s?: string) => {
+      if (!s) return NaN;
+      const [h, m] = s.split(":").map((n) => Number(n));
+      if (Number.isNaN(h) || Number.isNaN(m)) return NaN;
+      return h * 60 + m;
+    };
+    const start = toMin(startStr);
+    const end = toMin(endStr);
+    if (Number.isNaN(start) || Number.isNaN(end)) {
+      return { status: "upcoming", progress: 0 };
+    }
+    if (now < start) return { status: "upcoming", progress: 0 };
+    if (now >= end) return { status: "past", progress: 0 };
+    const progress = Math.min(
+      100,
+      Math.max(0, ((now - start) / (end - start)) * 100)
+    );
+    const remainingMinutes = Math.max(0, end - now);
+    return { status: "current", progress, remainingMinutes };
+  }
 
   // Get lessons for selected day
   const currentDayLessons = useMemo(() => {
@@ -273,12 +340,7 @@ export default function Dashboard({
             {calculateCurrentWeekType(university)}
           </h2>
           <p className="text-blue-100 text-sm">
-            {new Date().toLocaleDateString("az-AZ", {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            {formatAzDateShort(new Date())}
           </p>
         </div>
       </div>
@@ -303,9 +365,7 @@ export default function Dashboard({
             <p className="text-sm text-gray-600">
               {selectedDay + 1} / {DAYS.length}
             </p>
-            <p className="text-xs text-gray-500 mt-1">
-              Swipe left/right to navigate
-            </p>
+            <p className="text-xs text-gray-500 mt-1">Sola/sağa sürüşdürün</p>
           </div>
 
           <button
@@ -358,42 +418,117 @@ export default function Dashboard({
             </div>
           ) : (
             <div className="space-y-3">
-              {currentDayLessons.map((lesson, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  onClick={() => handleLessonClick(lesson)}
-                  className="bg-white rounded-xl p-4 shadow-sm border border-gray-200 hover:shadow-md transition-all duration-200 cursor-pointer active:scale-95"
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <div className="flex items-start space-x-3">
-                    <div
-                      className={`w-3 h-3 rounded-full ${lesson.colorClass} mt-2 flex-shrink-0`}
-                    />
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-gray-900 text-base mb-2 line-clamp-2">
-                        {lesson.subject}
-                      </h4>
-                      <div className="space-y-1">
-                        <div className="flex items-center space-x-2 text-sm text-gray-600">
-                          <Users className="w-4 h-4 flex-shrink-0" />
-                          <span className="truncate">{lesson.teacher}</span>
+              {/* Next lesson countdown (only if no ongoing lesson) */}
+              {(() => {
+                const anyCurrent = currentDayLessons.some(
+                  (l) => getLessonStatus(l.time).status === "current"
+                );
+                if (anyCurrent) return null;
+                const toStartMin = (t: string) => {
+                  const [sh] = t.split("-");
+                  const [h, m] = sh.split(":").map(Number);
+                  return h * 60 + m;
+                };
+                const upcoming = currentDayLessons
+                  .map((l) => ({ l, start: toStartMin(l.time) }))
+                  .filter(({ start }) => start > nowMinutes)
+                  .sort((a, b) => a.start - b.start)[0];
+                if (!upcoming) return null;
+                const minutesLeft = Math.max(0, upcoming.start - nowMinutes);
+                return (
+                  <div className="flex items-center justify-center">
+                    <span className="text-xs sm:text-sm font-medium text-blue-700 bg-blue-100 rounded-full px-3 py-1">
+                      Növbəti dərsə {minutesLeft} dəq qalıb
+                    </span>
+                  </div>
+                );
+              })()}
+              {currentDayLessons.map((lesson, index) => {
+                const { status, progress, remainingMinutes } = getLessonStatus(
+                  lesson.time
+                );
+                const isCurrent = status === "current";
+                const isPast = status === "past";
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.25, delay: index * 0.06 }}
+                    onClick={() => handleLessonClick(lesson)}
+                    className={`relative overflow-hidden rounded-xl p-4 border transition-all duration-300 cursor-pointer active:scale-95 ${
+                      isCurrent
+                        ? "bg-blue-50/80 border-blue-200 shadow-md"
+                        : isPast
+                        ? "bg-gray-50 border-gray-200 opacity-90"
+                        : "bg-white border-gray-200 hover:shadow-md"
+                    }`}
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {/* Animated left accent and pulsing indicator for current lesson */}
+                    {isCurrent && (
+                      <motion.div
+                        className="absolute left-0 top-0 h-1.5 bg-gradient-to-r from-blue-600 to-blue-400 rounded-tr-full"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${progress}%` }}
+                        transition={{ duration: 0.4 }}
+                      />
+                    )}
+
+                    <div className="flex items-start space-x-3">
+                      <div
+                        className={`w-3 h-3 rounded-full ${lesson.colorClass} mt-2 flex-shrink-0`}
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-3">
+                          <h4
+                            className={`font-semibold text-base mb-2 line-clamp-2 ${
+                              isPast ? "text-gray-500" : "text-gray-900"
+                            }`}
+                          >
+                            {lesson.subject}
+                          </h4>
+                          {isCurrent && (
+                            <span className="text-xs font-medium text-blue-700 bg-blue-100 rounded-full px-2 py-0.5">
+                              {typeof remainingMinutes === "number"
+                                ? `${remainingMinutes} dəq qalıb`
+                                : "Davam edir"}
+                            </span>
+                          )}
                         </div>
-                        <div className="flex items-center space-x-2 text-sm text-gray-600">
-                          <MapPin className="w-4 h-4 flex-shrink-0" />
-                          <span>Otaq: {lesson.room}</span>
-                        </div>
-                        <div className="flex items-center space-x-2 text-sm text-gray-600">
-                          <Clock className="w-4 h-4 flex-shrink-0" />
-                          <span>{lesson.time}</span>
+
+                        <div className="space-y-1">
+                          <div
+                            className={`flex items-center space-x-2 text-sm ${
+                              isPast ? "text-gray-500" : "text-gray-600"
+                            }`}
+                          >
+                            <Users className="w-4 h-4 flex-shrink-0" />
+                            <span className="truncate">{lesson.teacher}</span>
+                          </div>
+                          <div
+                            className={`flex items-center space-x-2 text-sm ${
+                              isPast ? "text-gray-500" : "text-gray-600"
+                            }`}
+                          >
+                            <MapPin className="w-4 h-4 flex-shrink-0" />
+                            <span>Otaq: {lesson.room}</span>
+                          </div>
+                          <div
+                            className={`flex items-center space-x-2 text-sm ${
+                              isPast ? "text-gray-500" : "text-gray-600"
+                            }`}
+                          >
+                            <Clock className="w-4 h-4 flex-shrink-0" />
+                            <span>{lesson.time}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </div>
           )}
         </motion.div>
