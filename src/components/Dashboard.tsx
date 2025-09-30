@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { University, Group, UserPreferences, Lesson, WeekType } from "@/types";
@@ -133,7 +133,7 @@ export default function Dashboard({
   }, [university]);
 
   // Determine lesson status (past | current | upcoming) and live progress
-  function getLessonStatus(timeRange: string): {
+  function getLessonStatus(timeRange: string | undefined): {
     status: "past" | "current" | "upcoming";
     progress: number; // 0..100 for current, otherwise 0
     remainingMinutes?: number; // for current state
@@ -424,9 +424,14 @@ export default function Dashboard({
                   (l) => getLessonStatus(l.time).status === "current"
                 );
                 if (anyCurrent) return null;
-                const toStartMin = (t: string) => {
+                const toStartMin = (t?: string) => {
+                  if (!t) return NaN;
                   const [sh] = t.split("-");
-                  const [h, m] = sh.split(":").map(Number);
+                  if (!sh) return NaN;
+                  const [hStr, mStr] = sh.split(":");
+                  const h = Number(hStr);
+                  const m = Number(mStr);
+                  if (Number.isNaN(h) || Number.isNaN(m)) return NaN;
                   return h * 60 + m;
                 };
                 const upcoming = currentDayLessons
