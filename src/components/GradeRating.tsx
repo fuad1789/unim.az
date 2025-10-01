@@ -12,7 +12,7 @@ interface GradeRatingProps {
   subjectName: string;
 }
 
-const GRADES = [1, 2, 3, 4, 5];
+// Slider-based 1..10 rating
 
 export default function GradeRating({
   isOpen,
@@ -21,10 +21,11 @@ export default function GradeRating({
   currentGrade,
   subjectName,
 }: GradeRatingProps) {
-  const [selectedGrade, setSelectedGrade] = useState<number>(currentGrade || 5);
+  const [selectedGrade, setSelectedGrade] = useState<number>(
+    typeof currentGrade === "number" ? currentGrade : 0
+  );
 
-  const handleGradeClick = (grade: number) => {
-    setSelectedGrade(grade);
+  const commitSelection = (grade: number) => {
     onGradeSelect(grade);
     onClose();
   };
@@ -71,35 +72,44 @@ export default function GradeRating({
               <p className="text-sm text-gray-600">Dərs üçün qiymət seçin</p>
             </div>
 
-            {/* Grade buttons */}
-            <div className="flex justify-center space-x-3 mb-6">
-              {GRADES.map((grade) => (
-                <motion.button
-                  key={grade}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => handleGradeClick(grade)}
-                  className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-200 ${
-                    selectedGrade === grade
-                      ? "bg-blue-600 text-white shadow-lg"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }`}
-                >
-                  {grade}
-                </motion.button>
-              ))}
+            {/* Minimal slider 1..10 */}
+            <div className="mb-6">
+              <div className="flex items-center justify-center mb-4">
+                <div className="px-4 py-2 rounded-full bg-blue-600 text-white text-lg font-bold shadow">
+                  {selectedGrade}
+                </div>
+              </div>
+              <div className="px-2">
+                <input
+                  type="range"
+                  min={0}
+                  max={10}
+                  step={1}
+                  value={selectedGrade}
+                  onChange={(e) => setSelectedGrade(Number(e.target.value))}
+                  onMouseUp={() => commitSelection(selectedGrade)}
+                  onTouchEnd={() => commitSelection(selectedGrade)}
+                  className="w-full accent-blue-600"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-2">
+                  <span>0</span>
+                  <span>5</span>
+                  <span>10</span>
+                </div>
+              </div>
             </div>
 
-            {/* Grade description */}
+            {/* Description */}
             <div className="text-center">
               <div className="flex items-center justify-center space-x-1 text-sm text-gray-600">
                 <Star className="w-4 h-4 text-yellow-500" />
                 <span>
-                  {selectedGrade === 1 && "Çox pis"}
-                  {selectedGrade === 2 && "Pis"}
-                  {selectedGrade === 3 && "Orta"}
-                  {selectedGrade === 4 && "Yaxşı"}
-                  {selectedGrade === 5 && "Əla"}
+                  {selectedGrade === 0 && "Seçilməyib"}
+                  {selectedGrade >= 1 && selectedGrade <= 2 && "Çox pis"}
+                  {selectedGrade >= 3 && selectedGrade <= 4 && "Pis"}
+                  {selectedGrade >= 5 && selectedGrade <= 6 && "Orta"}
+                  {selectedGrade >= 7 && selectedGrade <= 8 && "Yaxşı"}
+                  {selectedGrade >= 9 && selectedGrade <= 10 && "Əla"}
                 </span>
               </div>
             </div>

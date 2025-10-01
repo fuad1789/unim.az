@@ -116,8 +116,10 @@ export default function Dashboard({
     if (group) {
       const savedGrades: Record<string, number> = {};
       const savedGradeStates: Record<string, boolean> = {};
+      const savedAttendanceCounts: Record<string, number> = {};
+      const savedAttendanceStates: Record<string, boolean> = {};
 
-      // Load grades for all lessons
+      // Load grades and attendance for all lessons
       group.week.forEach((day, dayIndex) => {
         day.lessons.forEach((lesson, lessonIndex) => {
           if (lesson.lesson || lesson.subject) {
@@ -131,12 +133,26 @@ export default function Dashboard({
               savedGrades[lessonKey] = parseInt(savedGrade);
               savedGradeStates[lessonKey] = true;
             }
+
+            // restore attendance single selection (no accumulation)
+            const savedAttendanceCount = localStorage.getItem(
+              `attendance-count-${lessonKey}`
+            );
+            if (savedAttendanceCount) {
+              const countNum = parseInt(savedAttendanceCount);
+              if (countNum === 1 || countNum === 2) {
+                savedAttendanceCounts[lessonKey] = countNum;
+                savedAttendanceStates[lessonKey] = true;
+              }
+            }
           }
         });
       });
 
       setGradeValues(savedGrades);
       setGradeStates(savedGradeStates);
+      setAttendanceCounts(savedAttendanceCounts);
+      setAttendanceStates(savedAttendanceStates);
     }
   }, [group]);
 
@@ -295,18 +311,18 @@ export default function Dashboard({
       [lessonKey]: true,
     }));
 
-    // Qayib sayını artır
+    // Qayib sayını təyin et (akkumulyasiya YOXDUR)
     const attendanceCount = type === "first" ? 1 : 2;
     setAttendanceCounts((prev) => ({
       ...prev,
-      [lessonKey]: (prev[lessonKey] || 0) + attendanceCount,
+      [lessonKey]: attendanceCount,
     }));
 
     // Store attendance type and count for future reference
     localStorage.setItem(`attendance-${lessonKey}`, type);
     localStorage.setItem(
       `attendance-count-${lessonKey}`,
-      String((attendanceCounts[lessonKey] || 0) + attendanceCount)
+      String(attendanceCount)
     );
 
     setShowAttendanceOptions(null);
@@ -392,7 +408,12 @@ export default function Dashboard({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div
+      className="min-h-screen bg-gray-50"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Header */}
       <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40 safe-area-inset-top">
         <div className="px-3 sm:px-4 py-2 sm:py-3">
@@ -494,9 +515,6 @@ export default function Dashboard({
       {/* Schedule Content */}
       <div
         className="px-3 sm:px-4 py-3 sm:py-4"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
       >
         <motion.div
           key={selectedDay}
@@ -517,13 +535,28 @@ export default function Dashboard({
             </div>
           ) : (
             <div className="space-y-2 sm:space-y-3">
-              {/* Next lesson countdown (only today, and only if no ongoing lesson) */}
+              {/* Lesson countdown banner: show remaining of current lesson; otherwise, next lesson */}
               {(() => {
                 if (!isTodaySelected) return null;
-                const anyCurrent = currentDayLessons.some(
+
+                // Check if there's an ongoing lesson and show time remaining for it first
+                const currentLesson = currentDayLessons.find(
                   (l) => getLessonStatus(l.time).status === "current"
                 );
-                if (anyCurrent) return null;
+                if (currentLesson) {
+                  const { remainingMinutes = 0 } = getLessonStatus(
+                    currentLesson.time
+                  );
+                  return (
+                    <div className="flex items-center justify-center">
+                      <span className="text-xs sm:text-sm font-medium text-blue-700 bg-blue-100 rounded-full px-2 sm:px-3 py-1">
+                        Dərsin bitməsinə {remainingMinutes} dəq qalıb
+                      </span>
+                    </div>
+                  );
+                }
+
+                // Otherwise, show countdown to the next lesson
                 const toStartMin = (t?: string) => {
                   if (!t) return NaN;
                   const [sh] = t.split("-");
@@ -672,17 +705,21 @@ export default function Dashboard({
                                       : "bg-gray-100 hover:bg-gray-200"
                                   }`}
                                 >
-                                  <span
-                                    className={`text-sm font-bold ${
-                                      attendanceStates[
-                                        `${selectedDay}-${index}-${lesson.subject}`
-                                      ]
-                                        ? "text-white"
-                                        : "text-gray-600"
-                                    }`}
-                                  >
-                                    Q
-                                  </span>
+                                  {(() => {
+                                    const key = `${selectedDay}-${index}-${lesson.subject}`;
+                                    const count = attendanceCounts[key] || 0;
+                                    const text = count === 1 ? "'40" : count === 2 ? "'80" : "Q";
+                                    const isSet = attendanceStates[key];
+                                    return (
+                                      <span
+                                        className={`text-sm font-bold ${
+                                          isSet ? "text-white" : "text-gray-600"
+                                        }`}
+                                      >
+                                        {text}
+                                      </span>
+                                    );
+                                  })()}
                                 </motion.button>
                               )}
 
@@ -757,7 +794,7 @@ export default function Dashboard({
                                   <span className="text-white text-xs font-bold">
                                     {gradeValues[
                                       `${selectedDay}-${index}-${lesson.subject}`
-                                    ] || 5}
+                                    ]}
                                   </span>
                                 ) : (
                                   <Award className="w-5 h-5 text-green-600" />
