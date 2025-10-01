@@ -1,19 +1,20 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { University, Group, UserPreferences, Lesson, WeekType } from "@/types";
 import { getGroupData, getCurrentTimeInMinutes } from "@/utils/dataManager";
 import { calculateCurrentWeekType } from "@/utils/weekCalculator";
+import GradeRating from "./GradeRating";
 import {
   Clock,
   MapPin,
   Users,
   ChevronLeft,
   ChevronRight,
-  X,
   GraduationCap,
+  Award,
 } from "lucide-react";
 
 interface DashboardProps {
@@ -82,14 +83,24 @@ export default function Dashboard({
     // Convert Sunday (0) to 6, Monday (1) to 0, etc.
     return today === 0 ? 6 : today - 1;
   });
-  const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [nowMinutes, setNowMinutes] = useState<number>(
     getCurrentTimeInMinutes()
   );
+  const [attendanceStates, setAttendanceStates] = useState<
+    Record<string, boolean>
+  >({});
+  const [gradeStates, setGradeStates] = useState<Record<string, boolean>>({});
+  const [showAttendanceOptions, setShowAttendanceOptions] = useState<
+    string | null
+  >(null);
+  const [attendanceCounts, setAttendanceCounts] = useState<
+    Record<string, number>
+  >({});
+  const [showGradeRating, setShowGradeRating] = useState<string | null>(null);
+  const [gradeValues, setGradeValues] = useState<Record<string, number>>({});
 
   // Tick every 30s to keep countdowns fresh
   useEffect(() => {
@@ -99,6 +110,35 @@ export default function Dashboard({
     );
     return () => clearInterval(id);
   }, []);
+
+  // Load saved grades from localStorage
+  useEffect(() => {
+    if (group) {
+      const savedGrades: Record<string, number> = {};
+      const savedGradeStates: Record<string, boolean> = {};
+
+      // Load grades for all lessons
+      group.week.forEach((day, dayIndex) => {
+        day.lessons.forEach((lesson, lessonIndex) => {
+          if (lesson.lesson || lesson.subject) {
+            const lessonKey = `${dayIndex}-${lessonIndex}-${
+              lesson.subject ||
+              lesson.lesson?.upper?.subject ||
+              lesson.lesson?.lower?.subject
+            }`;
+            const savedGrade = localStorage.getItem(`grade-${lessonKey}`);
+            if (savedGrade) {
+              savedGrades[lessonKey] = parseInt(savedGrade);
+              savedGradeStates[lessonKey] = true;
+            }
+          }
+        });
+      });
+
+      setGradeValues(savedGrades);
+      setGradeStates(savedGradeStates);
+    }
+  }, [group]);
 
   const university = universities.find(
     (u) => u.id === preferences.universityId
@@ -197,11 +237,6 @@ export default function Dashboard({
       );
   }, [group, selectedDay, weekType]);
 
-  const handleLessonClick = (lesson: Lesson) => {
-    setSelectedLesson(lesson);
-    setIsModalOpen(true);
-  };
-
   const handleDayChange = (direction: "prev" | "next") => {
     if (isTransitioning) return;
 
@@ -243,6 +278,61 @@ export default function Dashboard({
       setSelectedDay(selectedDay - 1);
       setTimeout(() => setIsTransitioning(false), 300);
     }
+  };
+
+  const handleAttendanceClick = (lessonKey: string) => {
+    setShowAttendanceOptions(
+      showAttendanceOptions === lessonKey ? null : lessonKey
+    );
+  };
+
+  const handleAttendanceSelect = (
+    lessonKey: string,
+    type: "first" | "second"
+  ) => {
+    setAttendanceStates((prev) => ({
+      ...prev,
+      [lessonKey]: true,
+    }));
+
+    // Qayib sayını artır
+    const attendanceCount = type === "first" ? 1 : 2;
+    setAttendanceCounts((prev) => ({
+      ...prev,
+      [lessonKey]: (prev[lessonKey] || 0) + attendanceCount,
+    }));
+
+    // Store attendance type and count for future reference
+    localStorage.setItem(`attendance-${lessonKey}`, type);
+    localStorage.setItem(
+      `attendance-count-${lessonKey}`,
+      String((attendanceCounts[lessonKey] || 0) + attendanceCount)
+    );
+
+    setShowAttendanceOptions(null);
+  };
+
+  const handleGradeClick = (lessonKey: string) => {
+    setShowGradeRating(lessonKey);
+  };
+
+  const handleGradeSelect = (lessonKey: string, grade: number) => {
+    setGradeValues((prev) => ({
+      ...prev,
+      [lessonKey]: grade,
+    }));
+
+    setGradeStates((prev) => ({
+      ...prev,
+      [lessonKey]: true,
+    }));
+
+    // Store grade in localStorage
+    localStorage.setItem(`grade-${lessonKey}`, String(grade));
+  };
+
+  const handleGradeRatingClose = () => {
+    setShowGradeRating(null);
   };
 
   if (!university) {
@@ -305,34 +395,34 @@ export default function Dashboard({
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40 safe-area-inset-top">
-        <div className="px-4 py-3">
+        <div className="px-3 sm:px-4 py-2 sm:py-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3 min-w-0 flex-1">
-              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+            <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
                 {university.img ? (
                   <Image
                     src={university.img}
                     alt={university.name}
                     width={32}
                     height={32}
-                    className="w-8 h-8 object-contain"
+                    className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
                   />
                 ) : (
-                  <GraduationCap className="w-5 h-5 text-blue-600" />
+                  <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                 )}
               </div>
               <div className="min-w-0 flex-1">
-                <h1 className="font-bold text-gray-900 text-sm truncate">
+                <h1 className="font-bold text-gray-900 text-xs sm:text-sm truncate">
                   {university.name}
                 </h1>
-                <p className="text-xs text-gray-600">
+                <p className="text-xs text-gray-600 truncate">
                   Qrup: {preferences.groupName}
                 </p>
               </div>
             </div>
             <button
               onClick={onReset}
-              className="px-3 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium text-sm flex-shrink-0"
+              className="px-2 sm:px-3 py-1.5 sm:py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium text-xs sm:text-sm flex-shrink-0 touch-manipulation"
             >
               Dəyişdir
             </button>
@@ -341,58 +431,59 @@ export default function Dashboard({
       </div>
 
       {/* Week Type Banner */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 sm:px-4 py-2 sm:py-3">
         <div className="text-center">
-          <h2 className="text-lg font-bold">
+          <h2 className="text-base sm:text-lg font-bold">
             {calculateCurrentWeekType(university)}
           </h2>
-          <p className="text-blue-100 text-sm">
+          <p className="text-blue-100 text-xs sm:text-sm">
             {formatAzDateShort(new Date())}
           </p>
         </div>
       </div>
 
-
       {/* Day Navigation */}
       <div className="bg-white border-b border-gray-200">
-        <div className="flex items-center justify-between px-4 py-3">
+        <div className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3">
           <button
             onClick={() => handleDayChange("prev")}
             disabled={selectedDay === 0 || isTransitioning}
-            className={`p-2 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 ${
+            className={`p-1.5 sm:p-2 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-manipulation ${
               isTransitioning ? "scale-95" : "scale-100"
             }`}
           >
-            <ChevronLeft className="w-5 h-5 text-gray-600" />
+            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
           </button>
 
           <div className="flex-1 text-center">
-            <h3 className="font-bold text-gray-900 text-lg">
+            <h3 className="font-bold text-gray-900 text-base sm:text-lg">
               {DAYS[selectedDay]?.name}
             </h3>
-            <p className="text-sm text-gray-600">
+            <p className="text-xs sm:text-sm text-gray-600">
               {selectedDay + 1} / {DAYS.length}
             </p>
-            <p className="text-xs text-gray-500 mt-1">Sola/sağa sürüşdürün</p>
+            <p className="text-xs text-gray-500 mt-1 hidden sm:block">
+              Sola/sağa sürüşdürün
+            </p>
           </div>
 
           <button
             onClick={() => handleDayChange("next")}
             disabled={selectedDay === DAYS.length - 1 || isTransitioning}
-            className={`p-2 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 ${
+            className={`p-1.5 sm:p-2 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-manipulation ${
               isTransitioning ? "scale-95" : "scale-100"
             }`}
           >
-            <ChevronRight className="w-5 h-5 text-gray-600" />
+            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
           </button>
         </div>
 
         {/* Day indicator dots */}
-        <div className="flex justify-center space-x-2 pb-3">
+        <div className="flex justify-center space-x-1.5 sm:space-x-2 pb-2 sm:pb-3">
           {DAYS.map((_, index) => (
             <div
               key={index}
-              className={`w-2 h-2 rounded-full transition-colors ${
+              className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-colors ${
                 index === selectedDay ? "bg-blue-600" : "bg-gray-300"
               }`}
             />
@@ -402,7 +493,7 @@ export default function Dashboard({
 
       {/* Schedule Content */}
       <div
-        className="px-4 py-4"
+        className="px-3 sm:px-4 py-3 sm:py-4"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -425,7 +516,7 @@ export default function Dashboard({
               </p>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {/* Next lesson countdown (only today, and only if no ongoing lesson) */}
               {(() => {
                 if (!isTodaySelected) return null;
@@ -451,34 +542,32 @@ export default function Dashboard({
                 const minutesLeft = Math.max(0, upcoming.start - nowMinutes);
                 return (
                   <div className="flex items-center justify-center">
-                    <span className="text-xs sm:text-sm font-medium text-blue-700 bg-blue-100 rounded-full px-3 py-1">
+                    <span className="text-xs sm:text-sm font-medium text-blue-700 bg-blue-100 rounded-full px-2 sm:px-3 py-1">
                       Növbəti dərsə {minutesLeft} dəq qalıb
                     </span>
                   </div>
                 );
               })()}
               {currentDayLessons.map((lesson, index) => {
-                const { status, progress, remainingMinutes } = isTodaySelected
+                const { status, progress } = isTodaySelected
                   ? getLessonStatus(lesson.time)
                   : { status: "upcoming" as const, progress: 0 };
                 const isCurrent = status === "current";
                 const isPast = status === "past";
+
                 return (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.25, delay: index * 0.06 }}
-                    onClick={() => handleLessonClick(lesson)}
-                    className={`relative overflow-hidden rounded-xl p-4 border transition-all duration-300 cursor-pointer active:scale-95 ${
+                    className={`relative overflow-hidden rounded-xl border transition-all duration-300 ${
                       isCurrent
                         ? "bg-blue-50/80 border-blue-200 shadow-md"
                         : isPast
                         ? "bg-gray-50 border-gray-200 opacity-90"
                         : "bg-white border-gray-200 hover:shadow-md"
                     }`}
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.98 }}
                   >
                     {/* Animated left accent and pulsing indicator for current lesson */}
                     {isCurrent && (
@@ -490,52 +579,191 @@ export default function Dashboard({
                       />
                     )}
 
-                    <div className="flex items-start space-x-3">
-                      <div
-                        className={`w-3 h-3 rounded-full ${lesson.colorClass} mt-2 flex-shrink-0`}
-                      />
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-3">
-                          <h4
-                            className={`font-semibold text-base mb-2 line-clamp-2 ${
-                              isPast ? "text-gray-500" : "text-gray-900"
-                            }`}
-                          >
-                            {lesson.subject}
-                          </h4>
-                          {isCurrent && (
-                            <span className="text-xs font-medium text-blue-700 bg-blue-100 rounded-full px-2 py-0.5">
-                              {typeof remainingMinutes === "number"
-                                ? `${remainingMinutes} dəq qalıb`
-                                : "Davam edir"}
-                            </span>
-                          )}
+                    {/* Main card content */}
+                    <div className="p-3 sm:p-4">
+                      <div className="flex items-start space-x-2 sm:space-x-3">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between gap-2 sm:gap-3 mb-2">
+                            <h4
+                              className={`font-semibold text-sm sm:text-base line-clamp-2 flex-1 min-w-0 ${
+                                isPast ? "text-gray-500" : "text-gray-900"
+                              }`}
+                            >
+                              {lesson.subject}
+                            </h4>
+                          </div>
+
+                          <div className="space-y-1">
+                            <div
+                              className={`flex items-center space-x-2 text-xs sm:text-sm ${
+                                isPast ? "text-gray-500" : "text-gray-600"
+                              }`}
+                            >
+                              <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                              <span className="truncate">{lesson.teacher}</span>
+                            </div>
+                            <div
+                              className={`flex items-center space-x-2 text-xs sm:text-sm ${
+                                isPast ? "text-gray-500" : "text-gray-600"
+                              }`}
+                            >
+                              <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                              <span>Otaq: {lesson.room}</span>
+                            </div>
+                            <div
+                              className={`flex items-center space-x-2 text-xs sm:text-sm ${
+                                isPast ? "text-gray-500" : "text-gray-600"
+                              }`}
+                            >
+                              <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                              <span>{lesson.time}</span>
+                            </div>
+
+                            {/* Qayib məlumatı - ayrı xətt ilə */}
+                            {attendanceCounts[
+                              `${selectedDay}-${index}-${lesson.subject}`
+                            ] > 0 && (
+                              <>
+                                <div className="border-t border-gray-200 my-2"></div>
+                                <div
+                                  className={`flex items-center space-x-2 text-xs sm:text-sm ${
+                                    isPast ? "text-gray-500" : "text-red-600"
+                                  }`}
+                                >
+                                  <span className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 text-center font-bold">
+                                    Q
+                                  </span>
+                                  <span>
+                                    Ümumi:{" "}
+                                    {
+                                      attendanceCounts[
+                                        `${selectedDay}-${index}-${lesson.subject}`
+                                      ]
+                                    }{" "}
+                                    qayib
+                                  </span>
+                                </div>
+                              </>
+                            )}
+                          </div>
                         </div>
 
-                        <div className="space-y-1">
-                          <div
-                            className={`flex items-center space-x-2 text-sm ${
-                              isPast ? "text-gray-500" : "text-gray-600"
-                            }`}
-                          >
-                            <Users className="w-4 h-4 flex-shrink-0" />
-                            <span className="truncate">{lesson.teacher}</span>
-                          </div>
-                          <div
-                            className={`flex items-center space-x-2 text-sm ${
-                              isPast ? "text-gray-500" : "text-gray-600"
-                            }`}
-                          >
-                            <MapPin className="w-4 h-4 flex-shrink-0" />
-                            <span>Otaq: {lesson.room}</span>
-                          </div>
-                          <div
-                            className={`flex items-center space-x-2 text-sm ${
-                              isPast ? "text-gray-500" : "text-gray-600"
-                            }`}
-                          >
-                            <Clock className="w-4 h-4 flex-shrink-0" />
-                            <span>{lesson.time}</span>
+                        {/* Simple action buttons on the right */}
+                        <div className="flex flex-col items-center space-y-2 ml-2">
+                          <div className="flex flex-col space-y-2">
+                            {/* Davamiyyət düyməsi - aşağıya genişlənən animasiyalı */}
+                            <div className="flex flex-col items-center space-y-2">
+                              {/* Q düyməsi - yalnız seçimlər açıq olmadıqda görünür */}
+                              {showAttendanceOptions !==
+                                `${selectedDay}-${index}-${lesson.subject}` && (
+                                <motion.button
+                                  whileHover={{ scale: 1.05 }}
+                                  whileTap={{ scale: 0.95 }}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    const lessonKey = `${selectedDay}-${index}-${lesson.subject}`;
+                                    handleAttendanceClick(lessonKey);
+                                  }}
+                                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 touch-manipulation ${
+                                    attendanceStates[
+                                      `${selectedDay}-${index}-${lesson.subject}`
+                                    ]
+                                      ? "bg-red-500 hover:bg-red-600 shadow-md scale-105"
+                                      : "bg-gray-100 hover:bg-gray-200"
+                                  }`}
+                                >
+                                  <span
+                                    className={`text-sm font-bold ${
+                                      attendanceStates[
+                                        `${selectedDay}-${index}-${lesson.subject}`
+                                      ]
+                                        ? "text-white"
+                                        : "text-gray-600"
+                                    }`}
+                                  >
+                                    Q
+                                  </span>
+                                </motion.button>
+                              )}
+
+                              {/* Seçim düymələri - Q düyməsi '40-a çevrilir, '80 aşağı düşür */}
+                              {showAttendanceOptions ===
+                                `${selectedDay}-${index}-${lesson.subject}` && (
+                                <div className="flex flex-col items-center space-y-2">
+                                  <motion.button
+                                    initial={{ scale: 1 }}
+                                    animate={{ scale: 1 }}
+                                    transition={{ duration: 0.2 }}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      const lessonKey = `${selectedDay}-${index}-${lesson.subject}`;
+                                      handleAttendanceSelect(
+                                        lessonKey,
+                                        "first"
+                                      );
+                                    }}
+                                    className="w-8 h-8 bg-red-300 text-white text-xs font-bold rounded-full flex items-center justify-center hover:bg-red-400 transition-colors"
+                                  >
+                                    &apos;40
+                                  </motion.button>
+
+                                  <motion.button
+                                    initial={{ y: -20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{
+                                      delay: 0.1,
+                                      type: "spring",
+                                      stiffness: 600,
+                                      damping: 20,
+                                    }}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      const lessonKey = `${selectedDay}-${index}-${lesson.subject}`;
+                                      handleAttendanceSelect(
+                                        lessonKey,
+                                        "second"
+                                      );
+                                    }}
+                                    className="w-8 h-8 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
+                                  >
+                                    &apos;80
+                                  </motion.button>
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Qiymət düyməsi - qayib seçimləri açıq olduqda gizlənir */}
+                            {showAttendanceOptions !==
+                              `${selectedDay}-${index}-${lesson.subject}` && (
+                              <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  const lessonKey = `${selectedDay}-${index}-${lesson.subject}`;
+                                  handleGradeClick(lessonKey);
+                                }}
+                                className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 touch-manipulation ${
+                                  gradeStates[
+                                    `${selectedDay}-${index}-${lesson.subject}`
+                                  ]
+                                    ? "bg-green-500 hover:bg-green-600 shadow-md scale-105"
+                                    : "bg-green-100 hover:bg-green-200"
+                                }`}
+                              >
+                                {gradeStates[
+                                  `${selectedDay}-${index}-${lesson.subject}`
+                                ] ? (
+                                  <span className="text-white text-xs font-bold">
+                                    {gradeValues[
+                                      `${selectedDay}-${index}-${lesson.subject}`
+                                    ] || 5}
+                                  </span>
+                                ) : (
+                                  <Award className="w-5 h-5 text-green-600" />
+                                )}
+                              </motion.button>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -548,78 +776,25 @@ export default function Dashboard({
         </motion.div>
       </div>
 
-      {/* Lesson Detail Modal */}
-      <AnimatePresence>
-        {isModalOpen && selectedLesson && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-end justify-center"
-            onClick={() => setIsModalOpen(false)}
-          >
-            <motion.div
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="bg-white rounded-t-2xl w-full max-w-md mx-4"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="p-6 pb-4">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-bold text-gray-900">
-                    Dərs Təfərrüatları
-                  </h3>
-                  <button
-                    onClick={() => setIsModalOpen(false)}
-                    className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                  >
-                    <X className="w-5 h-5 text-gray-600" />
-                  </button>
-                </div>
-
-                <div className="space-y-3">
-                  <div>
-                    <h4 className="font-semibold text-gray-900 text-lg mb-2">
-                      {selectedLesson.subject}
-                    </h4>
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-3">
-                        <Users className="w-5 h-5 text-gray-500" />
-                        <div>
-                          <p className="text-sm text-gray-600">Müəllim</p>
-                          <p className="font-medium text-gray-900">
-                            {selectedLesson.teacher}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <MapPin className="w-5 h-5 text-gray-500" />
-                        <div>
-                          <p className="text-sm text-gray-600">Otaq</p>
-                          <p className="font-medium text-gray-900">
-                            {selectedLesson.room}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <Clock className="w-5 h-5 text-gray-500" />
-                        <div>
-                          <p className="text-sm text-gray-600">Vaxt</p>
-                          <p className="font-medium text-gray-900">
-                            {selectedLesson.time}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Grade Rating Modal */}
+      {showGradeRating && (
+        <GradeRating
+          isOpen={!!showGradeRating}
+          onClose={handleGradeRatingClose}
+          onGradeSelect={(grade: number) => {
+            if (showGradeRating) {
+              handleGradeSelect(showGradeRating, grade);
+            }
+          }}
+          currentGrade={gradeValues[showGradeRating]}
+          subjectName={(() => {
+            const [dayIndex, lessonIndex] = showGradeRating.split("-");
+            const day = group?.week[parseInt(dayIndex)];
+            const lesson = day?.lessons[parseInt(lessonIndex)];
+            return lesson?.subject || "Dərs";
+          })()}
+        />
+      )}
     </div>
   );
 }

@@ -74,3 +74,45 @@ html {
   min-height: 100vh;
   min-height: 100dvh; /* Dynamic viewport height for mobile */
 }
+
+/* Touch-friendly interactions */
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
+/* Better mobile scrolling */
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar for grade rating component */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  /* Reduce motion for better performance on mobile */
+  * {
+    animation-duration: 0.2s !important;
+    transition-duration: 0.2s !important;
+  }
+
+  /* Better text rendering on mobile */
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* Prevent zoom on input focus */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}

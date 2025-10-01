@@ -499,7 +499,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.2 }}
           onClick={handleOpenGroupSelector}
-          className="fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 sm:px-6 sm:py-3 rounded-full shadow-lg transition-all duration-200 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 max-w-[90vw]"
+          className="fixed top-2 sm:top-4 left-1/2 -translate-x-1/2 z-50 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-full shadow-lg transition-all duration-200 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 max-w-[90vw] touch-manipulation"
         >
           <span className="text-sm sm:text-base font-semibold whitespace-nowrap">
             📅 Cədvəlini Əlavə Et
@@ -521,7 +521,7 @@ export default function Home() {
             >
               {/* Headline first */}
               <motion.h1
-                className="text-3xl sm:text-6xl font-extrabold tracking-tight leading-tight"
+                className="text-2xl sm:text-3xl md:text-6xl font-extrabold tracking-tight leading-tight"
                 initial="hidden"
                 animate="visible"
                 variants={titleVariants}
@@ -547,8 +547,8 @@ export default function Home() {
             className="fixed left-1/2 -translate-x-1/2 mx-auto flex items-center gap-2 sm:gap-3"
             style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 14px)" }}
           >
-            <div className="flex items-center gap-2 sm:gap-3 text-gray-700 bg-white/90 backdrop-blur-md ring-1 ring-black/5 shadow-md rounded-full px-3 py-1 sm:px-4 sm:py-2.5 max-w-[78vw]">
-              <div className="h-9 w-8 sm:h-10 sm:w-9 rounded-full   overflow-hidden  flex items-center justify-center shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3 text-gray-700 bg-white/90 backdrop-blur-md ring-1 ring-black/5 shadow-md rounded-full px-3 py-1.5 sm:px-4 sm:py-2.5 max-w-[78vw]">
+              <div className="h-8 w-7 sm:h-9 sm:w-8 md:h-10 md:w-9 rounded-full overflow-hidden flex items-center justify-center shrink-0">
                 {selectedUniversity.img ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -558,18 +558,18 @@ export default function Home() {
                     loading="eager"
                   />
                 ) : (
-                  <span className="text-[10px] font-semibold text-gray-600">
+                  <span className="text-[9px] sm:text-[10px] font-semibold text-gray-600">
                     {getInitials(selectedUniversity.name)}
                   </span>
                 )}
               </div>
-              <p className="text-sm sm:text-base md:text-lg text-gray-800 max-w-[52vw] sm:max-w-none truncate">
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-800 max-w-[52vw] sm:max-w-none truncate">
                 {selectedUniversity.name}
               </p>
               <span className="hidden sm:inline text-gray-300">•</span>
               <button
                 onClick={handleChangeUniversity}
-                className="text-sm sm:text-base text-blue-600 font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500/50 rounded px-1 shrink-0"
+                className="text-xs sm:text-sm md:text-base text-blue-600 font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500/50 rounded px-1 shrink-0 touch-manipulation"
               >
                 Dəyişdir
               </button>
@@ -577,9 +577,9 @@ export default function Home() {
             <button
               onClick={handleShare}
               aria-label="Paylaş"
-              className="h-11 w-11 sm:h-11 sm:w-11 rounded-full cursor-pointer bg-white/90 backdrop-blur-md ring-1 ring-black/5 shadow-md flex items-center justify-center text-blue-600 hover:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              className="h-10 w-10 sm:h-11 sm:w-11 rounded-full cursor-pointer bg-white/90 backdrop-blur-md ring-1 ring-black/5 shadow-md flex items-center justify-center text-blue-600 hover:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 touch-manipulation"
             >
-              <Share2 className="h-5 w-5" aria-hidden="true" />
+              <Share2 className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
             </button>
           </div>
         )}
@@ -608,23 +608,23 @@ export default function Home() {
                 transition={{ duration: 0.3, ease: "easeOut" }}
                 className="fixed inset-0 flex items-center justify-center p-4 z-50"
               >
-                <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden">
+                <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
                   {/* Header */}
-                  <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
-                    <h2 className="text-xl font-bold text-white text-center">
+                  <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-4 sm:px-6 py-3 sm:py-4 flex-shrink-0">
+                    <h2 className="text-lg sm:text-xl font-bold text-white text-center">
                       Qrup Seçimi
                     </h2>
-                    <p className="text-blue-100 text-sm text-center mt-1">
+                    <p className="text-blue-100 text-xs sm:text-sm text-center mt-1 truncate">
                       {selectedUniversity?.name}
                     </p>
                   </div>
 
                   {/* Search Input */}
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6 flex-shrink-0">
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
                         <svg
-                          className="h-5 w-5 text-gray-400"
+                          className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -643,21 +643,23 @@ export default function Home() {
                         onChange={(e) => setGroupQuery(e.target.value)}
                         onKeyDown={onGroupKeyDown}
                         placeholder="Qrup nömrəsini yazın..."
-                        className="w-full pl-12 pr-4 py-4 text-lg border-2 border-gray-200 rounded-2xl focus:border-blue-500 focus:ring-0 transition-colors"
+                        className="w-full pl-10 sm:pl-12 pr-4 py-3 sm:py-4 text-base sm:text-lg border-2 border-gray-200 rounded-2xl focus:border-blue-500 focus:ring-0 transition-colors touch-manipulation"
                       />
                       {isLoadingGroups && (
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                          <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                        <div className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2">
+                          <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
                         </div>
                       )}
                     </div>
 
                     {/* Results */}
-                    <div className="mt-4 max-h-80 overflow-y-auto">
+                    <div className="mt-4 max-h-60 sm:max-h-80 overflow-y-auto flex-1">
                       {filteredGroups.length === 0 ? (
-                        <div className="text-center py-8">
-                          <div className="text-gray-400 text-4xl mb-2">🔍</div>
-                          <p className="text-gray-500">
+                        <div className="text-center py-6 sm:py-8">
+                          <div className="text-gray-400 text-3xl sm:text-4xl mb-2">
+                            🔍
+                          </div>
+                          <p className="text-gray-500 text-sm sm:text-base">
                             {isLoadingGroups ? "Yüklənir..." : "Qrup tapılmadı"}
                           </p>
                         </div>
@@ -670,7 +672,7 @@ export default function Home() {
                                 groupItemRefs.current[idx] = el;
                               }}
                               onClick={() => handleSelectGroup(group)}
-                              className={`w-full p-4 rounded-2xl text-left transition-all duration-200 ${
+                              className={`w-full p-3 sm:p-4 rounded-2xl text-left transition-all duration-200 touch-manipulation ${
                                 idx === groupActiveIndex
                                   ? "bg-blue-50 border-2 border-blue-200 shadow-md"
                                   : "bg-gray-50 hover:bg-gray-100 border-2 border-transparent"
@@ -678,22 +680,22 @@ export default function Home() {
                               tabIndex={-1}
                             >
                               <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-3">
-                                  <div className="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center font-bold text-lg">
+                                <div className="flex items-center space-x-2 sm:space-x-3">
+                                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center font-bold text-sm sm:text-lg">
                                     {group}
                                   </div>
                                   <div>
-                                    <div className="font-semibold text-gray-900">
+                                    <div className="font-semibold text-gray-900 text-sm sm:text-base">
                                       Qrup {group}
                                     </div>
-                                    <div className="text-sm text-gray-500">
+                                    <div className="text-xs sm:text-sm text-gray-500">
                                       Mühəndislik fakültəsi
                                     </div>
                                   </div>
                                 </div>
                                 <div className="text-blue-600">
                                   <svg
-                                    className="w-5 h-5"
+                                    className="w-4 h-4 sm:w-5 sm:h-5"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -742,16 +744,16 @@ export default function Home() {
                 transition={{ duration: 0.2, ease: "easeOut" }}
                 className="fixed inset-0 p-4 overflow-y-auto"
               >
-                <div className="mx-auto my-6 w-full max-w-lg bg-white/90 backdrop-blur-md rounded-2xl shadow-xl ring-1 ring-black/5 p-5 sm:p-6">
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 text-center">
+                <div className="mx-auto my-4 sm:my-6 w-full max-w-lg bg-white/90 backdrop-blur-md rounded-2xl shadow-xl ring-1 ring-black/5 p-4 sm:p-5 md:p-6 max-h-[90vh] flex flex-col">
+                  <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 text-center flex-shrink-0">
                     Universitetini Seç
                   </h2>
 
                   {/* Search Input */}
-                  <div className="mt-4 relative">
+                  <div className="mt-3 sm:mt-4 relative flex-shrink-0">
                     <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
                       <svg
-                        className="h-5 w-5"
+                        className="h-4 w-4 sm:h-5 sm:w-5"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -770,14 +772,14 @@ export default function Home() {
                       onChange={(e) => setQuery(e.target.value)}
                       onKeyDown={onKeyDown}
                       placeholder="Universitet axtar..."
-                      className="w-full pl-10 pr-3 py-2.5 bg-gray-100/90 border border-transparent hover:border-gray-200 rounded-lg text-gray-800 text-sm sm:text-base md:text-lg placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-300 transition"
+                      className="w-full pl-9 sm:pl-10 pr-3 py-2.5 sm:py-3 bg-gray-100/90 border border-transparent hover:border-gray-200 rounded-lg text-gray-800 text-sm sm:text-base md:text-lg placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-300 transition touch-manipulation"
                     />
                   </div>
 
                   {/* Results List */}
-                  <div className="mt-3 rounded-lg max-h-[52vh] sm:max-h-72 overflow-auto">
+                  <div className="mt-3 rounded-lg max-h-60 sm:max-h-72 overflow-auto flex-1">
                     {filtered.length === 0 ? (
-                      <div className="text-center text-sm text-gray-500 py-6">
+                      <div className="text-center text-xs sm:text-sm text-gray-500 py-4 sm:py-6">
                         Uyğun universitet tapılmadı
                       </div>
                     ) : (
@@ -789,12 +791,12 @@ export default function Home() {
                                 itemRefs.current[idx] = el;
                               }}
                               onClick={() => handleSelectUniversity(u)}
-                              className={`w-full text-left px-3 py-2 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none transition flex items-center gap-3 overflow-hidden ${
+                              className={`w-full text-left px-2 sm:px-3 py-2 sm:py-3 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none transition flex items-center gap-2 sm:gap-3 overflow-hidden touch-manipulation ${
                                 idx === activeIndex ? "bg-gray-50" : ""
                               }`}
                               tabIndex={-1}
                             >
-                              <div className="h-9 w-8 sm:h-10 sm:w-9 md:h-11 md:w-10 rounded-full overflow-hidden bg-gray-100 ring-1 ring-black/5 flex items-center justify-center shrink-0">
+                              <div className="h-8 w-7 sm:h-9 sm:w-8 md:h-10 md:w-9 lg:h-11 lg:w-10 rounded-full overflow-hidden bg-gray-100 ring-1 ring-black/5 flex items-center justify-center shrink-0">
                                 {u.img ? (
                                   // eslint-disable-next-line @next/next/no-img-element
                                   <img
@@ -804,20 +806,20 @@ export default function Home() {
                                     loading="lazy"
                                   />
                                 ) : (
-                                  <span className="text-[10px] font-semibold text-gray-600">
+                                  <span className="text-[9px] sm:text-[10px] font-semibold text-gray-600">
                                     {getInitials(u.name)}
                                   </span>
                                 )}
                               </div>
-                              <span className="text-gray-800 text-sm sm:text-base md:text-lg flex-1 min-w-0 whitespace-nowrap truncate">
+                              <span className="text-gray-800 text-xs sm:text-sm md:text-base lg:text-lg flex-1 min-w-0 whitespace-nowrap truncate">
                                 <HighlightedText
                                   text={u.name}
                                   query={debouncedQuery}
                                 />
                               </span>
-                              <span className="ml-2 shrink-0 inline-flex items-center gap-1">
+                              <span className="ml-1 sm:ml-2 shrink-0 inline-flex items-center gap-1">
                                 {u.shortName && (
-                                  <span className="text-[10px] sm:text-xs px-1.5 py-0.5 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-200">
+                                  <span className="text-[9px] sm:text-[10px] md:text-xs px-1 sm:px-1.5 py-0.5 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-200">
                                     {u.shortName}
                                   </span>
                                 )}

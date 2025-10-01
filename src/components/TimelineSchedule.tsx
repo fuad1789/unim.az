@@ -9,6 +9,12 @@ import {
   getCurrentTimeInMinutes,
 } from "@/utils/dataManager";
 import { calculateCurrentWeekType } from "@/utils/weekCalculator";
+import SubjectDetailsModal from "@/components/SubjectDetailsModal";
+import {
+  getSubjectStats,
+  makeSubjectId,
+  sumGrades,
+} from "@/utils/localStorage";
 
 interface TimelineScheduleProps {
   group: Group;
@@ -45,6 +51,12 @@ export default function TimelineSchedule({
   university,
 }: TimelineScheduleProps) {
   const [currentTime, setCurrentTime] = useState(getCurrentTimeInMinutes());
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedSubject, setSelectedSubject] = useState<{
+    subject?: string;
+    teacher?: string;
+    room?: string;
+  } | null>(null);
 
   // Update current time every minute
   useEffect(() => {
@@ -108,121 +120,185 @@ export default function TimelineSchedule({
   const currentTimePosition = (currentTime - 480) * 0.8; // 8:00 AM = 480 minutes
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="bg-white rounded-2xl shadow-lg p-6"
-    >
-      <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-2">
-          Bugünkü Dərs Cədvəli
-        </h2>
-        <p className="text-sm text-gray-600">
-          {new Date().toLocaleDateString("az-AZ", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </p>
-      </div>
+    <>
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="bg-white rounded-2xl shadow-lg p-6"
+      >
+        <div className="mb-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-2">
+            Bugünkü Dərs Cədvəli
+          </h2>
+          <p className="text-sm text-gray-600">
+            {new Date().toLocaleDateString("az-AZ", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
+        </div>
 
-      <div className="relative">
-        {/* Timeline */}
-        <div className="relative h-[600px] overflow-y-auto">
-          {/* Time markers */}
-          <div className="absolute left-0 top-0 w-16 h-full">
-            {TIME_SLOTS.map((slot, index) => (
-              <div
-                key={slot.time}
-                className="absolute left-0 text-xs text-gray-500 font-medium"
-                style={{ top: `${index * 80}px` }}
-              >
-                {slot.label}
-              </div>
-            ))}
-          </div>
-
-          {/* Timeline line */}
-          <div className="absolute left-8 top-0 w-0.5 h-full bg-gray-200" />
-
-          {/* Current time indicator */}
-          {currentTimePosition >= 0 && currentTimePosition <= 600 && (
-            <>
-              <motion.div
-                className="absolute left-6 top-0 w-4 h-4 bg-red-500 rounded-full z-10"
-                style={{ top: `${currentTimePosition}px` }}
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-              <div
-                className="absolute left-8 top-0 w-0.5 bg-red-500 z-10"
-                style={{
-                  top: `${currentTimePosition}px`,
-                  height: "2px",
-                }}
-              />
-            </>
-          )}
-
-          {/* Lesson cards */}
-          <div className="ml-20 relative">
-            {processedLessons.map((lesson, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{
-                  duration: 0.3,
-                  delay: index * 0.1,
-                  ease: "easeOut",
-                }}
-                className={`absolute left-0 right-0 p-4 rounded-lg border-l-4 ${lesson.colorClass} shadow-sm hover:shadow-md transition-shadow cursor-pointer`}
-                style={{
-                  top: `${lesson.top}px`,
-                  height: `${lesson.height}px`,
-                  minHeight: "60px",
-                }}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="h-full flex flex-col justify-center">
-                  <div className="font-bold text-gray-800 text-sm mb-1">
-                    {lesson.subject}
-                  </div>
-                  <div className="text-xs text-gray-600 mb-1">
-                    {lesson.teacher}
-                  </div>
-                  <div className="text-xs text-gray-500">
-                    Otaq: {lesson.room}
-                  </div>
-                  {lesson.time && (
-                    <div className="text-xs text-gray-500 mt-1">
-                      {lesson.time}
-                    </div>
-                  )}
+        <div className="relative">
+          {/* Timeline */}
+          <div className="relative h-[600px] overflow-y-auto">
+            {/* Time markers */}
+            <div className="absolute left-0 top-0 w-16 h-full">
+              {TIME_SLOTS.map((slot, index) => (
+                <div
+                  key={slot.time}
+                  className="absolute left-0 text-xs text-gray-500 font-medium"
+                  style={{ top: `${index * 80}px` }}
+                >
+                  {slot.label}
                 </div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
 
-            {/* No lessons message */}
-            {processedLessons.length === 0 && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="flex items-center justify-center h-32 text-gray-500"
-              >
-                <div className="text-center">
-                  <div className="text-4xl mb-2">📚</div>
-                  <div className="text-sm">Bu gün dərs yoxdur</div>
-                </div>
-              </motion.div>
+            {/* Timeline line */}
+            <div className="absolute left-8 top-0 w-0.5 h-full bg-gray-200" />
+
+            {/* Current time indicator */}
+            {currentTimePosition >= 0 && currentTimePosition <= 600 && (
+              <>
+                <motion.div
+                  className="absolute left-6 top-0 w-4 h-4 bg-red-500 rounded-full z-10"
+                  style={{ top: `${currentTimePosition}px` }}
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                <div
+                  className="absolute left-8 top-0 w-0.5 bg-red-500 z-10"
+                  style={{
+                    top: `${currentTimePosition}px`,
+                    height: "2px",
+                  }}
+                />
+              </>
             )}
+
+            {/* Lesson cards */}
+            <div className="ml-20 relative">
+              {processedLessons.map((lesson, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: index * 0.1,
+                    ease: "easeOut",
+                  }}
+                  className={`absolute left-0 right-0 rounded-lg border-l-4 ${lesson.colorClass} shadow-sm hover:shadow-md transition-shadow`}
+                  style={{
+                    top: `${lesson.top}px`,
+                    height: `${lesson.height}px`,
+                    minHeight: "60px",
+                  }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <button
+                    type="button"
+                    className="h-full w-full text-left p-4 cursor-pointer"
+                    onClick={() => {
+                      setSelectedSubject({
+                        subject: lesson.subject,
+                        teacher: lesson.teacher,
+                        room: lesson.room,
+                      });
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    <div className="h-full flex flex-col justify-center">
+                      <div className="font-bold text-gray-800 text-sm mb-1">
+                        {lesson.subject}
+                      </div>
+                      <div className="text-xs text-gray-600 mb-1">
+                        {lesson.teacher}
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        Otaq: {lesson.room}
+                      </div>
+                      {lesson.time && (
+                        <div className="text-xs text-gray-500 mt-1">
+                          {lesson.time}
+                        </div>
+                      )}
+
+                      {/* Quick stats */}
+                      {lesson.subject && (
+                        <QuickStats
+                          subject={lesson.subject}
+                          teacher={lesson.teacher}
+                          room={lesson.room}
+                        />
+                      )}
+                    </div>
+                  </button>
+                </motion.div>
+              ))}
+
+              {/* No lessons message */}
+              {processedLessons.length === 0 && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="flex items-center justify-center h-32 text-gray-500"
+                >
+                  <div className="text-center">
+                    <div className="text-4xl mb-2">📚</div>
+                    <div className="text-sm">Bu gün dərs yoxdur</div>
+                  </div>
+                </motion.div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+
+      {/* Subject details modal */}
+      <SubjectDetailsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        subject={selectedSubject?.subject}
+        teacher={selectedSubject?.teacher}
+        room={selectedSubject?.room}
+        absenceLimit={8}
+      />
+    </>
+  );
+}
+
+function QuickStats({
+  subject,
+  teacher,
+  room,
+}: {
+  subject: string;
+  teacher?: string;
+  room?: string;
+}) {
+  const id = useMemo(
+    () => makeSubjectId(subject, teacher, room),
+    [subject, teacher, room]
+  );
+  const stats = getSubjectStats(id);
+  const sum = sumGrades(id);
+
+  if (!stats || (!stats.absences && sum === 0)) {
+    return null;
+  }
+
+  return (
+    <div className="mt-2 pt-2 border-t border-black/5 text-xs text-gray-700 flex gap-3">
+      {typeof stats.absences === "number" && stats.absences > 0 && (
+        <span>Qayıb: {stats.absences}/8</span>
+      )}
+      {sum > 0 && <span>Cari Bal: {sum}</span>}
+    </div>
   );
 }
