@@ -269,15 +269,18 @@ export default function Dashboard({
 
   // Touch swipe handlers
   const handleTouchStart = (e: React.TouchEvent) => {
+    if (showGradeRating) return; // Disable swipe when grade modal is open
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
+    if (showGradeRating) return; // Disable swipe when grade modal is open
     setTouchEnd(e.targetTouches[0].clientX);
   };
 
   const handleTouchEnd = () => {
+    if (showGradeRating) return; // Disable swipe when grade modal is open
     if (!touchStart || !touchEnd || isTransitioning) return;
 
     const distance = touchStart - touchEnd;
