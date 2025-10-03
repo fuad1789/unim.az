@@ -22,9 +22,18 @@ export interface Day {
   lessons: Lesson[];
 }
 
+export interface AcademicLoadItem {
+  subject: string;
+  total_hours: number;
+}
+
 export interface Group {
   group: string;
-  week: Day[];
+  group_id?: string;
+  // Prefer week_schedule, but some sources still use week
+  week_schedule?: Day[];
+  week?: Day[];
+  academic_load?: AcademicLoadItem[];
 }
 
 export interface University {

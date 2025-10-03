@@ -7,7 +7,7 @@ export async function loadUniversityData(
   try {
     // Map university IDs to their data files
     const universityFiles: Record<number, string> = {
-      11: "SDU_muhendislik", // Sumqayıt Dövlət Universiteti
+      11: "sdu", // Sumqayıt Dövlət Universiteti - now using new unified structure
       // Add more universities as their data becomes available
     };
 
@@ -30,7 +30,7 @@ export async function getAvailableGroups(
   universityId: number
 ): Promise<string[]> {
   const groups = await loadUniversityData(universityId);
-  return groups.map((group) => group.group);
+  return groups.map((group) => group.group_id || group.group);
 }
 
 // Get group data
@@ -39,7 +39,11 @@ export async function getGroupData(
   groupName: string
 ): Promise<Group | null> {
   const groups = await loadUniversityData(universityId);
-  return groups.find((group) => group.group === groupName) || null;
+  return (
+    groups.find((group) => group.group_id === groupName) ||
+    groups.find((group) => group.group === groupName) ||
+    null
+  );
 }
 
 // Get current day lessons
@@ -52,7 +56,9 @@ export function getCurrentDayLessons(
   const dayNames: DayName[] = ["I", "II", "III", "IV", "V", "VI", "VII"];
   const currentDayName = dayNames[dayIndex];
 
-  const dayData = group.week.find((day) => day.day === currentDayName);
+  const dayData = (group.week_schedule || group.week || []).find(
+    (day) => day.day === currentDayName
+  );
   if (!dayData) return [];
 
   return dayData.lessons.filter((lesson) => {

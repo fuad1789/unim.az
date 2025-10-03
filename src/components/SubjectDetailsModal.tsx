@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
 import {
-  SubjectId,
-  getSubjectStats,
-  incrementAbsence,
-  addGrade,
-  removeGradeAt,
-  sumGrades,
-  makeSubjectId,
+  getAbsenceCount,
+  setAbsenceCount,
+  incrementAbsenceCount,
+  decrementAbsenceCount,
+  getGrade,
+  setGrade,
+  removeGrade,
 } from "@/utils/localStorage";
 
 interface SubjectDetailsModalProps {
@@ -28,25 +29,23 @@ export default function SubjectDetailsModal({
   room,
   absenceLimit = 8,
 }: SubjectDetailsModalProps) {
-  const subjectId: SubjectId | null = useMemo(() => {
-    if (!subject) return null;
-    return makeSubjectId(subject, teacher, room);
-  }, [subject, teacher, room]);
-
-  const [absences, setAbsences] = useState(0);
-  const [grades, setGrades] = useState<number[]>([]);
+  // Local UI state
   const [newGrade, setNewGrade] = useState<string>("");
 
+  // Get current data from localStorage
+  const absences = subject ? getAbsenceCount(subject) : 0;
+  const currentGrade = subject ? getGrade(subject) : null;
+
+  // Reset new grade input when modal opens
   useEffect(() => {
-    if (!isOpen || !subjectId) return;
-    const stats = getSubjectStats(subjectId);
-    setAbsences(stats.absences);
-    setGrades(stats.grades);
-  }, [isOpen, subjectId]);
+    if (isOpen) {
+      setNewGrade("");
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
-  const sum = subjectId ? sumGrades(subjectId) : 0;
+  const sum = currentGrade || 0;
   const absenceColor =
     absences >= absenceLimit
       ? "text-red-600"
@@ -55,24 +54,23 @@ export default function SubjectDetailsModal({
       : "text-gray-800";
 
   function handleInc(delta: number) {
-    if (!subjectId) return;
-    const next = incrementAbsence(subjectId, delta);
-    setAbsences(next.absences);
+    if (!subject) return;
+    const currentCount = getAbsenceCount(subject);
+    const newCount = Math.max(0, currentCount + delta);
+    setAbsenceCount(subject, newCount);
   }
 
   function handleAddGrade() {
-    if (!subjectId) return;
+    if (!subject) return;
     const val = Number(newGrade.replace(",", "."));
-    if (!Number.isFinite(val)) return;
-    const next = addGrade(subjectId, val);
-    setGrades(next.grades);
+    if (!Number.isFinite(val) || val < 0 || val > 100) return;
+    setGrade(subject, val);
     setNewGrade("");
   }
 
-  function handleRemoveGrade(index: number) {
-    if (!subjectId) return;
-    const next = removeGradeAt(subjectId, index);
-    setGrades(next.grades);
+  function handleRemoveGrade() {
+    if (!subject) return;
+    removeGrade(subject);
   }
 
   return (
@@ -80,8 +78,12 @@ export default function SubjectDetailsModal({
       className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 p-4"
       onClick={onClose}
     >
-      <div
-        className="w-full sm:max-w-md bg-white rounded-t-2xl sm:rounded-2xl shadow-xl overflow-hidden"
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="w-full sm:max-w-md bg-white rounded-t-2xl sm:rounded-2xl shadow-xl overflow-hidden border border-gray-200"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
@@ -148,26 +150,21 @@ export default function SubjectDetailsModal({
               </button>
             </div>
 
-            {grades.length === 0 ? (
+            {currentGrade === null ? (
               <div className="text-sm text-gray-500">Hələ qiymət yoxdur.</div>
             ) : (
-              <ul className="divide-y divide-gray-100 border border-gray-100 rounded">
-                {grades.map((g, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center justify-between px-3 py-2 text-sm"
+              <div className="border border-gray-100 rounded p-3">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="font-medium">Qiymət: {currentGrade}</span>
+                  <button
+                    className="text-gray-400 hover:text-red-600"
+                    onClick={handleRemoveGrade}
+                    aria-label="Sil"
                   >
-                    <span>{g}</span>
-                    <button
-                      className="text-gray-400 hover:text-red-600"
-                      onClick={() => handleRemoveGrade(i)}
-                      aria-label="Sil"
-                    >
-                      Sil
-                    </button>
-                  </li>
-                ))}
-              </ul>
+                    Sil
+                  </button>
+                </div>
+              </div>
             )}
 
             <div className="mt-3 text-sm text-gray-700">
@@ -175,7 +172,7 @@ export default function SubjectDetailsModal({
             </div>
           </section>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

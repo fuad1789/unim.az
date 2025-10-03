@@ -46,10 +46,10 @@ export default function EditorPage() {
   const updateDayName = (gIdx: number, dIdx: number, name: string) => {
     setGroups((prev) => {
       const draft = [...prev];
-      const days = [...(draft[gIdx].week || [])];
+      const days = [...(draft[gIdx].week_schedule || [])];
       const day: Day = { ...days[dIdx], day: name };
       days[dIdx] = day;
-      draft[gIdx] = { ...draft[gIdx], week: days };
+      draft[gIdx] = { ...draft[gIdx], week_schedule: days };
       return draft;
     });
   };
@@ -63,7 +63,7 @@ export default function EditorPage() {
   ) => {
     setGroups((prev) => {
       const draft = [...prev];
-      const days = [...(draft[gIdx].week || [])];
+      const days = [...(draft[gIdx].week_schedule || [])];
       const lessons = [...(days[dIdx].lessons || [])];
       const lesson: Lesson = { ...lessons[lIdx] };
       if (field === "lesson") {
@@ -73,7 +73,7 @@ export default function EditorPage() {
       }
       lessons[lIdx] = lesson;
       days[dIdx] = { ...days[dIdx], lessons };
-      draft[gIdx] = { ...draft[gIdx], week: days };
+      draft[gIdx] = { ...draft[gIdx], week_schedule: days };
       return draft;
     });
   };
@@ -88,7 +88,7 @@ export default function EditorPage() {
   ) => {
     setGroups((prev) => {
       const draft = [...prev];
-      const days = [...(draft[gIdx].week || [])];
+      const days = [...(draft[gIdx].week_schedule || [])];
       const lessons = [...(days[dIdx].lessons || [])];
       const lesson: Lesson = { ...lessons[lIdx] };
       const current = lesson.lesson || {
@@ -103,7 +103,7 @@ export default function EditorPage() {
       lesson.lesson = next;
       lessons[lIdx] = lesson;
       days[dIdx] = { ...days[dIdx], lessons };
-      draft[gIdx] = { ...draft[gIdx], week: days };
+      draft[gIdx] = { ...draft[gIdx], week_schedule: days };
       return draft;
     });
   };
@@ -187,7 +187,7 @@ export default function EditorPage() {
 
                 {expanded[g.group] && (
                   <div className="px-4 pb-4">
-                    {(g.week || []).map((d, di) => (
+                    {(g.week_schedule || []).map((d, di) => (
                       <div
                         key={di}
                         className="mt-3 rounded-lg border border-gray-100 p-3"

@@ -10,11 +10,7 @@ import {
 } from "@/utils/dataManager";
 import { calculateCurrentWeekType } from "@/utils/weekCalculator";
 import SubjectDetailsModal from "@/components/SubjectDetailsModal";
-import {
-  getSubjectStats,
-  makeSubjectId,
-  sumGrades,
-} from "@/utils/localStorage";
+// Removed localStorage imports - no persistence functionality
 
 interface TimelineScheduleProps {
   group: Group;
@@ -125,7 +121,8 @@ export default function TimelineSchedule({
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="bg-white rounded-2xl shadow-lg p-6"
+        whileHover={{ y: -2 }}
+        className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200"
       >
         <div className="mb-6">
           <h2 className="text-xl font-bold text-gray-800 mb-2">
@@ -191,13 +188,13 @@ export default function TimelineSchedule({
                     delay: index * 0.1,
                     ease: "easeOut",
                   }}
-                  className={`absolute left-0 right-0 rounded-lg border-l-4 ${lesson.colorClass} shadow-sm hover:shadow-md transition-shadow`}
+                  className={`absolute left-0 right-0 rounded-lg border-l-4 ${lesson.colorClass} shadow-sm hover:shadow-lg transition-all duration-300`}
                   style={{
                     top: `${lesson.top}px`,
                     height: `${lesson.height}px`,
                     minHeight: "60px",
                   }}
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <button
@@ -228,14 +225,7 @@ export default function TimelineSchedule({
                         </div>
                       )}
 
-                      {/* Quick stats */}
-                      {lesson.subject && (
-                        <QuickStats
-                          subject={lesson.subject}
-                          teacher={lesson.teacher}
-                          room={lesson.room}
-                        />
-                      )}
+                      {/* Quick stats removed - no persistence */}
                     </div>
                   </button>
                 </motion.div>
@@ -273,32 +263,4 @@ export default function TimelineSchedule({
   );
 }
 
-function QuickStats({
-  subject,
-  teacher,
-  room,
-}: {
-  subject: string;
-  teacher?: string;
-  room?: string;
-}) {
-  const id = useMemo(
-    () => makeSubjectId(subject, teacher, room),
-    [subject, teacher, room]
-  );
-  const stats = getSubjectStats(id);
-  const sum = sumGrades(id);
-
-  if (!stats || (!stats.absences && sum === 0)) {
-    return null;
-  }
-
-  return (
-    <div className="mt-2 pt-2 border-t border-black/5 text-xs text-gray-700 flex gap-3">
-      {typeof stats.absences === "number" && stats.absences > 0 && (
-        <span>Qayıb: {stats.absences}/8</span>
-      )}
-      {sum > 0 && <span>Cari Bal: {sum}</span>}
-    </div>
-  );
-}
+// QuickStats component removed - no persistence functionality

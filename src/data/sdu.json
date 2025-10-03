@@ -1,32 +1,49 @@
 [
   {
-    "group": "681",
-    "week": [
+    "group_id": "681",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüter mühəndisliyinin əsasları",
+        "total_hours": 60
+      },
+      {
+        "subject": "Proqramlaş. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr və analitik həndəsə",
+        "total_hours": 60
+      },
+      {
+        "subject": "Proqramlaşdırmanın əsasları",
+        "total_hours": 75
+      },
+      {
+        "subject": "Az. dil. işg. və ak. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr və an. hən.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Komp. müh. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Azərbaycan dilində işgüzar və akademik kommunikasiya",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
-        "lessons": [
-          {
-            "time": "",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
-          },
-          {
-            "time": "",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
-          },
-          {
-            "time": "",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
-          }
-        ]
+        "lessons": []
       },
       {
         "day": "II",
@@ -129,46 +146,56 @@
             "subject": "Komp. müh. əsas.(məş.)",
             "teacher": "Allahverdiyeva K.",
             "room": "213"
-          },
-          {
-            "time": "",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
           }
         ]
       }
     ]
   },
   {
-    "group": "681a",
-    "week": [
+    "group_id": "681a",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Proqramlaş. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüter mühəndisliyinin əsasları",
+        "total_hours": 60
+      },
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr və an. hən.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr və analitik həndəsə",
+        "total_hours": 60
+      },
+      {
+        "subject": "Az. dil. işg. və ak. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proqramlaşdırmanın əsasları",
+        "total_hours": 75
+      },
+      {
+        "subject": "Komp. müh. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Azərbaycan dilində işgüzar və akademik kommunikasiya",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
-        "lessons": [
-          {
-            "time": "",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
-          },
-          {
-            "time": "",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
-          },
-          {
-            "time": "",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
-          }
-        ]
+        "lessons": []
       },
       {
         "day": "II",
@@ -273,19 +300,54 @@
             "room": "203"
           },
           {
-            "time": "11:40-13:00",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
+            "time": "11:40-13:00"
           }
         ]
       }
     ]
   },
   {
-    "group": "681b",
-    "week": [
+    "group_id": "681b",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Proqramlaş. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Komp. müh. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüter mühəndisliyinin əsasları",
+        "total_hours": 60
+      },
+      {
+        "subject": "Az. dil. işg. və ak. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr və analitik həndəsə",
+        "total_hours": 60
+      },
+      {
+        "subject": "Xətti cəbr və an. hən.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proqramlaşdırmanın əsasları",
+        "total_hours": 75
+      },
+      {
+        "subject": "Azərbaycan dilində işgüzar və akademik kommunikasiya",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -364,13 +426,6 @@
             "subject": "Proqramlaşdırmanın əsasları (mühazirə)",
             "teacher": "Rəhimov Ş.",
             "room": "323"
-          },
-          {
-            "time": "",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
           }
         ]
       },
@@ -399,35 +454,44 @@
       },
       {
         "day": "V",
-        "lessons": [
-          {
-            "time": "",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
-          },
-          {
-            "time": "",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
-          },
-          {
-            "time": "",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
-          }
-        ]
+        "lessons": []
       }
     ]
   },
   {
-    "group": "682b",
-    "week": [
+    "group_id": "682b",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proqramlaşdırmanın əsasları",
+        "total_hours": 75
+      },
+      {
+        "subject": "İnform. təhlük. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr",
+        "total_hours": 45
+      },
+      {
+        "subject": "Azərbaycan tarixi",
+        "total_hours": 30
+      },
+      {
+        "subject": "Xətti cəbr.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proqramlaş. əsas.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -490,11 +554,7 @@
             "room": "203"
           },
           {
-            "time": "11:40-13:00",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
+            "time": "11:40-13:00"
           }
         ]
       },
@@ -502,25 +562,13 @@
         "day": "IV",
         "lessons": [
           {
-            "time": "08:30-09:50",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
+            "time": "08:30-09:50"
           },
           {
-            "time": "10:05-11:25",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
+            "time": "10:05-11:25"
           },
           {
-            "time": "11:40-13:00",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
+            "time": "11:40-13:00"
           }
         ]
       },
@@ -534,20 +582,11 @@
                 "subject": "X/d işgüzar. və akad. kom.",
                 "teacher": "Həsənova G.",
                 "room": "213"
-              },
-              "lower": {}
+              }
             }
           },
           {
             "time": "10:05-11:25",
-            "lesson": {
-              "upper": {},
-              "lower": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
-              }
-            },
             "subject": "Proqramlaş. əsas. (lab.)",
             "teacher": "İbrahimova N.",
             "room": "135"
@@ -563,8 +602,39 @@
     ]
   },
   {
-    "group": "682c",
-    "week": [
+    "group_id": "682c",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Proqramlaş. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proqramlaşdırmanın əsasları",
+        "total_hours": 75
+      },
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr",
+        "total_hours": 45
+      },
+      {
+        "subject": "Azərbaycan tarixi",
+        "total_hours": 30
+      },
+      {
+        "subject": "İnform. təhlük. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -627,39 +697,13 @@
             "room": "212"
           },
           {
-            "time": "11:40-13:00",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
+            "time": "11:40-13:00"
           }
         ]
       },
       {
         "day": "IV",
-        "lessons": [
-          {
-            "time": "",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
-          },
-          {
-            "time": "",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
-          },
-          {
-            "time": "",
-            "lesson": {
-              "upper": {},
-              "lower": {}
-            }
-          }
-        ]
+        "lessons": []
       },
       {
         "day": "V",
@@ -667,7 +711,6 @@
           {
             "time": "08:30-09:50",
             "lesson": {
-              "upper": {},
               "lower": {
                 "subject": "X/d işgüzar. və akad. kom.",
                 "teacher": "Nəcəfova Ş.",
@@ -692,8 +735,39 @@
     ]
   },
   {
-    "group": "682b",
-    "week": [
+    "group_id": "682b",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proqramlaşdırmanın əsasları",
+        "total_hours": 75
+      },
+      {
+        "subject": "İnform. təhlük. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr",
+        "total_hours": 45
+      },
+      {
+        "subject": "Azərbaycan tarixi",
+        "total_hours": 30
+      },
+      {
+        "subject": "Xətti cəbr.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proqramlaş. əsas.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -754,13 +828,12 @@
             "subject": "Xətti cəbr.(məş)",
             "teacher": "Hətəmova R.",
             "room": "203"
-          },
-          {}
+          }
         ]
       },
       {
         "day": "IV",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "V",
@@ -772,14 +845,12 @@
                 "subject": "X/d işgüzar. və akad. kom.",
                 "teacher": "Həsənova G.",
                 "room": "213"
-              },
-              "lower": {}
+              }
             }
           },
           {
             "time": "10:05-11:25",
             "lesson": {
-              "upper": {},
               "lower": {
                 "subject": "Proqramlaş. əsas. (lab.)",
                 "teacher": "İbrahimova N.",
@@ -798,8 +869,39 @@
     ]
   },
   {
-    "group": "682c",
-    "week": [
+    "group_id": "682c",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Proqramlaş. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proqramlaşdırmanın əsasları",
+        "total_hours": 75
+      },
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr",
+        "total_hours": 45
+      },
+      {
+        "subject": "Azərbaycan tarixi",
+        "total_hours": 30
+      },
+      {
+        "subject": "İnform. təhlük. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -860,13 +962,12 @@
             "subject": "İnform. təhlük. əsas. (məş.)",
             "teacher": "Əliyeva A.",
             "room": "212"
-          },
-          {}
+          }
         ]
       },
       {
         "day": "IV",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "V",
@@ -874,7 +975,6 @@
           {
             "time": "08:30-09:50",
             "lesson": {
-              "upper": {},
               "lower": {
                 "subject": "X/d işgüzar. və akad. kom.",
                 "teacher": "Nəcəfova Ş.",
@@ -899,25 +999,54 @@
     ]
   },
   {
-    "group": "682",
-    "week": [
+    "group_id": "682",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Multikultur. giriş",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr və an. hən.",
+        "total_hours": 45
+      },
+      {
+        "subject": "FİZİKA",
+        "total_hours": 45
+      },
+      {
+        "subject": "Fizika",
+        "total_hours": 60
+      },
+      {
+        "subject": "Proqramlaşdırmanın əsasları",
+        "total_hours": 75
+      },
+      {
+        "subject": "Proqramlaş. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Azərbaycan tarixi",
+        "total_hours": 30
+      },
+      {
+        "subject": "Xətti cəbr və analitik həndəsə",
+        "total_hours": 60
+      },
+      {
+        "subject": "M u l t i k u l t u r a l i z m ə   g i r i ş",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
-        "lessons": [
-          {},
-          {
-            "time": "",
-            "subject": "",
-            "teacher": "",
-            "room": ""
-          },
-          {
-            "time": "",
-            "subject": "",
-            "teacher": "",
-            "room": ""
-          }
-        ]
+        "lessons": []
       },
       {
         "day": "II",
@@ -980,11 +1109,6 @@
           {
             "time": "08:30-09:50",
             "lesson": {
-              "upper": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
-              },
               "lower": {
                 "subject": "Proqramlaş. əsas. (məş.)",
                 "teacher": "VAK 13",
@@ -1011,9 +1135,6 @@
         "lessons": [
           {
             "time": "08:30-09:50",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Xətti cəbr və analitik həndəsə (mühazirə) ",
@@ -1044,20 +1165,54 @@
     ]
   },
   {
-    "group": "682a",
-    "week": [
+    "group_id": "682a",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Xətti cəbr və an. hən.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proqramlaş. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "FİZİKA",
+        "total_hours": 45
+      },
+      {
+        "subject": "Fizika",
+        "total_hours": 60
+      },
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proqramlaşdırmanın əsasları",
+        "total_hours": 75
+      },
+      {
+        "subject": "Azərbaycan tarixi",
+        "total_hours": 30
+      },
+      {
+        "subject": "Xətti cəbr və analitik həndəsə",
+        "total_hours": 60
+      },
+      {
+        "subject": "M u l t i k u l t u r a l i z m ə   g i r i ş",
+        "total_hours": 45
+      },
+      {
+        "subject": "Multikultur. giriş",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
-        "lessons": [
-          {},
-          {
-            "time": "",
-            "subject": "",
-            "teacher": "",
-            "room": ""
-          },
-          {}
-        ]
+        "lessons": []
       },
       {
         "day": "II",
@@ -1072,8 +1227,7 @@
               },
               "lower": {
                 "subject": "Proqramlaş. əsas. (məş.)",
-                "teacher": "Hüseynova L.",
-                "room": ""
+                "teacher": "Hüseynova L."
               }
             }
           },
@@ -1142,9 +1296,6 @@
         "lessons": [
           {
             "time": "08:30-09:50",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Xətti cəbr və analitik həndəsə (mühazirə)",
@@ -1166,19 +1317,11 @@
           },
           {
             "time": "11:40-13:00",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Multikultur. giriş (məş.)",
                 "teacher": "Behbudov S.",
                 "room": "102"
-              },
-              "lower": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
               }
             }
           }
@@ -1187,20 +1330,58 @@
     ]
   },
   {
-    "group": "682d",
-    "week": [
+    "group_id": "682d",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr və an. hən.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proqramlaş. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "F İ Z İ K A",
+        "total_hours": 45
+      },
+      {
+        "subject": "Azərbaycan tarixi",
+        "total_hours": 30
+      },
+      {
+        "subject": "Proqramlaşdırmanın əsasları",
+        "total_hours": 75
+      },
+      {
+        "subject": "A z ə r b a y c a n   t a r i x i",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr və analitik həndəsə",
+        "total_hours": 60
+      },
+      {
+        "subject": "KT və proq.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Fizika",
+        "total_hours": 60
+      },
+      {
+        "subject": "Multikultur. giriş",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
-        "lessons": [
-          {},
-          {
-            "time": "",
-            "subject": "",
-            "teacher": "",
-            "room": ""
-          },
-          {}
-        ]
+        "lessons": []
       },
       {
         "day": "II",
@@ -1208,7 +1389,6 @@
           {
             "time": "08:30-09:50",
             "subject": "X/d işgüzar. və akad. kom.",
-            "teacher": "",
             "room": "204"
           },
           {
@@ -1221,8 +1401,7 @@
               },
               "lower": {
                 "subject": "Proqramlaş. əsas. (məş.)",
-                "teacher": "Hüseynova L.",
-                "room": ""
+                "teacher": "Hüseynova L."
               }
             }
           },
@@ -1240,7 +1419,6 @@
           {
             "time": "08:30-09:50",
             "subject": "X/d işgüzar. və akad. kom.",
-            "teacher": "",
             "room": "204"
           },
           {
@@ -1274,7 +1452,6 @@
           },
           {
             "time": "11:40-13:00",
-
             "subject": "A z ə r b a y c a n   t a r i x i  (mühazirə) ",
             "teacher": "Cəfərov P.",
             "room": "323"
@@ -1306,16 +1483,7 @@
             "room": "1209"
           },
           {
-            "time": "",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
-              "upper": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
-              },
               "lower": {
                 "subject": "Multikultur. giriş (məş.) ",
                 "teacher": "Behbudov S.",
@@ -1328,8 +1496,47 @@
     ]
   },
   {
-    "group": "683",
-    "week": [
+    "group_id": "683",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Nəcəfova Ş.",
+        "total_hours": 45
+      },
+      {
+        "subject": "İbrahimova P.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Əliyeva K.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Fizikanın əsasları",
+        "total_hours": 60
+      },
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Azərbaycan tarixi",
+        "total_hours": 30
+      },
+      {
+        "subject": "Kompüter texnologiyaları və proqramlaşdırma",
+        "total_hours": 45
+      },
+      {
+        "subject": "KT və proq.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr və an. hən.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -1354,13 +1561,7 @@
         "day": "II",
         "lessons": [
           {
-            "time": "",
             "lesson": {
-              "upper": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
-              },
               "lower": {
                 "subject": "Fizikanın əsasları (məş.)",
                 "teacher": "Şahsuvarova Q.",
@@ -1372,7 +1573,6 @@
             "time": "10:05-11:25",
             "lesson": {
               "upper": {
-                "subject": "",
                 "teacher": "Şahsuvarova Q.",
                 "room": "1201"
               },
@@ -1394,7 +1594,7 @@
       },
       {
         "day": "III",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "IV",
@@ -1423,7 +1623,6 @@
           {
             "time": "11:40-13:00",
             "lesson": {
-              "upper": {},
               "lower": {
                 "subject": "Xətti cəbr və an. hən.(məş)",
                 "teacher": "Babayeva Ü.",
@@ -1436,7 +1635,6 @@
       {
         "day": "V",
         "lessons": [
-          {},
           {
             "time": "10:05-11:25",
             "subject": "Fizikanın əsasları (mühazirə)",
@@ -1463,8 +1661,51 @@
     ]
   },
   {
-    "group": "683a",
-    "week": [
+    "group_id": "683a",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Azərbaycan tarixi",
+        "total_hours": 30
+      },
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr və analitik həndəsə",
+        "total_hours": 60
+      },
+      {
+        "subject": "109",
+        "total_hours": 45
+      },
+      {
+        "subject": "A z ə r b a y c a n   t a r i x i",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti Kompüter texnologiyaları və proqramlaşdırmavə an. hən.",
+        "total_hours": 45
+      },
+      {
+        "subject": "KT və proq.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr və an. hən.",
+        "total_hours": 45
+      },
+      {
+        "subject": "F i z i k a n ı n    ə s a s l a r ı",
+        "total_hours": 45
+      },
+      {
+        "subject": "Fizikanın əsasları",
+        "total_hours": 60
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -1493,19 +1734,13 @@
         "lessons": [
           {
             "time": "08:30-09:50",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
-                "subject": "",
                 "teacher": "Fizikanın əsasları (məş.) ",
                 "room": "Şahsuvarova Q.   "
               },
               "lower": {
-                "subject": "109",
-                "teacher": "",
-                "room": ""
+                "subject": "109"
               }
             }
           },
@@ -1525,7 +1760,7 @@
       },
       {
         "day": "III",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "IV",
@@ -1573,7 +1808,6 @@
         "lessons": [
           {
             "time": "08:30-09:50",
-
             "subject": "X/d işgüzar. və akad. kom. ",
             "teacher": "Yunusova Ş. ",
             "room": "102"
@@ -1595,8 +1829,35 @@
     ]
   },
   {
-    "group": "683b",
-    "week": [
+    "group_id": "683b",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Mexatr. və rob. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Fizika",
+        "total_hours": 60
+      },
+      {
+        "subject": "Proqramlaş. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr və an. hən.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proqr. əsas.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -1654,7 +1915,7 @@
       },
       {
         "day": "III",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "IV",
@@ -1684,15 +1945,7 @@
         "lessons": [
           {
             "time": "08:30-09:50",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
-              "upper": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
-              },
               "lower": {
                 "subject": "Xətti cəbr və an. hən.(məş) ",
                 "teacher": "Allahverdiyeva N.   ",
@@ -1717,8 +1970,43 @@
     ]
   },
   {
-    "group": "684",
-    "week": [
+    "group_id": "684",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Xətti cəbr və analitik həndəsə",
+        "total_hours": 60
+      },
+      {
+        "subject": "Tərsimi həndəsə",
+        "total_hours": 45
+      },
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kimya",
+        "total_hours": 60
+      },
+      {
+        "subject": "İxtisasa giriş",
+        "total_hours": 45
+      },
+      {
+        "subject": "Materialşünaslıq",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr və an. hən.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Materialşünaslıq , Materialşünaslıq",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -1776,7 +2064,7 @@
       },
       {
         "day": "III",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "IV",
@@ -1839,8 +2127,39 @@
     ]
   },
   {
-    "group": "684b",
-    "week": [
+    "group_id": "684b",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Xətti cəbr və analitik həndəsə",
+        "total_hours": 60
+      },
+      {
+        "subject": "X/d işgüzar. və akad. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Fizikanın əsasları",
+        "total_hours": 60
+      },
+      {
+        "subject": "Az.dil.işg. və ak.kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "X/d işgüzar. və akad. kom",
+        "total_hours": 30
+      },
+      {
+        "subject": "Komp. qrafikası",
+        "total_hours": 45
+      },
+      {
+        "subject": "Xətti cəbr və an. hən.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -1861,8 +2180,7 @@
             "lesson": {
               "upper": {
                 "subject": "Fizikanın əsasları (lab.)",
-                "teacher": "Şahsuvarova Q.",
-                "room": ""
+                "teacher": "Şahsuvarova Q."
               },
               "lower": {
                 "subject": "Az.dil.işg. və ak.kom. (məş)",
@@ -1875,7 +2193,7 @@
       },
       {
         "day": "II",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "III",
@@ -1883,8 +2201,7 @@
           {
             "time": "08:30-09:50",
             "subject": "X/d işgüzar. və akad. kom",
-            "teacher": "Məmməd İ.",
-            "room": ""
+            "teacher": "Məmməd İ."
           },
           {
             "time": "10:05-11:25",
@@ -1906,8 +2223,7 @@
           {
             "time": "08:30-09:50",
             "subject": "Az.dil.işg. və ak.kom. (müh)",
-            "teacher": "İmaməliyeva G.",
-            "room": ""
+            "teacher": "İmaməliyeva G."
           },
           {
             "time": "10:05-11:25",
@@ -1929,11 +2245,6 @@
           {
             "time": "08:30-09:50",
             "lesson": {
-              "upper": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
-              },
               "lower": {
                 "subject": "Xətti cəbr və an. hən.(məş)",
                 "teacher": "Babayeva Ü.",
@@ -1958,8 +2269,39 @@
     ]
   },
   {
-    "group": "671",
-    "week": [
+    "group_id": "671",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Ölçmə texnikasının əsasları",
+        "total_hours": 60
+      },
+      {
+        "subject": "Elektronikanın əsasları",
+        "total_hours": 45
+      },
+      {
+        "subject": "Əməliyyat sistemləri",
+        "total_hours": 45
+      },
+      {
+        "subject": "Diferensial tənliklər",
+        "total_hours": 45
+      },
+      {
+        "subject": "Ölçmə texnika. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Azərbaycan tarixi",
+        "total_hours": 30
+      },
+      {
+        "subject": "Diskret riyaziyyat",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -2017,9 +2359,6 @@
           },
           {
             "time": "14:50-16:10",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Ölçmə texnika. əsas. (məş.)",
@@ -2043,7 +2382,7 @@
       },
       {
         "day": "IV",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "V",
@@ -2061,8 +2400,7 @@
                 "teacher": "Zülfəliyeva G.",
                 "room": "212"
               }
-            },
-            "subject": ""
+            }
           },
           {
             "time": "14:50-16:10",
@@ -2081,8 +2419,47 @@
     ]
   },
   {
-    "group": "671a",
-    "week": [
+    "group_id": "671a",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Ö l ç m ə   t e x n i k a s ı n ı n   ə s a s l a r ı",
+        "total_hours": 45
+      },
+      {
+        "subject": "Azərbaycan tarixi",
+        "total_hours": 30
+      },
+      {
+        "subject": "Əməliyyat sistemləri",
+        "total_hours": 45
+      },
+      {
+        "subject": "Ə m ə l i y y a t   s i s t e m l ə r i",
+        "total_hours": 45
+      },
+      {
+        "subject": "Diskret riyaziyyat",
+        "total_hours": 45
+      },
+      {
+        "subject": "Ölçmə texnika. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Elektronikanın əsasları",
+        "total_hours": 45
+      },
+      {
+        "subject": "Diferensial tənliklər",
+        "total_hours": 45
+      },
+      {
+        "subject": "E l e k t r o n i k a n ı n   ə s a s l a r ı",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -2140,9 +2517,6 @@
           },
           {
             "time": "14:50-16:10",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Elektronikanın əsasları (məş.)",
@@ -2166,7 +2540,7 @@
       },
       {
         "day": "IV",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "V",
@@ -2203,16 +2577,52 @@
     ]
   },
   {
-    "group": "672",
-    "week": [
+    "group_id": "672",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "D i f e r e n s i a l   t ə n l i k l ə rx",
+        "total_hours": 45
+      },
+      {
+        "subject": "K o m p ü t e r   a r x i t e k t u r a s ı",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüter arxitekturası",
+        "total_hours": 45
+      },
+      {
+        "subject": "Multimediya texnologiyaları",
+        "total_hours": 45
+      },
+      {
+        "subject": "İnformasiya texnolog. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Multimediya texnolog.",
+        "total_hours": 45
+      },
+      {
+        "subject": "İnformasiya texnologiyalarının əsasları",
+        "total_hours": 45
+      },
+      {
+        "subject": "Elektronikanın əsasları",
+        "total_hours": 45
+      },
+      {
+        "subject": "Diferensial tənliklər",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
           {
             "time": "13:15-14:35",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "D i f e r e n s i a l   t ə n l i k l ə r   (mühazirə) x",
@@ -2265,16 +2675,7 @@
       },
       {
         "day": "III",
-        "lessons": [
-          {},
-          {
-            "time": "",
-            "subject": "",
-            "teacher": "",
-            "room": ""
-          },
-          {}
-        ]
+        "lessons": []
       },
       {
         "day": "IV",
@@ -2310,9 +2711,6 @@
           },
           {
             "time": "14:50-16:10",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Diferensial tənliklər (məş.) ",
@@ -2327,27 +2725,59 @@
             }
           },
           {
-            "time": "16:25-17:45",
-            "subject": "",
-            "teacher": "",
-            "room": "",
-            
+            "time": "16:25-17:45"
           }
         ]
       }
     ]
   },
   {
-    "group": "672a",
-    "week": [
+    "group_id": "672a",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Diferensial tənliklər",
+        "total_hours": 45
+      },
+      {
+        "subject": "K o m p ü t e r   a r x i t e k t u r a s ı",
+        "total_hours": 45
+      },
+      {
+        "subject": "İnformasiya texnologiyalarının əsasları",
+        "total_hours": 45
+      },
+      {
+        "subject": "Multimediya texnolog.",
+        "total_hours": 45
+      },
+      {
+        "subject": "M u l t i m e d i y a    t e x n o l o g i y a l a r ı",
+        "total_hours": 45
+      },
+      {
+        "subject": "Elektronikanın əsasları",
+        "total_hours": 45
+      },
+      {
+        "subject": "İnformasiya texnolog. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "E l e k t r o n i k a n ı n   ə s a s l a r ı",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüter arxitekturası",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
           {
             "time": "13:15-14:35",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Diferensial tənliklər (mühazirə)",
@@ -2369,15 +2799,7 @@
           },
           {
             "time": "16:25-17:45",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
-              "upper": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
-              },
               "lower": {
                 "subject": "İnformasiya texnologiyalarının əsasları (mühazirə)",
                 "teacher": "Məmmədova G.",
@@ -2412,16 +2834,7 @@
       },
       {
         "day": "III",
-        "lessons": [
-          {},
-          {
-            "time": "",
-            "subject": "",
-            "teacher": "",
-            "room": ""
-          },
-          {}
-        ]
+        "lessons": []
       },
       {
         "day": "IV",
@@ -2468,22 +2881,11 @@
                 "teacher": "Yaqnaliyeva A.",
                 "room": "201"
               }
-            },
-            "subject": "",
-            "teacher": "",
-            "room": ""
+            }
           },
           {
             "time": "16:25-17:45",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
-              "upper": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
-              },
               "lower": {
                 "subject": "Kompüter arxitekturası (məş.) ",
                 "teacher": "Mürşüdov E.   ",
@@ -2496,15 +2898,56 @@
     ]
   },
   {
-    "group": "672b",
-    "week": [
+    "group_id": "672b",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Sensorlar və aktuatorlar",
+        "total_hours": 45
+      },
+      {
+        "subject": "Riyazi analiz",
+        "total_hours": 45
+      },
+      {
+        "subject": "Azərbaycan tarixiVəliyeva D. 210",
+        "total_hours": 45
+      },
+      {
+        "subject": "İnformasiya təhlükəsizliyi və kibertəhlükəsizliyin hüquqi aspektləri",
+        "total_hours": 45
+      },
+      {
+        "subject": "Verilən. struk. və alqoritm.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Əməliyyat sistemləri",
+        "total_hours": 45
+      },
+      {
+        "subject": "Təhlükəsiz proqramlaşdırma",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kriptoqrafiyanın əsasları",
+        "total_hours": 45
+      },
+      {
+        "subject": "Şəbəkələrin təhlükəsizliyi",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kriptoqrafiyanın əsasları , İnfor. təhlükəs və kibertəh.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
           {
             "time": "13:15-14:35",
-            "subject": "",
-            "teacher": "",
             "room": "210",
             "lesson": {
               "upper": {
@@ -2552,14 +2995,13 @@
             "time": "16:25-17:45",
             "subject": "Əməliyyat sistemləri(müh) ",
             "teacher": "Əmiraslanov B. ",
-            "room": "212",
-            
+            "room": "212"
           }
         ]
       },
       {
         "day": "III",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "IV",
@@ -2572,9 +3014,6 @@
           },
           {
             "time": "14:50-16:10",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "İnformasiya təhlükəsizliyi və kibertəhlükəsizliyin hüquqi aspektləri (müh) ",
@@ -2634,8 +3073,43 @@
     ]
   },
   {
-    "group": "673",
-    "week": [
+    "group_id": "673",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Avtomatlaş. texniki vasitə.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Fəlsəfə",
+        "total_hours": 30
+      },
+      {
+        "subject": "Tətbiqi riyaziyyat",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kimya",
+        "total_hours": 60
+      },
+      {
+        "subject": "Ölçmə texnikasının əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Döv.nəz.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Dövrələr nəzəriyyəsi",
+        "total_hours": 60
+      },
+      {
+        "subject": "Dövrələr nəzərioyyəsi",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -2681,8 +3155,7 @@
               },
               "lower": {
                 "subject": "Kimya (lab.)",
-                "teacher": "Rzaxanova S.",
-                "room": ""
+                "teacher": "Rzaxanova S."
               }
             }
           },
@@ -2720,8 +3193,7 @@
             "lesson": {
               "upper": {
                 "subject": "Döv.nəz. (lab)",
-                "teacher": "Hacıyeva K",
-                "room": ""
+                "teacher": "Hacıyeva K"
               },
               "lower": {
                 "subject": "Dövrələr nəzəriyyəsi (məş.)",
@@ -2740,16 +3212,7 @@
       },
       {
         "day": "IV",
-        "lessons": [
-          {},
-          {
-            "time": "",
-            "subject": "",
-            "teacher": "",
-            "room": ""
-          },
-          {}
-        ]
+        "lessons": []
       },
       {
         "day": "V",
@@ -2762,7 +3225,6 @@
           },
           {
             "time": "14:50-16:10",
-
             "subject": "Avtomatlaş. texniki vasitə. (lab) ",
             "teacher": "Əsgərova S. ",
             "room": "102 , 111  "
@@ -2787,8 +3249,35 @@
     ]
   },
   {
-    "group": "673a",
-    "week": [
+    "group_id": "673a",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Fəlsəfə",
+        "total_hours": 30
+      },
+      {
+        "subject": "Tətbiqi riyaziyyat",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kimya",
+        "total_hours": 60
+      },
+      {
+        "subject": "Dövrələr nəzəriyyəsi",
+        "total_hours": 60
+      },
+      {
+        "subject": "Ölçmə texnikasının əsasları",
+        "total_hours": 60
+      },
+      {
+        "subject": "Avtomatlaşdırmanın texniki vasitələri",
+        "total_hours": 75
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -2829,8 +3318,7 @@
             "lesson": {
               "upper": {
                 "subject": "Döv.nəz. (lab)",
-                "teacher": "Hacıyeva K",
-                "room": ""
+                "teacher": "Hacıyeva K"
               },
               "lower": {
                 "subject": "Dövrələr nəzəriyyəsi (məş.)",
@@ -2864,8 +3352,7 @@
             "lesson": {
               "upper": {
                 "subject": "Kimya (lab.)",
-                "teacher": "Rzaxanova S",
-                "room": ""
+                "teacher": "Rzaxanova S"
               },
               "lower": {
                 "subject": "Kimya (məş.)",
@@ -2884,7 +3371,44 @@
       },
       {
         "day": "IV",
-        "lessons": [{}, {}, {}]
+        "lessons": [
+          {
+            "time": "13:15-14:35",
+            "subject": "Dövrələr nəzəriyyəsi (müh.)",
+            "teacher": "Hacıyeva K.",
+            "room": "102"
+          },
+          {
+            "time": "14:50-16:10",
+            "lesson": {
+              "upper": {
+                "subject": "Ölçmə texnikasının əsas. (məş.)",
+                "teacher": "Məmmədova R.",
+                "room": "102"
+              },
+              "lower": {
+                "subject": "Ölçmə texnikasının əsas. (lab.)",
+                "teacher": "Məmmədova R.",
+                "room": "205,207"
+              }
+            }
+          },
+          {
+            "time": "16:25-17:45",
+            "lesson": {
+              "upper": {
+                "subject": "Tətbiqi riyaziyyat (məş.)",
+                "teacher": "Yaqnaliyeva A.",
+                "room": "201"
+              },
+              "lower": {
+                "subject": "Avtomatlaş. texniki vasitə. (məş.) ",
+                "teacher": "Əsgərova S.  ",
+                "room": "113"
+              }
+            }
+          }
+        ]
       },
       {
         "day": "V",
@@ -2893,8 +3417,7 @@
             "time": "13:15-14:35",
             "subject": "Dövrələr nəzəriyyəsi (müh.)",
             "teacher": "Hacıyeva K.",
-            "room": "102",
-            
+            "room": "102"
           },
           {
             "time": "14:50-16:10",
@@ -2931,8 +3454,35 @@
     ]
   },
   {
-    "group": "673b",
-    "week": [
+    "group_id": "673b",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Sensorlar və aktuatorlar",
+        "total_hours": 45
+      },
+      {
+        "subject": "Riyazi analiz",
+        "total_hours": 45
+      },
+      {
+        "subject": "Azərbaycan tarixi",
+        "total_hours": 30
+      },
+      {
+        "subject": "Verilən. struk. və alqoritm.",
+        "total_hours": 45
+      },
+      {
+        "subject": "İst. tex. və pr.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Verilən. strukturu və alqor.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -2999,7 +3549,7 @@
       },
       {
         "day": "III",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "IV",
@@ -3015,8 +3565,7 @@
             "subject": "İst. tex. və pr. (müh.)",
             "teacher": "Məmmədov C.",
             "room": "102"
-          },
-          {}
+          }
         ]
       },
       {
@@ -3030,14 +3579,12 @@
           },
           {
             "time": "14:50-16:10",
-
             "subject": "Azərbaycan tarixi (məş.) ",
             "teacher": "Vəliyeva D. ",
             "room": "210"
           },
           {
             "time": "16:25-17:45",
-
             "subject": "Sensorlar və aktuatorlar (müh.) ",
             "teacher": "Quliyeva N. ",
             "room": "113"
@@ -3047,8 +3594,39 @@
     ]
   },
   {
-    "group": "674",
-    "week": [
+    "group_id": "674",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Proqramlaşdırmanın əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Tətbiqi riyaziyyat",
+        "total_hours": 45
+      },
+      {
+        "subject": "Materiallar müqaviməti",
+        "total_hours": 45
+      },
+      {
+        "subject": "Fizika",
+        "total_hours": 60
+      },
+      {
+        "subject": "Azərb. dil. işg. və ak. kom.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proq. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "İnformasiya texnolog.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -3090,8 +3668,7 @@
           {
             "time": "16:25-17:45",
             "subject": "Fizika (lab.)",
-            "teacher": "Mustafayeva Ü.",
-            "room": ""
+            "teacher": "Mustafayeva Ü."
           }
         ]
       },
@@ -3129,8 +3706,7 @@
               },
               "lower": {
                 "subject": "Fizika (məş.)",
-                "teacher": "Ələsgərova D.",
-                "room": ""
+                "teacher": "Ələsgərova D."
               }
             }
           }
@@ -3141,15 +3717,7 @@
         "lessons": [
           {
             "time": "13:15-14:35",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
-              "upper": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
-              },
               "lower": {
                 "subject": "Azərb. dil. işg. və ak. kom. (məş.)",
                 "teacher": "İmaməliyeva G.",
@@ -3191,22 +3759,40 @@
       },
       {
         "day": "V",
-        "lessons": [
-          {
-            "time": "",
-            "subject": "",
-            "teacher": "",
-            "room": ""
-          },
-          {},
-          {}
-        ]
+        "lessons": []
       }
     ]
   },
   {
-    "group": "674b",
-    "week": [
+    "group_id": "674b",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Tətbiqi fizika",
+        "total_hours": 45
+      },
+      {
+        "subject": "Vahid nəqliyyat sistemi",
+        "total_hours": 45
+      },
+      {
+        "subject": "Nəql. növ. konstr. xüs.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Nəqliyyat ekologiyası",
+        "total_hours": 45
+      },
+      {
+        "subject": "Avtomatlaşdırmanın əsasları",
+        "total_hours": 45
+      },
+      {
+        "subject": "Fizika",
+        "total_hours": 60
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -3270,8 +3856,7 @@
             "lesson": {
               "upper": {
                 "subject": "Fizika (lab.)",
-                "teacher": "Lətifova S.",
-                "room": ""
+                "teacher": "Lətifova S."
               },
               "lower": {
                 "subject": "Fizika (məş.)",
@@ -3305,7 +3890,7 @@
       },
       {
         "day": "IV",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "V",
@@ -3333,8 +3918,59 @@
     ]
   },
   {
-    "group": "661",
-    "week": [
+    "group_id": "661",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Multikulturalizmə giriş",
+        "total_hours": 30
+      },
+      {
+        "subject": "Sensor sistemlər",
+        "total_hours": 60
+      },
+      {
+        "subject": "Mülki müdafiə",
+        "total_hours": 30
+      },
+      {
+        "subject": "İnternet texnologiyaları",
+        "total_hours": 45
+      },
+      {
+        "subject": "Komp. arxite.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Komp.qraf.",
+        "total_hours": 45
+      },
+      {
+        "subject": "İnt. tex.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Sensor sistemləri",
+        "total_hours": 45
+      },
+      {
+        "subject": "Sensor sist.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüter qarafikası",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüter arxitekturası",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüter qrafikası",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -3413,7 +4049,6 @@
         "lessons": [
           {
             "time": "08:30-09:50",
-
             "subject": "Sensor sist. (lab)",
             "teacher": "Ağayeva F. ",
             "room": "205,207"
@@ -3446,19 +4081,11 @@
         "lessons": [
           {
             "time": "08:30-09:50",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Multikulturalizmə giriş (məş.)",
                 "teacher": "Behbudov S",
                 "room": "213"
-              },
-              "lower": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
               }
             }
           },
@@ -3478,13 +4105,64 @@
       },
       {
         "day": "V",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       }
     ]
   },
   {
-    "group": "661a",
-    "week": [
+    "group_id": "661a",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Multikulturalizmə giriş",
+        "total_hours": 30
+      },
+      {
+        "subject": "Kompüter qarafikası",
+        "total_hours": 45
+      },
+      {
+        "subject": "Mülki müdafiə",
+        "total_hours": 30
+      },
+      {
+        "subject": "Sensor sistemlər",
+        "total_hours": 60
+      },
+      {
+        "subject": "İnternet texnologiyaları",
+        "total_hours": 45
+      },
+      {
+        "subject": "Komp. arxit.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Sensor sistemləri",
+        "total_hours": 45
+      },
+      {
+        "subject": "Komp.qraf.",
+        "total_hours": 45
+      },
+      {
+        "subject": "İnt. tex.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Sensor sist.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüter arxitekturası",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüter qrafikası",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -3588,11 +4266,6 @@
           {
             "time": "11:40-13:00",
             "lesson": {
-              "upper": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
-              },
               "lower": {
                 "subject": "İnternet texnologiyaları (məş.) ",
                 "teacher": "Cəfərova Ş.   ",
@@ -3627,13 +4300,56 @@
       },
       {
         "day": "V",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       }
     ]
   },
   {
-    "group": "662",
-    "week": [
+    "group_id": "662",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Sis. anal. və komp. model.",
+        "total_hours": 45
+      },
+      {
+        "subject": "İnf. texn. riyazi elem.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Məntiqi proqramlaşdırma dilləri",
+        "total_hours": 45
+      },
+      {
+        "subject": "Süni intellekt",
+        "total_hours": 45
+      },
+      {
+        "subject": "Mənt.pr.dil.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Ehtimal nəzəriyyəsi",
+        "total_hours": 45
+      },
+      {
+        "subject": "Sistemli analiz və kompüterdə modelləşdirmə",
+        "total_hours": 45
+      },
+      {
+        "subject": "İnf.texnol.riyazi elem.",
+        "total_hours": 45
+      },
+      {
+        "subject": "İnformasiya texnologiyalarının riyazi elementləri",
+        "total_hours": 45
+      },
+      {
+        "subject": "E h t i m a l    n ə z ə r i y y ə s i",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -3725,16 +4441,10 @@
         "day": "IV",
         "lessons": [
           {
-            "time": "08:30-09:50",
-            "subject": "",
-            "teacher": "",
-            "room": ""
+            "time": "08:30-09:50"
           },
           {
             "time": "10:05-11:25",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "E h t i m a l    n ə z ə r i y y ə s i  (mühazirə) ",
@@ -3758,13 +4468,60 @@
       },
       {
         "day": "V",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       }
     ]
   },
   {
-    "group": "662a",
-    "week": [
+    "group_id": "662a",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "İnf. texn. riyazi elem.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Sis. anal. və komp. model.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Məntiqi proqramlaşdırma dilləri",
+        "total_hours": 45
+      },
+      {
+        "subject": "İnf.texnol.riyazi elem.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Mənt.pr.dil.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Sistemli analiz və kompüterdə modelləşdirmə",
+        "total_hours": 45
+      },
+      {
+        "subject": "Mənt.pr.dil.Zeynalova S  202",
+        "total_hours": 45
+      },
+      {
+        "subject": "Ehtimal nəzəriyyəsi",
+        "total_hours": 45
+      },
+      {
+        "subject": "İnformasiya texnologiyalarının riyazi elementləri",
+        "total_hours": 45
+      },
+      {
+        "subject": "Süni intellekt",
+        "total_hours": 45
+      },
+      {
+        "subject": "E h t i m a l    n ə z ə r i y y ə s i",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -3802,19 +4559,11 @@
         "lessons": [
           {
             "time": "08:30-09:50",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Mənt.pr.dil. (məş.)",
                 "teacher": "Zeynalova S.",
                 "room": "213"
-              },
-              "lower": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
               }
             }
           },
@@ -3828,14 +4577,7 @@
             "time": "11:40-13:00",
             "lesson": {
               "upper": {
-                "subject": "Mənt.pr.dil. (lab.)",
-                "teacher": "",
-                "room": ""
-              },
-              "lower": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
+                "subject": "Mənt.pr.dil. (lab.)"
               }
             },
             "subject": "Mənt.pr.dil. (lab.) Zeynalova S  202 ",
@@ -3849,19 +4591,11 @@
         "lessons": [
           {
             "time": "08:30-09:50",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Ehtimal nəzəriyyəsi (məş.)",
                 "teacher": "Rzayeva V",
                 "room": "203"
-              },
-              "lower": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
               }
             }
           },
@@ -3890,9 +4624,6 @@
           },
           {
             "time": "10:05-11:25",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "E h t i m a l    n ə z ə r i y y ə s i  (mühazirə) ",
@@ -3916,13 +4647,40 @@
       },
       {
         "day": "V",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       }
     ]
   },
   {
-    "group": "663",
-    "week": [
+    "group_id": "663",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Kimya və NK tex. pros. və qur.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Texnoloji ölçmələr",
+        "total_hours": 45
+      },
+      {
+        "subject": "Rəqəmsal elektronika",
+        "total_hours": 45
+      },
+      {
+        "subject": "Sistemlər nəzəriy. əsasları",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proseslərin identifikasiyası",
+        "total_hours": 45
+      },
+      {
+        "subject": "Pros. ident.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -4003,7 +4761,7 @@
       },
       {
         "day": "IV",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "V",
@@ -4031,7 +4789,6 @@
           },
           {
             "time": "11:40-13:00",
-
             "subject": "Pros. ident.(lab)",
             "teacher": "Salmanov M",
             "room": "111"
@@ -4041,8 +4798,39 @@
     ]
   },
   {
-    "group": "664",
-    "week": [
+    "group_id": "664",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Materiallar texnologiyası",
+        "total_hours": 45
+      },
+      {
+        "subject": "Maş. ist. tex..",
+        "total_hours": 45
+      },
+      {
+        "subject": "Həyat fəaliy. təhlükəsiz.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Maşın dizaynı",
+        "total_hours": 45
+      },
+      {
+        "subject": "Avtomatlaşdırmanın əsasları",
+        "total_hours": 45
+      },
+      {
+        "subject": "Mühəndis iqtisadiyyatı",
+        "total_hours": 45
+      },
+      {
+        "subject": "Avtomat. əsasları",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -4123,7 +4911,7 @@
       },
       {
         "day": "IV",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "V",
@@ -4166,8 +4954,35 @@
     ]
   },
   {
-    "group": "665",
-    "week": [
+    "group_id": "665",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Multikulturalizmə giriş",
+        "total_hours": 30
+      },
+      {
+        "subject": "Mülki müdafiə",
+        "total_hours": 30
+      },
+      {
+        "subject": "İstehsal logistikası",
+        "total_hours": 45
+      },
+      {
+        "subject": "Nəqliyyatda sığorta",
+        "total_hours": 45
+      },
+      {
+        "subject": "Logistika sis. id. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Logistika sistem. id. əsas.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -4200,8 +5015,7 @@
                 "room": "210"
               }
             }
-          },
-          {}
+          }
         ]
       },
       {
@@ -4247,16 +5061,12 @@
           },
           {
             "time": "10:05-11:25",
-
             "subject": "Nəqliyyatda sığorta (müh) ",
             "teacher": "Məmmədova Ş  ",
             "room": "210"
           },
           {
             "time": "11:40-13:00",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "İstehsal logistikası (məş.) ",
@@ -4274,7 +5084,7 @@
       },
       {
         "day": "IV",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       },
       {
         "day": "V",
@@ -4302,12 +5112,38 @@
     ]
   },
   {
-    "group": "667",
-    "week": [
+    "group_id": "667",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Mobil robotlar",
+        "total_hours": 45
+      },
+      {
+        "subject": "Rəqəmsal siq. və təsv. işlən.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Robot elektr.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proqramlaş. məntiqi kontroller",
+        "total_hours": 45
+      },
+      {
+        "subject": "Komp. qraf.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüter qrafikası",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
-          {},
           {
             "time": "10:05-11:25",
             "subject": "Mobil robotlar (lab.)",
@@ -4327,37 +5163,21 @@
         "lessons": [
           {
             "time": "08:30-09:50",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Rəqəmsal siq. və təsv. işlən. (məş.)",
                 "teacher": "Rəsulov R.",
                 "room": "203"
-              },
-              "lower": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
               }
             }
           },
           {
             "time": "10:05-11:25",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Rəqəmsal siq. və təsv. işlən. (müh.)",
                 "teacher": "Rəsulov R.",
                 "room": "203"
-              },
-              "lower": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
               }
             }
           },
@@ -4374,7 +5194,6 @@
         "lessons": [
           {
             "time": "08:30-09:50",
-
             "subject": "Robot elektr. (müh) ",
             "teacher": "Harunov A.   ",
             "room": "111"
@@ -4418,13 +5237,56 @@
       },
       {
         "day": "V",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       }
     ]
   },
   {
-    "group": "651",
-    "week": [
+    "group_id": "651",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Ver. baz.sis..",
+        "total_hours": 45
+      },
+      {
+        "subject": "Əməliyyatların tədqiqi",
+        "total_hours": 45
+      },
+      {
+        "subject": "Mikroprosessorlar",
+        "total_hours": 45
+      },
+      {
+        "subject": "Verilənlər bazası sistemləri",
+        "total_hours": 45
+      },
+      {
+        "subject": "Komp. model.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Əməliy. tədqiqi",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüterdə modelləşdirmə",
+        "total_hours": 45
+      },
+      {
+        "subject": "Mikrorosessorlar",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüterlərin tətbiqi nəzəriyyəsinin əsasları",
+        "total_hours": 45
+      },
+      {
+        "subject": "KTNƏ",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -4490,10 +5352,7 @@
             "room": "212"
           },
           {
-            "time": "14:50-16:10",
-            "subject": "",
-            "teacher": "",
-            "room": ""
+            "time": "14:50-16:10"
           },
           {
             "time": "16:25-17:45",
@@ -4538,19 +5397,11 @@
           },
           {
             "time": "16:25-17:45",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "KTNƏ (məş.)",
                 "teacher": "Rəsulov R.",
                 "room": "109"
-              },
-              "lower": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
               }
             }
           }
@@ -4558,13 +5409,60 @@
       },
       {
         "day": "V",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       }
     ]
   },
   {
-    "group": "651a",
-    "week": [
+    "group_id": "651a",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Komp. model.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Əməliyyatların tədqiqi",
+        "total_hours": 45
+      },
+      {
+        "subject": "M i k r o p r o s e s s o r l a r",
+        "total_hours": 45
+      },
+      {
+        "subject": "Əməliy. tədqiqiHüseynova L.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Əməliy. tədqiqi",
+        "total_hours": 45
+      },
+      {
+        "subject": "KTNƏ",
+        "total_hours": 45
+      },
+      {
+        "subject": "Mikrorosessorlar",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüterdə modelləşdirmə",
+        "total_hours": 45
+      },
+      {
+        "subject": "Mikroprosessorlar",
+        "total_hours": 45
+      },
+      {
+        "subject": "Ver. baz.sis..",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüterlərin tətbiqi nəzəriyyəsinin əsasları",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -4677,20 +5575,11 @@
             "room": "202 ,208"
           },
           {
-            "time": "",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Komp. model. (məş.) ",
                 "teacher": "Quliyev R ",
                 "room": "201"
-              },
-              "lower": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
               }
             }
           }
@@ -4698,13 +5587,52 @@
       },
       {
         "day": "V",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       }
     ]
   },
   {
-    "group": "652",
-    "week": [
+    "group_id": "652",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Proqram mühəndisliynin əsasları və layihələndirilməsi",
+        "total_hours": 45
+      },
+      {
+        "subject": "Veril. baz. sist.",
+        "total_hours": 45
+      },
+      {
+        "subject": "İntellektual texnologiyalar",
+        "total_hours": 45
+      },
+      {
+        "subject": "Verilənlər bazası  sistemləri",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proq. müh. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "ÜTPV",
+        "total_hours": 45
+      },
+      {
+        "subject": "Ümumi təyinatlı proqram vasitələri",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüter texnologiyasının nəzər .əsasları",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kom.tex.nəz.əsas.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -4754,19 +5682,11 @@
           },
           {
             "time": "16:25-17:45",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "ÜTPV (lab.)",
                 "teacher": "İbrahimova P.",
                 "room": "208"
-              },
-              "lower": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
               }
             }
           }
@@ -4800,19 +5720,11 @@
         "lessons": [
           {
             "time": "13:15-14:35",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Verilənlər bazası  sistemləri (müh.) ",
                 "teacher": "Səlimova M.    ",
                 "room": "201"
-              },
-              "lower": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
               }
             }
           },
@@ -4832,13 +5744,52 @@
       },
       {
         "day": "V",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       }
     ]
   },
   {
-    "group": "652a",
-    "week": [
+    "group_id": "652a",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Proqram mühəndisliynin əsasları və layihələndirilməsi",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kom.tex.nəz.əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "İntellektual texnologiyalar",
+        "total_hours": 45
+      },
+      {
+        "subject": "Verilənlər bazası sistemləri",
+        "total_hours": 45
+      },
+      {
+        "subject": "ÜTPV",
+        "total_hours": 45
+      },
+      {
+        "subject": "Proq. müh. əsas.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Ümumi təyinatlı proqram vasitələri",
+        "total_hours": 45
+      },
+      {
+        "subject": "Kompüter texnologiyasının nəzər .əsasları",
+        "total_hours": 45
+      },
+      {
+        "subject": "Veril. baz. sist.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -4922,19 +5873,11 @@
         "lessons": [
           {
             "time": "13:15-14:35",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
               "upper": {
                 "subject": "Verilənlər bazası sistemləri (müh.)",
                 "teacher": "Səlimova M.",
                 "room": "201"
-              },
-              "lower": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
               }
             }
           },
@@ -4954,13 +5897,44 @@
       },
       {
         "day": "V",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       }
     ]
   },
   {
-    "group": "653",
-    "week": [
+    "group_id": "653",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Sənaye avtomat.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Rəqəmli idarəetmə",
+        "total_hours": 45
+      },
+      {
+        "subject": "İdarəet.sis.lay.avt.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Məntiqi idarəet. ,  İdarəet. əməl.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Məntiqi idarəet. sis.",
+        "total_hours": 45
+      },
+      {
+        "subject": "İdarəet. əməl. təd.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Məntiqi idarəet. sistem",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -4995,7 +5969,6 @@
           },
           {
             "time": "14:50-16:10",
-
             "subject": "Məntiqi idarəet. ,  İdarəet. əməl. ",
             "teacher": "Həşimova H. , Əsgərova S.",
             "room": "111 ,113"
@@ -5034,15 +6007,7 @@
           },
           {
             "time": "16:25-17:45",
-            "subject": "",
-            "teacher": "",
-            "room": "",
             "lesson": {
-              "upper": {
-                "subject": "",
-                "teacher": "",
-                "room": ""
-              },
               "lower": {
                 "subject": "İdarəet. əməl. təd. (məş.)",
                 "teacher": "Salmanov M.",
@@ -5086,13 +6051,36 @@
       },
       {
         "day": "V",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       }
     ]
   },
   {
-    "group": "654",
-    "week": [
+    "group_id": "654",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Maş. av. diaq.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Maş. hidrav. sis.",
+        "total_hours": 45
+      },
+      {
+        "subject": "İst. maş. və av.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Neft-məd. av.et.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Maş. hid.sis.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -5134,8 +6122,7 @@
           {
             "time": "16:25-17:45",
             "subject": "İst. maş. və av. (məş.)",
-            "teacher": "Bağırov Z.",
-            "room": ""
+            "teacher": "Bağırov Z."
           }
         ]
       },
@@ -5153,8 +6140,7 @@
             "subject": "Neft-məd. av.et. (müh.)",
             "teacher": "Bağırov Z.",
             "room": "101"
-          },
-          {}
+          }
         ]
       },
       {
@@ -5191,13 +6177,44 @@
       },
       {
         "day": "V",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       }
     ]
   },
   {
-    "group": "655",
-    "week": [
+    "group_id": "655",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Log. inf. sis. və tex.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Nəql. ris. id. ed.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Anbar log.",
+        "total_hours": 45
+      },
+      {
+        "subject": "Texniki sənədlərə norma nəzarət və metroloji ekspertiza",
+        "total_hours": 45
+      },
+      {
+        "subject": "Təchizat zəncirinin idarə edilməsi",
+        "total_hours": 45
+      },
+      {
+        "subject": "Tex. sən. NN və ME",
+        "total_hours": 45
+      },
+      {
+        "subject": "Təc.zən. id. ed.",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -5267,8 +6284,7 @@
             "subject": "Anbar log. (məş..)",
             "teacher": "Quliyeva H.",
             "room": "206"
-          },
-          {}
+          }
         ]
       },
       {
@@ -5305,13 +6321,36 @@
       },
       {
         "day": "V",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       }
     ]
   },
   {
-    "group": "657",
-    "week": [
+    "group_id": "657",
+    "faculty": "Mühəndislik",
+    "academic_load": [
+      {
+        "subject": "Süni intellekt",
+        "total_hours": 45
+      },
+      {
+        "subject": "Mexatronika və robotexnika sistemlərinin layihələndirilməsi",
+        "total_hours": 45
+      },
+      {
+        "subject": "Rəqəmsal kommunikasiya",
+        "total_hours": 45
+      },
+      {
+        "subject": "Robotların idarə olunması",
+        "total_hours": 45
+      },
+      {
+        "subject": "Klassik qeyri-səlis məntiq",
+        "total_hours": 45
+      }
+    ],
+    "week_schedule": [
       {
         "day": "I",
         "lessons": [
@@ -5406,7 +6445,7 @@
       },
       {
         "day": "V",
-        "lessons": [{}, {}, {}]
+        "lessons": []
       }
     ]
   }

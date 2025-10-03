@@ -6,6 +6,26 @@ import Image from "next/image";
 import { University, Group, UserPreferences, Lesson, WeekType } from "@/types";
 import { getGroupData, getCurrentTimeInMinutes } from "@/utils/dataManager";
 import { calculateCurrentWeekType } from "@/utils/weekCalculator";
+import {
+  calculateAbsenceLimits,
+  getAbsenceLimitForSubject,
+} from "@/utils/academics";
+import {
+  getAbsenceCount,
+  getSpecificAbsenceCount,
+  setAbsenceCount,
+  incrementAbsenceCount,
+  decrementAbsenceCount,
+  getGrade,
+  setGrade,
+  removeGrade,
+  getSubjectGrade,
+  setSubjectGrade,
+  getLessonGrade,
+  setLessonGrade,
+  getCurrentWeekId,
+  composeLessonKey,
+} from "@/utils/localStorage";
 import GradeRating from "./GradeRating";
 import {
   Clock,
@@ -89,6 +109,7 @@ export default function Dashboard({
   const [nowMinutes, setNowMinutes] = useState<number>(
     getCurrentTimeInMinutes()
   );
+  // UI state for attendance and grades (now with localStorage persistence)
   const [attendanceStates, setAttendanceStates] = useState<
     Record<string, boolean>
   >({});
@@ -96,11 +117,16 @@ export default function Dashboard({
   const [showAttendanceOptions, setShowAttendanceOptions] = useState<
     string | null
   >(null);
-  const [attendanceCounts, setAttendanceCounts] = useState<
-    Record<string, number>
-  >({});
   const [showGradeRating, setShowGradeRating] = useState<string | null>(null);
-  const [gradeValues, setGradeValues] = useState<Record<string, number>>({});
+
+  // Force re-render trigger for localStorage updates
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+  // Computed absence limits based on academic load
+  const absenceLimits = useMemo(() => {
+    if (!group?.academic_load) return {};
+    return calculateAbsenceLimits(group.academic_load);
+  }, [group?.academic_load]);
 
   // Tick every 30s to keep countdowns fresh
   useEffect(() => {
@@ -111,50 +137,51 @@ export default function Dashboard({
     return () => clearInterval(id);
   }, []);
 
-  // Load saved grades from localStorage
+  // Initialize UI states when group changes
   useEffect(() => {
     if (group) {
-      const savedGrades: Record<string, number> = {};
-      const savedGradeStates: Record<string, boolean> = {};
-      const savedAttendanceCounts: Record<string, number> = {};
-      const savedAttendanceStates: Record<string, boolean> = {};
+      // Reset UI states (localStorage data is loaded on-demand)
+      setGradeStates({});
+      setAttendanceStates({});
+    }
+  }, [group]);
 
-      // Load grades and attendance for all lessons
-      group.week.forEach((day, dayIndex) => {
+  // Load grade states from localStorage when component mounts or group changes
+  useEffect(() => {
+    if (group) {
+      const newGradeStates: Record<string, boolean> = {};
+      const newAttendanceStates: Record<string, boolean> = {};
+
+      // Check all lessons for existing grades and absences
+      const days = group.week_schedule || group.week || [];
+      days.forEach((day, dayIndex) => {
         day.lessons.forEach((lesson, lessonIndex) => {
-          if (lesson.lesson || lesson.subject) {
-            const lessonKey = `${dayIndex}-${lessonIndex}-${
-              lesson.subject ||
-              lesson.lesson?.upper?.subject ||
-              lesson.lesson?.lower?.subject
-            }`;
-            const savedGrade = localStorage.getItem(`grade-${lessonKey}`);
-            if (savedGrade) {
-              savedGrades[lessonKey] = parseInt(savedGrade);
-              savedGradeStates[lessonKey] = true;
+          if (lesson.subject) {
+            const lessonKey = `${dayIndex}-${lessonIndex}-${lesson.subject}`;
+            const weekAwareKey = composeLessonKey({
+              weekId: getCurrentWeekId(),
+              dayIndex,
+              lessonIndex,
+              subject: lesson.subject,
+            });
+
+            // Check if grade exists for THIS lesson (not aggregated)
+            if (getLessonGrade(weekAwareKey) !== null) {
+              newGradeStates[lessonKey] = true;
             }
 
-            // restore attendance single selection (no accumulation)
-            const savedAttendanceCount = localStorage.getItem(
-              `attendance-count-${lessonKey}`
-            );
-            if (savedAttendanceCount) {
-              const countNum = parseInt(savedAttendanceCount);
-              if (countNum === 1 || countNum === 2) {
-                savedAttendanceCounts[lessonKey] = countNum;
-                savedAttendanceStates[lessonKey] = true;
-              }
+            // Check if absence exists for this lesson
+            if (getSpecificAbsenceCount(weekAwareKey) > 0) {
+              newAttendanceStates[lessonKey] = true;
             }
           }
         });
       });
 
-      setGradeValues(savedGrades);
-      setGradeStates(savedGradeStates);
-      setAttendanceCounts(savedAttendanceCounts);
-      setAttendanceStates(savedAttendanceStates);
+      setGradeStates(newGradeStates);
+      setAttendanceStates(newAttendanceStates);
     }
-  }, [group]);
+  }, [group, refreshTrigger]);
 
   const university = universities.find(
     (u) => u.id === preferences.universityId
@@ -227,7 +254,8 @@ export default function Dashboard({
   // Get lessons for selected day
   const currentDayLessons = useMemo(() => {
     if (!group) return [];
-    const day = group.week[selectedDay];
+    const days = group.week_schedule || group.week || [];
+    const day = days[selectedDay];
     if (!day) return [];
 
     return day.lessons
@@ -251,7 +279,7 @@ export default function Dashboard({
       .filter(
         (lesson): lesson is Lesson & { colorClass: string } => lesson !== null
       );
-  }, [group, selectedDay, weekType]);
+  }, [group, selectedDay, weekType, refreshTrigger]);
 
   const handleDayChange = (direction: "prev" | "next") => {
     if (isTransitioning) return;
@@ -314,19 +342,24 @@ export default function Dashboard({
       [lessonKey]: true,
     }));
 
-    // Qayib sayını təyin et (akkumulyasiya YOXDUR)
-    const attendanceCount = type === "first" ? 1 : 2;
-    setAttendanceCounts((prev) => ({
-      ...prev,
-      [lessonKey]: attendanceCount,
-    }));
+    // Build week-aware lesson key to keep data per week/day/lesson
+    const [dayIndexStr, indexStr, ...subjectParts] = lessonKey.split("-");
+    const weekAwareKey = composeLessonKey({
+      weekId: getCurrentWeekId(),
+      dayIndex: Number(dayIndexStr),
+      lessonIndex: Number(indexStr),
+      subject: subjectParts.join("-"),
+    });
 
-    // Store attendance type and count for future reference
-    localStorage.setItem(`attendance-${lessonKey}`, type);
-    localStorage.setItem(
-      `attendance-count-${lessonKey}`,
-      String(attendanceCount)
-    );
+    // Set the exact count based on selection (don't add to existing)
+    if (type === "first") {
+      setAbsenceCount(weekAwareKey, 1); // 1 absence for this specific lesson this week
+    } else {
+      setAbsenceCount(weekAwareKey, 2); // 2 absences for this specific lesson this week
+    }
+
+    // Force re-render by triggering state update
+    setRefreshTrigger((prev) => prev + 1);
 
     setShowAttendanceOptions(null);
   };
@@ -336,22 +369,27 @@ export default function Dashboard({
   };
 
   const handleGradeSelect = (lessonKey: string, grade: number) => {
-    setGradeValues((prev) => ({
-      ...prev,
-      [lessonKey]: grade,
-    }));
+    // Write per-lesson grade (for button display) and update subject grade accordingly
+    const subject = lessonKey.split("-").slice(2).join("-");
+    const weekAwareKey = composeLessonKey({
+      weekId: getCurrentWeekId(),
+      dayIndex: Number(lessonKey.split("-")[0]),
+      lessonIndex: Number(lessonKey.split("-")[1]),
+      subject,
+    });
+    setLessonGrade(weekAwareKey, grade);
 
-    setGradeStates((prev) => ({
-      ...prev,
-      [lessonKey]: true,
-    }));
-
-    // Store grade in localStorage
-    localStorage.setItem(`grade-${lessonKey}`, String(grade));
+    // Force re-render by triggering state update
+    setRefreshTrigger((prev) => prev + 1);
   };
 
   const handleGradeRatingClose = () => {
     setShowGradeRating(null);
+  };
+
+  // Helper function to get absence limit for a lesson
+  const getAbsenceLimitForLesson = (lessonSubject: string): number => {
+    return getAbsenceLimitForSubject(lessonSubject, absenceLimits);
   };
 
   if (!university) {
@@ -454,10 +492,10 @@ export default function Dashboard({
         </div>
       </div>
 
-      {/* Week Type Banner */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 sm:px-4 py-2 sm:py-3">
+      {/* Week Type Banner - Modernized */}
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 sm:px-4 py-4 sm:py-5">
         <div className="text-center">
-          <h2 className="text-base sm:text-lg font-bold">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 font-sans">
             {calculateCurrentWeekType(university)}
           </h2>
           <p className="text-blue-100 text-xs sm:text-sm">
@@ -466,40 +504,50 @@ export default function Dashboard({
         </div>
       </div>
 
-      {/* Day Navigation */}
+      {/* Day Navigation - Enhanced */}
       <div className="bg-white border-b border-gray-200">
-        <div className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3">
-          <button
+        <div className="flex items-center justify-between px-3 sm:px-4 py-3 sm:py-4">
+          <motion.button
             onClick={() => handleDayChange("prev")}
             disabled={selectedDay === 0 || isTransitioning}
-            className={`p-1.5 sm:p-2 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-manipulation ${
+            className={`p-2 sm:p-3 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-manipulation ${
               isTransitioning ? "scale-95" : "scale-100"
             }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
-          </button>
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
+          </motion.button>
 
-          <div className="flex-1 text-center">
-            <h3 className="font-bold text-gray-900 text-base sm:text-lg">
+          <motion.div
+            className="flex-1 text-center"
+            key={selectedDay}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <h3 className="font-semibold text-gray-900 text-lg sm:text-xl">
               {DAYS[selectedDay]?.name}
             </h3>
-            <p className="text-xs sm:text-sm text-gray-600">
+            <p className="text-xs text-gray-500 mt-1">
               {selectedDay + 1} / {DAYS.length}
             </p>
-            <p className="text-xs text-gray-500 mt-1 hidden sm:block">
+            <p className="text-xs text-gray-400 mt-1 hidden sm:block">
               Sola/sağa sürüşdürün
             </p>
-          </div>
+          </motion.div>
 
-          <button
+          <motion.button
             onClick={() => handleDayChange("next")}
             disabled={selectedDay === DAYS.length - 1 || isTransitioning}
-            className={`p-1.5 sm:p-2 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-manipulation ${
+            className={`p-2 sm:p-3 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-manipulation ${
               isTransitioning ? "scale-95" : "scale-100"
             }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
-          </button>
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
+          </motion.button>
         </div>
 
         {/* Day indicator dots */}
@@ -516,9 +564,7 @@ export default function Dashboard({
       </div>
 
       {/* Schedule Content */}
-      <div
-        className="px-3 sm:px-4 py-3 sm:py-4"
-      >
+      <div className="px-3 sm:px-4 py-3 sm:py-4">
         <motion.div
           key={selectedDay}
           initial={{ opacity: 0, x: 20 }}
@@ -537,7 +583,7 @@ export default function Dashboard({
               </p>
             </div>
           ) : (
-            <div className="space-y-2 sm:space-y-3">
+            <div className="space-y-3 sm:space-y-4">
               {/* Lesson countdown banner: show remaining of current lesson; otherwise, next lesson */}
               {(() => {
                 if (!isTodaySelected) return null;
@@ -597,12 +643,13 @@ export default function Dashboard({
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.25, delay: index * 0.06 }}
-                    className={`relative overflow-hidden rounded-xl border transition-all duration-300 ${
+                    whileHover={{ y: -3, scale: 1.02 }}
+                    className={`relative overflow-hidden rounded-lg border transition-all duration-300 ${
                       isCurrent
                         ? "bg-blue-50/80 border-blue-200 shadow-md"
                         : isPast
                         ? "bg-gray-50 border-gray-200 opacity-90"
-                        : "bg-white border-gray-200 hover:shadow-md"
+                        : "bg-white border-gray-200 hover:shadow-lg"
                     }`}
                   >
                     {/* Animated left accent and pulsing indicator for current lesson */}
@@ -616,12 +663,12 @@ export default function Dashboard({
                     )}
 
                     {/* Main card content */}
-                    <div className="p-3 sm:p-4">
-                      <div className="flex items-start space-x-2 sm:space-x-3">
+                    <div className="p-4">
+                      <div className="flex items-start space-x-2">
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-start justify-between gap-2 sm:gap-3 mb-2">
+                          <div className="flex items-start justify-between gap-2 mb-1.5">
                             <h4
-                              className={`font-semibold text-sm sm:text-base line-clamp-2 flex-1 min-w-0 ${
+                              className={`font-semibold text-xs sm:text-sm line-clamp-2 flex-1 min-w-0 ${
                                 isPast ? "text-gray-500" : "text-gray-900"
                               }`}
                             >
@@ -631,53 +678,81 @@ export default function Dashboard({
 
                           <div className="space-y-1">
                             <div
-                              className={`flex items-center space-x-2 text-xs sm:text-sm ${
+                              className={`flex items-center space-x-2 text-xs ${
                                 isPast ? "text-gray-500" : "text-gray-600"
                               }`}
                             >
-                              <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                              <Users className="w-3.5 h-3.5 flex-shrink-0" />
                               <span className="truncate">{lesson.teacher}</span>
                             </div>
                             <div
-                              className={`flex items-center space-x-2 text-xs sm:text-sm ${
+                              className={`flex items-center space-x-2 text-xs ${
                                 isPast ? "text-gray-500" : "text-gray-600"
                               }`}
                             >
-                              <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                              <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
                               <span>Otaq: {lesson.room}</span>
                             </div>
                             <div
-                              className={`flex items-center space-x-2 text-xs sm:text-sm ${
+                              className={`flex items-center space-x-2 text-xs ${
                                 isPast ? "text-gray-500" : "text-gray-600"
                               }`}
                             >
-                              <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                              <Clock className="w-3.5 h-3.5 flex-shrink-0" />
                               <span>{lesson.time}</span>
                             </div>
 
                             {/* Qayib məlumatı - ayrı xətt ilə */}
-                            {attendanceCounts[
-                              `${selectedDay}-${index}-${lesson.subject}`
-                            ] > 0 && (
+                            {lesson.subject && (
                               <>
-                                <div className="border-t border-gray-200 my-2"></div>
-                                <div
-                                  className={`flex items-center space-x-2 text-xs sm:text-sm ${
-                                    isPast ? "text-gray-500" : "text-red-600"
-                                  }`}
-                                >
-                                  <span className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 text-center font-bold">
-                                    Q
-                                  </span>
-                                  <span>
-                                    Ümumi:{" "}
-                                    {
-                                      attendanceCounts[
-                                        `${selectedDay}-${index}-${lesson.subject}`
-                                      ]
-                                    }{" "}
-                                    qayib
-                                  </span>
+                                <div className="border-t border-gray-200 my-1.5"></div>
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center space-x-2">
+                                    {(() => {
+                                      if (!lesson.subject) return null;
+                                      // Show aggregated total for this subject across all weeks
+                                      const current = getAbsenceCount(
+                                        lesson.subject
+                                      );
+                                      const limit = getAbsenceLimitForLesson(
+                                        lesson.subject
+                                      );
+
+                                      if (limit === 0) return null;
+
+                                      const percentage = Math.min(
+                                        (current / limit) * 100,
+                                        100
+                                      );
+                                      const isWarning = percentage >= 75;
+                                      const isDanger = percentage >= 90;
+
+                                      const gradeValue = getSubjectGrade(
+                                        String(lesson.subject)
+                                      );
+
+                                      return (
+                                        <div className="flex items-center space-x-2">
+                                          {/* Absence total badge */}
+                                          <span
+                                            className={`px-1.5 py-0.5 rounded-full text-[11px] font-medium ${
+                                              isDanger
+                                                ? "bg-red-100 text-red-700"
+                                                : isWarning
+                                                ? "bg-yellow-100 text-yellow-700"
+                                                : "bg-blue-100 text-blue-700"
+                                            }`}
+                                          >
+                                            {current}/{limit}
+                                          </span>
+                                          {/* Grade total badge */}
+                                          <span className="px-1.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-100 text-emerald-700">
+                                            {gradeValue ?? 0}
+                                          </span>
+                                        </div>
+                                      );
+                                    })()}
+                                  </div>
                                 </div>
                               </>
                             )}
@@ -685,8 +760,8 @@ export default function Dashboard({
                         </div>
 
                         {/* Simple action buttons on the right */}
-                        <div className="flex flex-col items-center space-y-2 ml-2">
-                          <div className="flex flex-col space-y-2">
+                        <div className="flex flex-col items-center space-y-1.5 ml-2">
+                          <div className="flex flex-col space-y-1.5">
                             {/* Davamiyyət düyməsi - aşağıya genişlənən animasiyalı */}
                             <div className="flex flex-col items-center space-y-2">
                               {/* Q düyməsi - yalnız seçimlər açıq olmadıqda görünür */}
@@ -700,7 +775,7 @@ export default function Dashboard({
                                     const lessonKey = `${selectedDay}-${index}-${lesson.subject}`;
                                     handleAttendanceClick(lessonKey);
                                   }}
-                                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 touch-manipulation ${
+                                  className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 touch-manipulation ${
                                     attendanceStates[
                                       `${selectedDay}-${index}-${lesson.subject}`
                                     ]
@@ -709,13 +784,29 @@ export default function Dashboard({
                                   }`}
                                 >
                                   {(() => {
-                                    const key = `${selectedDay}-${index}-${lesson.subject}`;
-                                    const count = attendanceCounts[key] || 0;
-                                    const text = count === 1 ? "'40" : count === 2 ? "'80" : "Q";
-                                    const isSet = attendanceStates[key];
+                                    const key = composeLessonKey({
+                                      weekId: getCurrentWeekId(),
+                                      dayIndex: selectedDay,
+                                      lessonIndex: index,
+                                      subject: String(lesson.subject),
+                                    });
+                                    const count = lesson.subject
+                                      ? getSpecificAbsenceCount(key)
+                                      : 0;
+                                    // refreshTrigger is used to force re-render when localStorage changes
+                                    const text =
+                                      count === 1
+                                        ? "'40"
+                                        : count === 2
+                                        ? "'80"
+                                        : "Q";
+                                    const isSet =
+                                      attendanceStates[
+                                        `${selectedDay}-${index}-${lesson.subject}`
+                                      ];
                                     return (
                                       <span
-                                        className={`text-sm font-bold ${
+                                        className={`text-xs font-bold ${
                                           isSet ? "text-white" : "text-gray-600"
                                         }`}
                                       >
@@ -742,7 +833,7 @@ export default function Dashboard({
                                         "first"
                                       );
                                     }}
-                                    className="w-8 h-8 bg-red-300 text-white text-xs font-bold rounded-full flex items-center justify-center hover:bg-red-400 transition-colors"
+                                    className="w-7 h-7 bg-red-300 text-white text-[11px] font-bold rounded-full flex items-center justify-center hover:bg-red-400 transition-colors"
                                   >
                                     &apos;40
                                   </motion.button>
@@ -764,7 +855,7 @@ export default function Dashboard({
                                         "second"
                                       );
                                     }}
-                                    className="w-8 h-8 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
+                                    className="w-7 h-7 bg-red-500 text-white text-[11px] font-bold rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
                                   >
                                     &apos;80
                                   </motion.button>
@@ -783,24 +874,49 @@ export default function Dashboard({
                                   const lessonKey = `${selectedDay}-${index}-${lesson.subject}`;
                                   handleGradeClick(lessonKey);
                                 }}
-                                className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 touch-manipulation ${
-                                  gradeStates[
-                                    `${selectedDay}-${index}-${lesson.subject}`
-                                  ]
+                                className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 touch-manipulation ${
+                                  (() => {
+                                    if (!lesson.subject) return false;
+                                    const key = composeLessonKey({
+                                      weekId: getCurrentWeekId(),
+                                      dayIndex: selectedDay,
+                                      lessonIndex: index,
+                                      subject: String(lesson.subject),
+                                    });
+                                    return getLessonGrade(key) !== null;
+                                  })()
                                     ? "bg-green-500 hover:bg-green-600 shadow-md scale-105"
                                     : "bg-green-100 hover:bg-green-200"
                                 }`}
                               >
-                                {gradeStates[
-                                  `${selectedDay}-${index}-${lesson.subject}`
-                                ] ? (
-                                  <span className="text-white text-xs font-bold">
-                                    {gradeValues[
-                                      `${selectedDay}-${index}-${lesson.subject}`
-                                    ]}
+                                {(() => {
+                                  // Only show filled (green) state if THIS lesson has a stored lesson grade
+                                  const hasLessonGrade = (() => {
+                                    if (!lesson.subject) return false;
+                                    const key = composeLessonKey({
+                                      weekId: getCurrentWeekId(),
+                                      dayIndex: selectedDay,
+                                      lessonIndex: index,
+                                      subject: String(lesson.subject),
+                                    });
+                                    return getLessonGrade(key) !== null;
+                                  })();
+                                  return hasLessonGrade;
+                                })() ? (
+                                  <span className="text-white text-[11px] font-bold">
+                                    {(() => {
+                                      if (!lesson.subject) return 0;
+                                      const weekAwareKey = composeLessonKey({
+                                        weekId: getCurrentWeekId(),
+                                        dayIndex: selectedDay,
+                                        lessonIndex: index,
+                                        subject: String(lesson.subject),
+                                      });
+                                      return getLessonGrade(weekAwareKey) ?? 0;
+                                    })()}
                                   </span>
                                 ) : (
-                                  <Award className="w-5 h-5 text-green-600" />
+                                  <Award className="w-4.5 h-4.5 text-green-600" />
                                 )}
                               </motion.button>
                             )}
@@ -826,10 +942,22 @@ export default function Dashboard({
               handleGradeSelect(showGradeRating, grade);
             }
           }}
-          currentGrade={gradeValues[showGradeRating]}
+          currentGrade={(() => {
+            if (!showGradeRating) return 0;
+            const subject = showGradeRating.split("-").slice(2).join("-");
+            const weekAwareKey = composeLessonKey({
+              weekId: getCurrentWeekId(),
+              dayIndex: Number(showGradeRating.split("-")[0]),
+              lessonIndex: Number(showGradeRating.split("-")[1]),
+              subject,
+            });
+            return 0; // Always start from 0 for new grade entry
+          })()}
           subjectName={(() => {
             const [dayIndex, lessonIndex] = showGradeRating.split("-");
-            const day = group?.week[parseInt(dayIndex)];
+            const day = (group?.week_schedule || group?.week || [])[
+              parseInt(dayIndex)
+            ];
             const lesson = day?.lessons[parseInt(lessonIndex)];
             return lesson?.subject || "Dərs";
           })()}
