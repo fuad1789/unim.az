@@ -9,24 +9,21 @@ import { calculateCurrentWeekType } from "@/utils/weekCalculator";
 import {
   calculateAbsenceLimits,
   getAbsenceLimitForSubject,
+  isMidSemester,
 } from "@/utils/academics";
 import {
   getAbsenceCount,
   getSpecificAbsenceCount,
   setAbsenceCount,
-  incrementAbsenceCount,
-  decrementAbsenceCount,
-  getGrade,
-  setGrade,
-  removeGrade,
   getSubjectGrade,
-  setSubjectGrade,
   getLessonGrade,
   setLessonGrade,
   getCurrentWeekId,
   composeLessonKey,
+  hasAddedPreviousAbsences,
 } from "@/utils/localStorage";
 import GradeRating from "./GradeRating";
+import PreviousAbsencesAlert from "./PreviousAbsencesAlert";
 import {
   Clock,
   MapPin,
@@ -113,11 +110,12 @@ export default function Dashboard({
   const [attendanceStates, setAttendanceStates] = useState<
     Record<string, boolean>
   >({});
-  const [gradeStates, setGradeStates] = useState<Record<string, boolean>>({});
   const [showAttendanceOptions, setShowAttendanceOptions] = useState<
     string | null
   >(null);
   const [showGradeRating, setShowGradeRating] = useState<string | null>(null);
+  const [showPreviousAbsencesAlert, setShowPreviousAbsencesAlert] =
+    useState(false);
 
   // Force re-render trigger for localStorage updates
   const [refreshTrigger, setRefreshTrigger] = useState(0);
@@ -141,23 +139,20 @@ export default function Dashboard({
   useEffect(() => {
     if (group) {
       // Reset UI states (localStorage data is loaded on-demand)
-      setGradeStates({});
       setAttendanceStates({});
     }
   }, [group]);
 
-  // Load grade states from localStorage when component mounts or group changes
+  // Load attendance states from localStorage when component mounts or group changes
   useEffect(() => {
     if (group) {
-      const newGradeStates: Record<string, boolean> = {};
       const newAttendanceStates: Record<string, boolean> = {};
 
-      // Check all lessons for existing grades and absences
+      // Check all lessons for existing absences
       const days = group.week_schedule || group.week || [];
       days.forEach((day, dayIndex) => {
         day.lessons.forEach((lesson, lessonIndex) => {
           if (lesson.subject) {
-            const lessonKey = `${dayIndex}-${lessonIndex}-${lesson.subject}`;
             const weekAwareKey = composeLessonKey({
               weekId: getCurrentWeekId(),
               dayIndex,
@@ -165,23 +160,30 @@ export default function Dashboard({
               subject: lesson.subject,
             });
 
-            // Check if grade exists for THIS lesson (not aggregated)
-            if (getLessonGrade(weekAwareKey) !== null) {
-              newGradeStates[lessonKey] = true;
-            }
-
             // Check if absence exists for this lesson
             if (getSpecificAbsenceCount(weekAwareKey) > 0) {
+              const lessonKey = `${dayIndex}-${lessonIndex}-${lesson.subject}`;
               newAttendanceStates[lessonKey] = true;
             }
           }
         });
       });
 
-      setGradeStates(newGradeStates);
       setAttendanceStates(newAttendanceStates);
     }
   }, [group, refreshTrigger]);
+
+  // Check if we should show the previous absences alert
+  useEffect(() => {
+    if (group && isMidSemester() && !hasAddedPreviousAbsences()) {
+      // Show alert after a short delay to let the dashboard load
+      const timer = setTimeout(() => {
+        setShowPreviousAbsencesAlert(true);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [group]);
 
   const university = universities.find(
     (u) => u.id === preferences.universityId
@@ -279,7 +281,7 @@ export default function Dashboard({
       .filter(
         (lesson): lesson is Lesson & { colorClass: string } => lesson !== null
       );
-  }, [group, selectedDay, weekType, refreshTrigger]);
+  }, [group, selectedDay, weekType]);
 
   const handleDayChange = (direction: "prev" | "next") => {
     if (isTransitioning) return;
@@ -385,6 +387,16 @@ export default function Dashboard({
 
   const handleGradeRatingClose = () => {
     setShowGradeRating(null);
+  };
+
+  const handlePreviousAbsencesClose = () => {
+    setShowPreviousAbsencesAlert(false);
+  };
+
+  const handlePreviousAbsencesConfirm = () => {
+    setShowPreviousAbsencesAlert(false);
+    // Force re-render to update absence counts
+    setRefreshTrigger((prev) => prev + 1);
   };
 
   // Helper function to get absence limit for a lesson
@@ -944,13 +956,6 @@ export default function Dashboard({
           }}
           currentGrade={(() => {
             if (!showGradeRating) return 0;
-            const subject = showGradeRating.split("-").slice(2).join("-");
-            const weekAwareKey = composeLessonKey({
-              weekId: getCurrentWeekId(),
-              dayIndex: Number(showGradeRating.split("-")[0]),
-              lessonIndex: Number(showGradeRating.split("-")[1]),
-              subject,
-            });
             return 0; // Always start from 0 for new grade entry
           })()}
           subjectName={(() => {
@@ -963,6 +968,14 @@ export default function Dashboard({
           })()}
         />
       )}
+
+      {/* Previous Absences Alert */}
+      <PreviousAbsencesAlert
+        isOpen={showPreviousAbsencesAlert}
+        onClose={handlePreviousAbsencesClose}
+        onConfirm={handlePreviousAbsencesConfirm}
+        group={group}
+      />
     </div>
   );
 }

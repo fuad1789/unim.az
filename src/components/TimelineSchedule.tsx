@@ -9,8 +9,12 @@ import {
   getCurrentTimeInMinutes,
 } from "@/utils/dataManager";
 import { calculateCurrentWeekType } from "@/utils/weekCalculator";
+import {
+  calculateAbsenceLimits,
+  getAbsenceLimitForSubject,
+} from "@/utils/academics";
+import { getAbsenceCount, getSubjectGrade } from "@/utils/localStorage";
 import SubjectDetailsModal from "@/components/SubjectDetailsModal";
-// Removed localStorage imports - no persistence functionality
 
 interface TimelineScheduleProps {
   group: Group;
@@ -48,6 +52,17 @@ export default function TimelineSchedule({
 }: TimelineScheduleProps) {
   const [currentTime, setCurrentTime] = useState(getCurrentTimeInMinutes());
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Calculate absence limits based on academic load
+  const absenceLimits = useMemo(() => {
+    if (!group?.academic_load) return {};
+    return calculateAbsenceLimits(group.academic_load);
+  }, [group?.academic_load]);
+
+  // Helper function to get absence limit for a lesson
+  const getAbsenceLimitForLesson = (lessonSubject: string): number => {
+    return getAbsenceLimitForSubject(lessonSubject, absenceLimits);
+  };
   const [selectedSubject, setSelectedSubject] = useState<{
     subject?: string;
     teacher?: string;
@@ -69,8 +84,8 @@ export default function TimelineSchedule({
   }, [university]);
 
   const lessons = useMemo(() => {
-    return getCurrentDayLessons(group, weekType);
-  }, [group, weekType]);
+    return getCurrentDayLessons(group);
+  }, [group]);
 
   // Process lessons for timeline display
   const processedLessons = useMemo(() => {
@@ -225,7 +240,47 @@ export default function TimelineSchedule({
                         </div>
                       )}
 
-                      {/* Quick stats removed - no persistence */}
+                      {/* Qayıb məlumatları */}
+                      {lesson.subject &&
+                        (() => {
+                          const current = getAbsenceCount(lesson.subject);
+                          const limit = getAbsenceLimitForLesson(
+                            lesson.subject
+                          );
+                          const grade = getSubjectGrade(lesson.subject);
+
+                          if (limit === 0) return null;
+
+                          const percentage = Math.min(
+                            (current / limit) * 100,
+                            100
+                          );
+                          const isWarning = percentage >= 75;
+                          const isDanger = percentage >= 90;
+
+                          return (
+                            <div className="flex items-center space-x-2 mt-2">
+                              {/* Qayıb badge */}
+                              <span
+                                className={`px-1.5 py-0.5 rounded-full text-[10px] font-medium ${
+                                  isDanger
+                                    ? "bg-red-100 text-red-700"
+                                    : isWarning
+                                    ? "bg-yellow-100 text-yellow-700"
+                                    : "bg-blue-100 text-blue-700"
+                                }`}
+                              >
+                                {current}/{limit}
+                              </span>
+                              {/* Qiymət badge */}
+                              {grade !== null && (
+                                <span className="px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-100 text-emerald-700">
+                                  {grade}
+                                </span>
+                              )}
+                            </div>
+                          );
+                        })()}
                     </div>
                   </button>
                 </motion.div>
@@ -257,7 +312,11 @@ export default function TimelineSchedule({
         subject={selectedSubject?.subject}
         teacher={selectedSubject?.teacher}
         room={selectedSubject?.room}
-        absenceLimit={8}
+        absenceLimit={
+          selectedSubject?.subject
+            ? getAbsenceLimitForLesson(selectedSubject.subject)
+            : 8
+        }
       />
     </>
   );

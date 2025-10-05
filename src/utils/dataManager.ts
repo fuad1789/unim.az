@@ -1,4 +1,4 @@
-import { Group, UserPreferences, WeekType, DayName, Lesson } from "@/types";
+import { Group, UserPreferences, DayName, Lesson } from "@/types";
 
 // Load university data
 export async function loadUniversityData(
@@ -47,10 +47,7 @@ export async function getGroupData(
 }
 
 // Get current day lessons
-export function getCurrentDayLessons(
-  group: Group,
-  _weekType: WeekType
-): Lesson[] {
+export function getCurrentDayLessons(group: Group): Lesson[] {
   const today = new Date();
   const dayIndex = (today.getDay() + 6) % 7; // Convert Sunday=0 to Monday=0
   const dayNames: DayName[] = ["I", "II", "III", "IV", "V", "VI", "VII"];

@@ -3077,10 +3077,6 @@
     "faculty": "Mühəndislik",
     "academic_load": [
       {
-        "subject": "Avtomatlaş. texniki vasitə.",
-        "total_hours": 45
-      },
-      {
         "subject": "Fəlsəfə",
         "total_hours": 30
       },
@@ -3093,20 +3089,20 @@
         "total_hours": 60
       },
       {
-        "subject": "Ölçmə texnikasının əsas.",
-        "total_hours": 45
-      },
-      {
-        "subject": "Döv.nəz.",
-        "total_hours": 45
-      },
-      {
-        "subject": "Dövrələr nəzəriyyəsi",
+        "subject": "Dövrələr nəzərioyyəsi",
         "total_hours": 60
       },
       {
-        "subject": "Dövrələr nəzərioyyəsi",
-        "total_hours": 45
+        "subject": "Döv.nəz.",
+        "total_hours": 60
+      },
+      {
+        "subject": "Ölçmə texnikasının əsasları",
+        "total_hours": 60
+      },
+      {
+        "subject": "Avtomatlaş. texniki vasitələ.",
+        "total_hours": 75
       }
     ],
     "week_schedule": [
@@ -3265,7 +3261,11 @@
         "total_hours": 60
       },
       {
-        "subject": "Dövrələr nəzəriyyəsi",
+        "subject": "Dövrələr nəzərioyyəsi",
+        "total_hours": 60
+      },
+      {
+        "subject": "Döv.nəz.",
         "total_hours": 60
       },
       {
@@ -3273,7 +3273,7 @@
         "total_hours": 60
       },
       {
-        "subject": "Avtomatlaşdırmanın texniki vasitələri",
+        "subject": "Avtomatlaş. texniki vasitələ.",
         "total_hours": 75
       }
     ],
@@ -3371,44 +3371,7 @@
       },
       {
         "day": "IV",
-        "lessons": [
-          {
-            "time": "13:15-14:35",
-            "subject": "Dövrələr nəzəriyyəsi (müh.)",
-            "teacher": "Hacıyeva K.",
-            "room": "102"
-          },
-          {
-            "time": "14:50-16:10",
-            "lesson": {
-              "upper": {
-                "subject": "Ölçmə texnikasının əsas. (məş.)",
-                "teacher": "Məmmədova R.",
-                "room": "102"
-              },
-              "lower": {
-                "subject": "Ölçmə texnikasının əsas. (lab.)",
-                "teacher": "Məmmədova R.",
-                "room": "205,207"
-              }
-            }
-          },
-          {
-            "time": "16:25-17:45",
-            "lesson": {
-              "upper": {
-                "subject": "Tətbiqi riyaziyyat (məş.)",
-                "teacher": "Yaqnaliyeva A.",
-                "room": "201"
-              },
-              "lower": {
-                "subject": "Avtomatlaş. texniki vasitə. (məş.) ",
-                "teacher": "Əsgərova S.  ",
-                "room": "113"
-              }
-            }
-          }
-        ]
+        "lessons": []
       },
       {
         "day": "V",

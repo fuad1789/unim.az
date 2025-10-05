@@ -128,3 +128,31 @@ export function calculateAbsenceLimit(
   const limits = calculateAbsenceLimits(academicLoad);
   return getAbsenceLimitForSubject(subjectName, limits);
 }
+
+/**
+ * Check if we're in the middle of the semester (after week 6)
+ * This is used to determine if we should ask about previous absences
+ */
+export function isMidSemester(): boolean {
+  const now = new Date();
+  const currentWeek = getCurrentWeekNumber(now);
+
+  // Consider mid-semester if we're past week 6
+  return currentWeek > 6;
+}
+
+/**
+ * Get current week number of the year
+ */
+function getCurrentWeekNumber(date: Date): number {
+  const d = new Date(
+    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+  );
+  const dayNum = d.getUTCDay() || 7;
+  if (dayNum !== 1) d.setUTCDate(d.getUTCDate() + (1 - dayNum));
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  const weekNo = Math.ceil(
+    ((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7
+  );
+  return weekNo;
+}

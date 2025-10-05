@@ -383,3 +383,26 @@ export function importUserData(jsonString: string): boolean {
     return false;
   }
 }
+
+/**
+ * Check if user has already added previous absences
+ */
+export function hasAddedPreviousAbsences(): boolean {
+  try {
+    return localStorage.getItem("unimaz-previous-absences-added") === "true";
+  } catch (error) {
+    console.error("Error checking previous absences status:", error);
+    return false;
+  }
+}
+
+/**
+ * Mark that user has added previous absences
+ */
+export function markPreviousAbsencesAdded(): void {
+  try {
+    localStorage.setItem("unimaz-previous-absences-added", "true");
+  } catch (error) {
+    console.error("Error marking previous absences as added:", error);
+  }
+}
