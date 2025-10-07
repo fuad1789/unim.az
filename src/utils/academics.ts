@@ -1,8 +1,13 @@
 /**
  * Academic utilities for calculating absence limits and other academic-related functions
+ * Now uses global subject mapping system for consistent subject name handling
  */
 
 import { AcademicLoadItem } from "@/types";
+import {
+  findCanonicalSubjectName,
+  normalizeSubjectName as globalNormalizeSubjectName,
+} from "./subjectMapping";
 
 /**
  * Function 1: calculateAbsenceLimits
@@ -82,17 +87,10 @@ export function getAbsenceLimitForSubject(
  * Removes extra whitespace, converts to lowercase, and handles common abbreviations
  */
 export function normalizeSubjectName(subjectName: string): string {
-  return (
-    subjectName
-      .trim()
-      .toLowerCase()
-      // Handle common abbreviations and variations
-      .replace(/\s+/g, " ")
-      .replace(/\./g, "")
-      .replace(/məş/g, "məşğələ")
-      .replace(/müh/g, "mühazirə")
-      .replace(/lab/g, "laboratoriya")
-  );
+  const canonicalName = findCanonicalSubjectName(subjectName);
+  return canonicalName
+    ? canonicalName.toLowerCase()
+    : globalNormalizeSubjectName(subjectName);
 }
 
 /**

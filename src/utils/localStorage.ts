@@ -1,7 +1,14 @@
 /**
  * localStorage utilities for managing user data (absences/grades)
  * All user-specific data is stored in a single JSON object under "unimaz-userdata" key
+ * Now uses global subject mapping system for consistent subject name handling
  */
+
+import {
+  findCanonicalSubjectName,
+  areSubjectsEquivalent,
+  normalizeSubjectName as globalNormalizeSubjectName,
+} from "./subjectMapping";
 
 export interface UserData {
   absences: Record<string, number>;
@@ -59,9 +66,112 @@ export function writeUserData(userData: UserData): void {
 
 /**
  * Extract base subject name by removing type indicators (mühazirə, məşğələ, laboratoriya, etc.)
+ * Now uses global subject mapping system
  */
 function getBaseSubjectName(subjectName: string): string {
-  return subjectName.replace(/\s*\([^)]*\)\s*/g, "").trim();
+  const canonicalName = findCanonicalSubjectName(subjectName);
+  return canonicalName || subjectName.replace(/\s*\([^)]*\)\s*/g, "").trim();
+}
+
+/**
+ * Normalize subject name for better matching by:
+ * 1. Removing type indicators
+ * 2. Converting to lowercase
+ * 3. Removing extra spaces
+ * 4. Handling common abbreviations
+ */
+function normalizeSubjectName(subjectName: string): string {
+  const canonicalName = findCanonicalSubjectName(subjectName);
+  return canonicalName
+    ? canonicalName.toLowerCase()
+    : globalNormalizeSubjectName(subjectName);
+}
+
+/**
+ * Calculate similarity between two strings using Levenshtein distance
+ * Returns a score between 0 and 1, where 1 is perfect match
+ */
+function calculateSimilarity(str1: string, str2: string): number {
+  const longer = str1.length > str2.length ? str1 : str2;
+  const shorter = str1.length > str2.length ? str2 : str1;
+
+  if (longer.length === 0) return 1.0;
+
+  const distance = levenshteinDistance(longer, shorter);
+  return (longer.length - distance) / longer.length;
+}
+
+/**
+ * Calculate Levenshtein distance between two strings
+ */
+function levenshteinDistance(str1: string, str2: string): number {
+  const matrix = Array(str2.length + 1)
+    .fill(null)
+    .map(() => Array(str1.length + 1).fill(null));
+
+  for (let i = 0; i <= str1.length; i++) matrix[0][i] = i;
+  for (let j = 0; j <= str2.length; j++) matrix[j][0] = j;
+
+  for (let j = 1; j <= str2.length; j++) {
+    for (let i = 1; i <= str1.length; i++) {
+      const indicator = str1[i - 1] === str2[j - 1] ? 0 : 1;
+      matrix[j][i] = Math.min(
+        matrix[j][i - 1] + 1, // deletion
+        matrix[j - 1][i] + 1, // insertion
+        matrix[j - 1][i - 1] + indicator // substitution
+      );
+    }
+  }
+
+  return matrix[str2.length][str1.length];
+}
+
+/**
+ * Find the best matching subject from aggregated absences for a given academic_load subject
+ * Uses fuzzy matching to handle abbreviated vs full names
+ */
+function findBestMatchingSubject(
+  academicLoadSubject: string,
+  aggregatedAbsences: Record<string, number>
+): string | null {
+  const normalizedAcademicLoad = normalizeSubjectName(academicLoadSubject);
+  let bestMatch: string | null = null;
+  let bestScore = 0;
+
+  // First try exact match with normalized names
+  for (const [storedSubject, count] of Object.entries(aggregatedAbsences)) {
+    const normalizedStored = normalizeSubjectName(storedSubject);
+    if (normalizedAcademicLoad === normalizedStored) {
+      return storedSubject; // Perfect match, return immediately
+    }
+  }
+
+  // If no exact match, try fuzzy matching
+  for (const [storedSubject, count] of Object.entries(aggregatedAbsences)) {
+    const normalizedStored = normalizeSubjectName(storedSubject);
+
+    // Check if one contains the other (for cases where one is abbreviated)
+    if (
+      normalizedAcademicLoad.includes(normalizedStored) ||
+      normalizedStored.includes(normalizedAcademicLoad)
+    ) {
+      return storedSubject; // High confidence match
+    }
+
+    // Calculate similarity score
+    const similarity = calculateSimilarity(
+      normalizedAcademicLoad,
+      normalizedStored
+    );
+
+    // If similarity is high enough (>= 0.7), consider it a potential match
+    if (similarity >= 0.7 && similarity > bestScore) {
+      bestMatch = storedSubject;
+      bestScore = similarity;
+    }
+  }
+
+  return bestMatch;
 }
 
 /**
@@ -289,6 +399,39 @@ export function getAggregatedAbsences(): Record<string, number> {
   }
 
   return aggregated;
+}
+
+/**
+ * Get absence count for a subject from academic_load by finding the best match
+ * in the aggregated absences. This handles cases where academic_load has abbreviated
+ * names but aggregated absences has full names, or vice versa.
+ */
+export function getAbsenceCountForAcademicLoadSubject(
+  academicLoadSubject: string
+): number {
+  const aggregatedAbsences = getAggregatedAbsences();
+  const matchingSubject = findBestMatchingSubject(
+    academicLoadSubject,
+    aggregatedAbsences
+  );
+
+  if (matchingSubject) {
+    return aggregatedAbsences[matchingSubject];
+  }
+
+  // If no match found, return 0
+  return 0;
+}
+
+/**
+ * Get the matching subject key from aggregated absences for a given academic_load subject
+ * This is used when setting absence counts to ensure we update the correct subject
+ */
+export function getMatchingSubjectKey(
+  academicLoadSubject: string
+): string | null {
+  const aggregatedAbsences = getAggregatedAbsences();
+  return findBestMatchingSubject(academicLoadSubject, aggregatedAbsences);
 }
 
 /**
