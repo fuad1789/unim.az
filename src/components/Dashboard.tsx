@@ -366,6 +366,30 @@ export default function Dashboard({
     setShowAttendanceOptions(null);
   };
 
+  const handleAttendanceRemove = (lessonKey: string) => {
+    setAttendanceStates((prev) => ({
+      ...prev,
+      [lessonKey]: false,
+    }));
+
+    // Build week-aware lesson key to keep data per week/day/lesson
+    const [dayIndexStr, indexStr, ...subjectParts] = lessonKey.split("-");
+    const weekAwareKey = composeLessonKey({
+      weekId: getCurrentWeekId(),
+      dayIndex: Number(dayIndexStr),
+      lessonIndex: Number(indexStr),
+      subject: subjectParts.join("-"),
+    });
+
+    // Remove absence count (set to 0)
+    setAbsenceCount(weekAwareKey, 0);
+
+    // Force re-render by triggering state update
+    setRefreshTrigger((prev) => prev + 1);
+
+    setShowAttendanceOptions(null);
+  };
+
   const handleGradeClick = (lessonKey: string) => {
     setShowGradeRating(lessonKey);
   };
@@ -833,6 +857,35 @@ export default function Dashboard({
                               {showAttendanceOptions ===
                                 `${selectedDay}-${index}-${lesson.subject}` && (
                                 <div className="flex flex-col items-center space-y-2">
+                                  {/* Remove button - shown when absences exist */}
+                                  {(() => {
+                                    const key = composeLessonKey({
+                                      weekId: getCurrentWeekId(),
+                                      dayIndex: selectedDay,
+                                      lessonIndex: index,
+                                      subject: String(lesson.subject),
+                                    });
+                                    const count = lesson.subject
+                                      ? getSpecificAbsenceCount(key)
+                                      : 0;
+                                    return count > 0 ? (
+                                      <motion.button
+                                        initial={{ scale: 1 }}
+                                        animate={{ scale: 1 }}
+                                        transition={{ duration: 0.2 }}
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          const lessonKey = `${selectedDay}-${index}-${lesson.subject}`;
+                                          handleAttendanceRemove(lessonKey);
+                                        }}
+                                        className="w-7 h-7 bg-gray-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors"
+                                        title="Qayıbı sil"
+                                      >
+                                        ✕
+                                      </motion.button>
+                                    ) : null;
+                                  })()}
+
                                   <motion.button
                                     initial={{ scale: 1 }}
                                     animate={{ scale: 1 }}
