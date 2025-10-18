@@ -1,8 +1,17 @@
+export interface SubLesson {
+  subject: string;
+  room: string;
+  teacher: string;
+  lessonType: string;
+}
+
 export interface Lesson {
   time?: string;
   subject?: string;
   teacher?: string;
   room?: string;
+  lessonType?: string;
+  subLessons?: SubLesson[];
   lesson?: {
     upper: {
       subject: string;

@@ -113,7 +113,7 @@ export default function PreviousAbsencesAlert({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-6"
+        className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 sm:p-6 pt-16 sm:pt-6"
         onClick={onClose}
       >
         <motion.div
@@ -126,7 +126,7 @@ export default function PreviousAbsencesAlert({
             stiffness: 400,
             mass: 0.8,
           }}
-          className="bg-white rounded-3xl shadow-2xl max-w-lg w-full max-h-[95vh] flex flex-col overflow-hidden"
+          className="bg-white rounded-3xl shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col overflow-hidden mt-4 sm:mt-0"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}

@@ -1,26 +1,20 @@
 import { Group, UserPreferences, DayName, Lesson } from "@/types";
 
-// Load university data
+// Load university data from MongoDB
 export async function loadUniversityData(
   universityId: number
 ): Promise<Group[]> {
   try {
-    // Map university IDs to their data files
-    const universityFiles: Record<number, string> = {
-      11: "sdu", // Sumqayıt Dövlət Universiteti - now using new unified structure
-      // Add more universities as their data becomes available
-    };
-
-    const fileName = universityFiles[universityId];
-    if (!fileName) {
-      throw new Error(`No data available for university ID: ${universityId}`);
+    // Fetch from MongoDB API
+    const response = await fetch(`/api/groups`);
+    if (response.ok) {
+      const result = await response.json();
+      if (result.success && result.data && result.data.length > 0) {
+        return result.data as Group[];
+      }
     }
-
-    // Use dynamic import with proper path
-    const data = await import(`../data/${fileName}.json`);
-    return data.default as Group[];
+    return [];
   } catch (error) {
-    console.error("Error loading university data:", error);
     return [];
   }
 }
@@ -30,7 +24,9 @@ export async function getAvailableGroups(
   universityId: number
 ): Promise<string[]> {
   const groups = await loadUniversityData(universityId);
-  return groups.map((group) => group.group_id || group.group);
+  const groupNames = groups.map((group) => group.group_id || group.group);
+  // Remove duplicates and filter out undefined/null values
+  return [...new Set(groupNames.filter(Boolean))];
 }
 
 // Get group data

@@ -1,0 +1,82 @@
+import mongoose, { Schema, Document } from "mongoose";
+
+export interface IGroup extends Document {
+  group_id: string;
+  faculty: string;
+  academic_load: {
+    subject: string;
+    total_hours: number;
+  }[];
+  week_schedule: {
+    day: string;
+    lessons: {
+      time: string;
+      subject?: string;
+      teacher?: string;
+      room?: string;
+      lesson?: {
+        upper: {
+          subject: string;
+          teacher: string;
+          room: string;
+        };
+        lower: {
+          subject: string;
+          teacher: string;
+          room: string;
+        };
+      };
+    }[];
+  }[];
+}
+
+const GroupSchema = new Schema<IGroup>(
+  {
+    group_id: { type: String, required: true, unique: true },
+    faculty: { type: String, required: true },
+    academic_load: [
+      {
+        subject: { type: String, required: true },
+        total_hours: { type: Number, required: true },
+      },
+    ],
+    week_schedule: [
+      {
+        day: { type: String, required: true },
+        lessons: [
+          {
+            time: { type: String, required: true },
+            subject: { type: String, default: "" },
+            teacher: { type: String, default: "" },
+            room: { type: String, default: "" },
+            lesson: {
+              type: {
+                upper: {
+                  subject: { type: String, default: "" },
+                  teacher: { type: String, default: "" },
+                  room: { type: String, default: "" },
+                },
+                lower: {
+                  subject: { type: String, default: "" },
+                  teacher: { type: String, default: "" },
+                  room: { type: String, default: "" },
+                },
+              },
+              required: false,
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    strict: false, // Allow additional fields
+  }
+);
+
+// Clear any existing model to force schema update
+if (mongoose.models.Group) {
+  delete mongoose.models.Group;
+}
+
+export default mongoose.model<IGroup>("Group", GroupSchema);

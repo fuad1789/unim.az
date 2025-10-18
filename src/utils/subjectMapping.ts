@@ -431,3 +431,5 @@ export function getUniversitySubjectMappings(
   );
   return config ? config.subjectMappings : GLOBAL_SUBJECT_MAPPINGS;
 }
+
+

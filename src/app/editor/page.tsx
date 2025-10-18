@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import data from "@/data/SDU_muhendislik.json";
-import { Day, Group, Lesson } from "@/types";
+import { loadUniversityData } from "@/utils/dataManager";
+import { Day, Group, Lesson, AcademicLoadItem } from "@/types";
 
 type Mutable<T> = { -readonly [K in keyof T]: Mutable<T[K]> };
 
@@ -15,14 +15,27 @@ export default function EditorPage() {
 
   // load once
   useEffect(() => {
-    try {
-      const initial: EditableGroup[] = Array.isArray(data)
-        ? (data as EditableGroup[])
-        : [];
-      setGroups(initial);
-    } catch {
-      setGroups([]);
-    }
+    const loadData = async () => {
+      try {
+        const data = await loadUniversityData(11); // SDU university ID
+        const initial: EditableGroup[] = Array.isArray(data)
+          ? data.map((item: Group) => {
+              return {
+                group: item.group_id || "Unknown",
+                group_id: item.group_id,
+                week_schedule: item.week_schedule || [],
+                academic_load: item.academic_load || [],
+              };
+            })
+          : [];
+        setGroups(initial);
+      } catch (error) {
+        console.error("Error loading data:", error);
+        setGroups([]);
+      }
+    };
+
+    loadData();
   }, []);
 
   const filtered = useMemo(() => {
@@ -223,15 +236,46 @@ export default function EditorPage() {
                                   <td className="px-2 py-1">
                                     <input
                                       value={l.time || ""}
-                                      onChange={(e) =>
+                                      onChange={(e) => {
+                                        let value = e.target.value;
+                                        // If the value is just "0", treat it as empty
+                                        if (value === "0") {
+                                          value = "";
+                                        }
+                                        // If user types a number and current value is "0", replace it
+                                        if (
+                                          l.time === "0" &&
+                                          /^\d/.test(value)
+                                        ) {
+                                          value = value;
+                                        }
                                         updateLessonField(
                                           gi,
                                           di,
                                           li,
                                           "time",
-                                          e.target.value
-                                        )
-                                      }
+                                          value
+                                        );
+                                      }}
+                                      onKeyDown={(e) => {
+                                        // If current value is "0" and user types a number, select all text first
+                                        if (
+                                          l.time === "0" &&
+                                          /^\d/.test(e.key)
+                                        ) {
+                                          e.preventDefault();
+                                          const input =
+                                            e.target as HTMLInputElement;
+                                          input.value = e.key;
+                                          updateLessonField(
+                                            gi,
+                                            di,
+                                            li,
+                                            "time",
+                                            e.key
+                                          );
+                                        }
+                                      }}
                                       className="w-28 px-2 py-1 rounded border border-gray-200"
                                     />
                                   </td>
