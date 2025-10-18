@@ -49,6 +49,7 @@ async function uploadGroupsToMongoDB() {
     const GroupSchema = new mongoose.default.Schema(
       {
         group_id: { type: String, required: true, unique: true },
+        universityId: { type: Number, required: true },
         faculty: { type: String, required: true },
         academic_load: [
           {
@@ -110,8 +111,14 @@ async function uploadGroupsToMongoDB() {
     for (let i = 0; i < jsonData.length; i += batchSize) {
       const batch = jsonData.slice(i, i + batchSize);
 
+      // Add universityId to each group (SDU = 11)
+      const batchWithUniversityId = batch.map((group) => ({
+        ...group,
+        universityId: 11, // Sumqayıt Dövlət Universiteti
+      }));
+
       try {
-        await Group.insertMany(batch, { ordered: false });
+        await Group.insertMany(batchWithUniversityId, { ordered: false });
         uploaded += batch.length;
         console.log(
           `Uploaded batch ${Math.floor(i / batchSize) + 1}: ${

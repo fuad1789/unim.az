@@ -5,8 +5,8 @@ export async function loadUniversityData(
   universityId: number
 ): Promise<Group[]> {
   try {
-    // Fetch from MongoDB API
-    const response = await fetch(`/api/groups`);
+    // Fetch from MongoDB API with university filter
+    const response = await fetch(`/api/groups?universityId=${universityId}`);
     if (response.ok) {
       const result = await response.json();
       if (result.success && result.data && result.data.length > 0) {

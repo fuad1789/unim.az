@@ -7,20 +7,16 @@ export default function MongoDBExample() {
   const [groups, setGroups] = useState<Group[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedFaculty, setSelectedFaculty] = useState<string>("");
-
   useEffect(() => {
     loadGroups();
-  }, [selectedFaculty]);
+  }, []);
 
   const loadGroups = async () => {
     try {
       setLoading(true);
       setError(null);
 
-      const response = await groupService.getAllGroups(
-        selectedFaculty || undefined
-      );
+      const response = await groupService.getAllGroups();
 
       if (response.success && response.data) {
         setGroups(response.data);
@@ -33,10 +29,6 @@ export default function MongoDBExample() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleFacultyChange = (faculty: string) => {
-    setSelectedFaculty(faculty);
   };
 
   if (loading) {
@@ -71,23 +63,6 @@ export default function MongoDBExample() {
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">SDU Groups from MongoDB</h2>
 
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Filter by Faculty:
-        </label>
-        <select
-          value={selectedFaculty}
-          onChange={(e) => handleFacultyChange(e.target.value)}
-          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">All Faculties</option>
-          <option value="Mühəndislik">Mühəndislik</option>
-          <option value="İqtisadiyyat">İqtisadiyyat</option>
-          <option value="Hüquq">Hüquq</option>
-          {/* Add more faculties as needed */}
-        </select>
-      </div>
-
       <div className="grid gap-4">
         {groups.map((group) => (
           <div
@@ -96,7 +71,9 @@ export default function MongoDBExample() {
           >
             <div className="flex justify-between items-start mb-2">
               <h3 className="text-lg font-semibold">Group {group.group_id}</h3>
-              <span className="text-sm text-gray-500">{group.faculty}</span>
+              {group.faculty && (
+                <span className="text-sm text-gray-500">{group.faculty}</span>
+              )}
             </div>
 
             <div className="mb-3">
@@ -129,9 +106,7 @@ export default function MongoDBExample() {
       </div>
 
       {groups.length === 0 && (
-        <div className="text-center py-8 text-gray-500">
-          No groups found{selectedFaculty && ` for ${selectedFaculty}`}
-        </div>
+        <div className="text-center py-8 text-gray-500">No groups found</div>
       )}
     </div>
   );

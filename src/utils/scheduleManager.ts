@@ -43,7 +43,8 @@ export interface Day {
 
 export interface ScheduleData {
   group_id: string;
-  faculty: string;
+  universityId?: number;
+  faculty?: string;
   academic_load: AcademicLoad[];
   week_schedule: Day[];
 }

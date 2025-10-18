@@ -39,6 +39,7 @@ export interface AcademicLoadItem {
 export interface Group {
   group: string;
   group_id?: string;
+  universityId?: number;
   // Prefer week_schedule, but some sources still use week
   week_schedule?: Day[];
   week?: Day[];

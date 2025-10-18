@@ -812,9 +812,6 @@ export default function Home() {
                                     <div className="font-semibold text-gray-900 text-sm sm:text-base">
                                       Qrup {group}
                                     </div>
-                                    <div className="text-xs sm:text-sm text-gray-500">
-                                      Mühəndislik fakültəsi
-                                    </div>
                                   </div>
                                 </div>
                                 <div className="text-blue-600">

@@ -2,7 +2,8 @@ import mongoose, { Schema, Document } from "mongoose";
 
 export interface IGroup extends Document {
   group_id: string;
-  faculty: string;
+  universityId: number;
+  faculty?: string;
   academic_load: {
     subject: string;
     total_hours: number;
@@ -33,7 +34,8 @@ export interface IGroup extends Document {
 const GroupSchema = new Schema<IGroup>(
   {
     group_id: { type: String, required: true, unique: true },
-    faculty: { type: String, required: true },
+    universityId: { type: Number, required: true },
+    faculty: { type: String, required: false },
     academic_load: [
       {
         subject: { type: String, required: true },
@@ -79,4 +81,8 @@ if (mongoose.models.Group) {
   delete mongoose.models.Group;
 }
 
-export default mongoose.model<IGroup>("Group", GroupSchema);
+export default mongoose.model<IGroup>(
+  "Group",
+  GroupSchema,
+  "university_11_groups"
+);

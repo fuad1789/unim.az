@@ -13,6 +13,7 @@ const MONGODB_URI =
 // Group Schema - Simplified without separate models
 const GroupSchema = new mongoose.Schema({
   group_id: { type: String, required: true, unique: true },
+  universityId: { type: Number, required: true },
   faculty: { type: String, required: true },
   academic_load: [
     {
@@ -76,6 +77,7 @@ async function migrateData() {
 
       return {
         ...group,
+        universityId: 11, // Sumqayıt Dövlət Universiteti
         week_schedule: cleanedWeekSchedule,
       };
     });

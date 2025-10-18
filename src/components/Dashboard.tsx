@@ -120,6 +120,17 @@ export default function Dashboard({
   // Force re-render trigger for localStorage updates
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
+  // Debounced refresh to prevent excessive re-renders
+  const debouncedRefresh = useMemo(() => {
+    let timeoutId: NodeJS.Timeout;
+    return () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setRefreshTrigger((prev) => prev + 1);
+      }, 200);
+    };
+  }, []);
+
   // Computed absence limits based on academic load
   const absenceLimits = useMemo(() => {
     if (!group?.academic_load) return {};
@@ -217,6 +228,37 @@ export default function Dashboard({
     return weekTypeText === "ÜST HƏFTƏDİR" ? "ust" : "alt";
   }, [university]);
 
+  // Memoize expensive calculations to prevent unnecessary re-renders
+  const memoizedLessonData = useMemo(() => {
+    if (!group) return [];
+
+    const days = group.week_schedule || group.week || [];
+    const day = days[selectedDay];
+    if (!day) return [];
+
+    return day.lessons
+      .map((lesson, index) => {
+        if (lesson.lesson) {
+          const variant =
+            weekType === "ust" ? lesson.lesson.upper : lesson.lesson.lower;
+          return {
+            ...variant,
+            time: lesson.time,
+            colorClass: SUBJECT_COLORS[index % SUBJECT_COLORS.length],
+          };
+        } else if (lesson.time && lesson.subject) {
+          return {
+            ...lesson,
+            colorClass: SUBJECT_COLORS[index % SUBJECT_COLORS.length],
+          };
+        }
+        return null;
+      })
+      .filter(
+        (lesson): lesson is Lesson & { colorClass: string } => lesson !== null
+      );
+  }, [group, selectedDay, weekType]);
+
   // Whether the currently selected day is today
   const isTodaySelected = useMemo(() => {
     const jsDow = new Date().getDay(); // 0..6, Sun..Sat
@@ -253,35 +295,8 @@ export default function Dashboard({
     return { status: "current", progress, remainingMinutes };
   }
 
-  // Get lessons for selected day
-  const currentDayLessons = useMemo(() => {
-    if (!group) return [];
-    const days = group.week_schedule || group.week || [];
-    const day = days[selectedDay];
-    if (!day) return [];
-
-    return day.lessons
-      .map((lesson, index) => {
-        if (lesson.lesson) {
-          const variant =
-            weekType === "ust" ? lesson.lesson.upper : lesson.lesson.lower;
-          return {
-            ...variant,
-            time: lesson.time,
-            colorClass: SUBJECT_COLORS[index % SUBJECT_COLORS.length],
-          };
-        } else if (lesson.time && lesson.subject) {
-          return {
-            ...lesson,
-            colorClass: SUBJECT_COLORS[index % SUBJECT_COLORS.length],
-          };
-        }
-        return null;
-      })
-      .filter(
-        (lesson): lesson is Lesson & { colorClass: string } => lesson !== null
-      );
-  }, [group, selectedDay, weekType]);
+  // Get lessons for selected day - now using memoized data
+  const currentDayLessons = memoizedLessonData;
 
   const handleDayChange = (direction: "prev" | "next") => {
     if (isTransitioning) return;
@@ -360,8 +375,8 @@ export default function Dashboard({
       setAbsenceCount(weekAwareKey, 2); // 2 absences for this specific lesson this week
     }
 
-    // Force re-render by triggering state update
-    setRefreshTrigger((prev) => prev + 1);
+    // Force re-render by triggering state update (debounced)
+    debouncedRefresh();
 
     setShowAttendanceOptions(null);
   };
@@ -384,8 +399,8 @@ export default function Dashboard({
     // Remove absence count (set to 0)
     setAbsenceCount(weekAwareKey, 0);
 
-    // Force re-render by triggering state update
-    setRefreshTrigger((prev) => prev + 1);
+    // Force re-render by triggering state update (debounced)
+    debouncedRefresh();
 
     setShowAttendanceOptions(null);
   };
@@ -405,8 +420,8 @@ export default function Dashboard({
     });
     setLessonGrade(weekAwareKey, grade);
 
-    // Force re-render by triggering state update
-    setRefreshTrigger((prev) => prev + 1);
+    // Force re-render by triggering state update (debounced)
+    debouncedRefresh();
   };
 
   const handleGradeRatingClose = () => {
@@ -419,8 +434,8 @@ export default function Dashboard({
 
   const handlePreviousAbsencesConfirm = () => {
     setShowPreviousAbsencesAlert(false);
-    // Force re-render to update absence counts
-    setRefreshTrigger((prev) => prev + 1);
+    // Force re-render to update absence counts (debounced)
+    debouncedRefresh();
   };
 
   // Helper function to get absence limit for a lesson
@@ -543,24 +558,22 @@ export default function Dashboard({
       {/* Day Navigation - Enhanced */}
       <div className="bg-white border-b border-gray-200">
         <div className="flex items-center justify-between px-3 sm:px-4 py-3 sm:py-4">
-          <motion.button
+          <button
             onClick={() => handleDayChange("prev")}
             disabled={selectedDay === 0 || isTransitioning}
-            className={`p-2 sm:p-3 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-manipulation ${
+            className={`p-2 sm:p-3 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-manipulation hover:scale-110 active:scale-95 ${
               isTransitioning ? "scale-95" : "scale-100"
             }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
             <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
-          </motion.button>
+          </button>
 
           <motion.div
             className="flex-1 text-center"
             key={selectedDay}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
           >
             <h3 className="font-semibold text-gray-900 text-lg sm:text-xl">
               {DAYS[selectedDay]?.name}
@@ -573,17 +586,15 @@ export default function Dashboard({
             </p>
           </motion.div>
 
-          <motion.button
+          <button
             onClick={() => handleDayChange("next")}
             disabled={selectedDay === DAYS.length - 1 || isTransitioning}
-            className={`p-2 sm:p-3 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-manipulation ${
+            className={`p-2 sm:p-3 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-manipulation hover:scale-110 active:scale-95 ${
               isTransitioning ? "scale-95" : "scale-100"
             }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
             <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
-          </motion.button>
+          </button>
         </div>
 
         {/* Day indicator dots */}
@@ -605,8 +616,7 @@ export default function Dashboard({
           key={selectedDay}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
         >
           {currentDayLessons.length === 0 ? (
             <div className="text-center py-12">
@@ -676,25 +686,26 @@ export default function Dashboard({
                 return (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 16 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.25, delay: index * 0.06 }}
-                    whileHover={{ y: -3, scale: 1.02 }}
-                    className={`relative overflow-hidden rounded-lg border transition-all duration-300 ${
+                    transition={{
+                      duration: 0.5,
+                      delay: index * 0.08,
+                      ease: "easeOut",
+                    }}
+                    className={`relative overflow-hidden rounded-lg border transition-all duration-300 hover:shadow-md ${
                       isCurrent
                         ? "bg-blue-50/80 border-blue-200 shadow-md"
                         : isPast
                         ? "bg-gray-50 border-gray-200 opacity-90"
-                        : "bg-white border-gray-200 hover:shadow-lg"
+                        : "bg-white border-gray-200"
                     }`}
                   >
                     {/* Animated left accent and pulsing indicator for current lesson */}
                     {isCurrent && (
-                      <motion.div
-                        className="absolute left-0 top-0 h-1.5 bg-gradient-to-r from-blue-600 to-blue-400 rounded-tr-full"
-                        initial={{ width: 0 }}
-                        animate={{ width: `${progress}%` }}
-                        transition={{ duration: 0.4 }}
+                      <div
+                        className="absolute left-0 top-0 h-1.5 bg-gradient-to-r from-blue-600 to-blue-400 rounded-tr-full transition-all duration-500"
+                        style={{ width: `${progress}%` }}
                       />
                     )}
 
@@ -803,19 +814,17 @@ export default function Dashboard({
                               {/* Q düyməsi - yalnız seçimlər açıq olmadıqda görünür */}
                               {showAttendanceOptions !==
                                 `${selectedDay}-${index}-${lesson.subject}` && (
-                                <motion.button
-                                  whileHover={{ scale: 1.05 }}
-                                  whileTap={{ scale: 0.95 }}
+                                <button
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     const lessonKey = `${selectedDay}-${index}-${lesson.subject}`;
                                     handleAttendanceClick(lessonKey);
                                   }}
-                                  className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 touch-manipulation ${
+                                  className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 touch-manipulation hover:scale-110 active:scale-95 ${
                                     attendanceStates[
                                       `${selectedDay}-${index}-${lesson.subject}`
                                     ]
-                                      ? "bg-red-500 hover:bg-red-600 shadow-md scale-105"
+                                      ? "bg-red-500 hover:bg-red-600 shadow-md"
                                       : "bg-gray-100 hover:bg-gray-200"
                                   }`}
                                 >
@@ -850,13 +859,22 @@ export default function Dashboard({
                                       </span>
                                     );
                                   })()}
-                                </motion.button>
+                                </button>
                               )}
 
                               {/* Seçim düymələri - Q düyməsi '40-a çevrilir, '80 aşağı düşür */}
                               {showAttendanceOptions ===
                                 `${selectedDay}-${index}-${lesson.subject}` && (
-                                <div className="flex flex-col items-center space-y-2">
+                                <motion.div
+                                  className="flex flex-col items-center space-y-2"
+                                  initial={{ opacity: 0, y: -10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  exit={{ opacity: 0, y: -10 }}
+                                  transition={{
+                                    duration: 0.25,
+                                    ease: "easeInOut",
+                                  }}
+                                >
                                   {/* Remove button - shown when absences exist */}
                                   {(() => {
                                     const key = composeLessonKey({
@@ -869,27 +887,21 @@ export default function Dashboard({
                                       ? getSpecificAbsenceCount(key)
                                       : 0;
                                     return count > 0 ? (
-                                      <motion.button
-                                        initial={{ scale: 1 }}
-                                        animate={{ scale: 1 }}
-                                        transition={{ duration: 0.2 }}
+                                      <button
                                         onClick={(e) => {
                                           e.stopPropagation();
                                           const lessonKey = `${selectedDay}-${index}-${lesson.subject}`;
                                           handleAttendanceRemove(lessonKey);
                                         }}
-                                        className="w-7 h-7 bg-gray-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors"
+                                        className="w-7 h-7 bg-gray-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center hover:bg-gray-600 transition-all duration-200 hover:scale-105"
                                         title="Qayıbı sil"
                                       >
                                         ✕
-                                      </motion.button>
+                                      </button>
                                     ) : null;
                                   })()}
 
-                                  <motion.button
-                                    initial={{ scale: 1 }}
-                                    animate={{ scale: 1 }}
-                                    transition={{ duration: 0.2 }}
+                                  <button
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       const lessonKey = `${selectedDay}-${index}-${lesson.subject}`;
@@ -898,20 +910,12 @@ export default function Dashboard({
                                         "first"
                                       );
                                     }}
-                                    className="w-7 h-7 bg-red-300 text-white text-[11px] font-bold rounded-full flex items-center justify-center hover:bg-red-400 transition-colors"
+                                    className="w-7 h-7 bg-red-300 text-white text-[11px] font-bold rounded-full flex items-center justify-center hover:bg-red-400 transition-all duration-200 hover:scale-105"
                                   >
                                     &apos;40
-                                  </motion.button>
+                                  </button>
 
-                                  <motion.button
-                                    initial={{ y: -20, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{
-                                      delay: 0.1,
-                                      type: "spring",
-                                      stiffness: 600,
-                                      damping: 20,
-                                    }}
+                                  <button
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       const lessonKey = `${selectedDay}-${index}-${lesson.subject}`;
@@ -920,26 +924,24 @@ export default function Dashboard({
                                         "second"
                                       );
                                     }}
-                                    className="w-7 h-7 bg-red-500 text-white text-[11px] font-bold rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
+                                    className="w-7 h-7 bg-red-500 text-white text-[11px] font-bold rounded-full flex items-center justify-center hover:bg-red-600 transition-all duration-200 hover:scale-105"
                                   >
                                     &apos;80
-                                  </motion.button>
-                                </div>
+                                  </button>
+                                </motion.div>
                               )}
                             </div>
 
                             {/* Qiymət düyməsi - qayib seçimləri açıq olduqda gizlənir */}
                             {showAttendanceOptions !==
                               `${selectedDay}-${index}-${lesson.subject}` && (
-                              <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                              <button
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   const lessonKey = `${selectedDay}-${index}-${lesson.subject}`;
                                   handleGradeClick(lessonKey);
                                 }}
-                                className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 touch-manipulation ${
+                                className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 touch-manipulation hover:scale-110 active:scale-95 ${
                                   (() => {
                                     if (!lesson.subject) return false;
                                     const key = composeLessonKey({
@@ -950,7 +952,7 @@ export default function Dashboard({
                                     });
                                     return getLessonGrade(key) !== null;
                                   })()
-                                    ? "bg-green-500 hover:bg-green-600 shadow-md scale-105"
+                                    ? "bg-green-500 hover:bg-green-600 shadow-md"
                                     : "bg-green-100 hover:bg-green-200"
                                 }`}
                               >
@@ -983,7 +985,7 @@ export default function Dashboard({
                                 ) : (
                                   <Award className="w-4.5 h-4.5 text-green-600" />
                                 )}
-                              </motion.button>
+                              </button>
                             )}
                           </div>
                         </div>

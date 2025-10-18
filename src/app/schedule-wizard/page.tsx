@@ -15,6 +15,7 @@ import {
   type Lesson,
   type SubLesson,
 } from "@/utils/scheduleManager";
+import { saveUserPreferences } from "@/utils/dataManager";
 
 const DAYS = ["B.e.", "Ç.a.", "Çər.", "C.a.", "Cümə"];
 const DAY_NAMES = {
@@ -77,7 +78,7 @@ function ScheduleWizardContent() {
   const [showCustomTimeInput, setShowCustomTimeInput] = useState(false);
   const [scheduleData, setScheduleData] = useState<ScheduleData>({
     group_id: groupName,
-    faculty: "Mühəndislik",
+    universityId: 11, // Default to SDU, will be updated from localStorage
     academic_load: [],
     week_schedule: DAYS.map((day, index) => ({
       day: ["I", "II", "III", "IV", "V"][index] || day,
@@ -85,12 +86,30 @@ function ScheduleWizardContent() {
     })),
   });
 
+  // Load university ID from localStorage on mount
+  useEffect(() => {
+    const universityId = localStorage.getItem("universityId");
+    if (universityId) {
+      setScheduleData((prev) => ({
+        ...prev,
+        universityId: parseInt(universityId),
+      }));
+    }
+  }, []);
+
   // Load saved data from localStorage on mount
   useEffect(() => {
     if (groupName) {
       const saved = loadWizardData();
       if (saved) {
-        setScheduleData(saved);
+        // Preserve universityId when loading saved data
+        const universityId = localStorage.getItem("universityId");
+        setScheduleData({
+          ...saved,
+          universityId: universityId
+            ? parseInt(universityId)
+            : saved.universityId || 11,
+        });
       }
     }
   }, [groupName]);
@@ -425,7 +444,14 @@ function ScheduleWizardContent() {
       // Clear wizard data
       clearWizardData();
 
-      // Redirect back to home page
+      // Set user preferences to automatically show the newly created group's schedule
+      const userPreferences = {
+        universityId: scheduleData.universityId || 11, // Default to SDU if undefined
+        groupName: groupName,
+      };
+      saveUserPreferences(userPreferences);
+
+      // Redirect back to home page - the Dashboard will automatically show the new group's schedule
       router.push("/");
     } catch (error) {
       setSaveError(
@@ -1546,7 +1572,7 @@ function ScheduleWizardContent() {
 
     return {
       group_id: data.group_id,
-      faculty: data.faculty,
+      universityId: data.universityId,
       academic_load: data.academic_load,
       week_schedule: convertedSchedule,
     };
@@ -1569,8 +1595,7 @@ function ScheduleWizardContent() {
             Qrup Məlumatları
           </h4>
           <p className="text-xs sm:text-sm text-gray-600">
-            <strong>Qrup:</strong> {scheduleData.group_id} |{" "}
-            <strong>Fakultə:</strong> {scheduleData.faculty}
+            <strong>Qrup:</strong> {scheduleData.group_id}
           </p>
         </div>
 

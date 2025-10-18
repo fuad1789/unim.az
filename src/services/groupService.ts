@@ -1,7 +1,8 @@
 export interface Group {
   _id?: string;
   group_id: string;
-  faculty: string;
+  universityId: number;
+  faculty?: string;
   academic_load: {
     subject: string;
     total_hours: number;
@@ -113,7 +114,11 @@ class GroupService {
       const response = await this.getAllGroups();
       if (response.success && response.data) {
         const faculties = [
-          ...new Set(response.data.map((group) => group.faculty)),
+          ...new Set(
+            response.data
+              .map((group) => group.faculty)
+              .filter((faculty): faculty is string => Boolean(faculty))
+          ),
         ];
         return { success: true, data: faculties };
       }
