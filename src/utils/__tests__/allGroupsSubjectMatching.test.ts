@@ -10,7 +10,7 @@ import {
 } from "../localStorage";
 
 // Sample data from different groups to test
-const testGroups = [
+const _testGroups = [
   {
     groupId: "681",
     subjects: [
@@ -233,5 +233,3 @@ describe("All Groups Subject Matching", () => {
     });
   });
 });
-
-

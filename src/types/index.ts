@@ -55,6 +55,26 @@ export interface University {
   img?: string;
 }
 
+export interface UniversityRules {
+  id: number;
+  name: string;
+  shortName: string;
+  lessonTimes: string[];
+  rules: {
+    lessonDuration: number; // dəqiqə
+    breakDuration: number; // dəqiqə
+    lunchBreak?: {
+      start: string;
+      end: string;
+      duration: number;
+    };
+    maxLessonsPerDay: number;
+    specialRules?: {
+      [key: string]: unknown;
+    };
+  };
+}
+
 export interface UserPreferences {
   universityId: number;
   groupName: string;

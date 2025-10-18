@@ -1,0 +1,29 @@
+{
+  "5": {
+    "id": 5,
+    "name": "Azərbaycan Dövlət Pedaqoji Universiteti",
+    "shortName": "ADPU",
+    "lessonTimes": [
+      "08:30-09:50",
+      "10:00-11:20",
+      "11:30-12:20",
+      "13:00-14:20",
+      "14:30-15:50",
+      "16:00-17:20"
+    ],
+    "rules": {
+      "lessonDuration": 80,
+      "breakDuration": 10,
+      "lunchBreak": {
+        "start": "12:20",
+        "end": "13:00",
+        "duration": 40
+      },
+      "maxLessonsPerDay": 6,
+      "specialRules": {
+        "thirdLessonDuration": 50,
+        "thirdLessonBreak": 10
+      }
+    }
+  }
+}

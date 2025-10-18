@@ -58,7 +58,7 @@ const SCHEDULES_STORAGE_KEY = "created-schedules";
 export function saveWizardData(data: ScheduleData): void {
   try {
     localStorage.setItem(WIZARD_STORAGE_KEY, JSON.stringify(data));
-  } catch (error) {
+  } catch (_error) {
     // Silent error handling
   }
 }
@@ -71,7 +71,7 @@ export function loadWizardData(): ScheduleData | null {
     const stored = localStorage.getItem(WIZARD_STORAGE_KEY);
     if (!stored) return null;
     return JSON.parse(stored);
-  } catch (error) {
+  } catch (_error) {
     return null;
   }
 }
@@ -82,7 +82,7 @@ export function loadWizardData(): ScheduleData | null {
 export function clearWizardData(): void {
   try {
     localStorage.removeItem(WIZARD_STORAGE_KEY);
-  } catch (error) {
+  } catch (_error) {
     // Silent error handling
   }
 }
@@ -110,7 +110,7 @@ export function saveSchedule(
       SCHEDULES_STORAGE_KEY,
       JSON.stringify(existingSchedules)
     );
-  } catch (error) {
+  } catch (_error) {
     // Silent error handling
   }
 }
@@ -155,7 +155,7 @@ export function loadSchedule(groupName: string): ScheduleData | null {
   try {
     const schedules = loadAllSchedules();
     return schedules[groupName] || null;
-  } catch (error) {
+  } catch (_error) {
     return null;
   }
 }
@@ -171,7 +171,7 @@ export function loadAllSchedules(): Record<
     const stored = localStorage.getItem(SCHEDULES_STORAGE_KEY);
     if (!stored) return {};
     return JSON.parse(stored);
-  } catch (error) {
+  } catch (_error) {
     return {};
   }
 }
@@ -184,7 +184,7 @@ export function deleteSchedule(groupName: string): void {
     const schedules = loadAllSchedules();
     delete schedules[groupName];
     localStorage.setItem(SCHEDULES_STORAGE_KEY, JSON.stringify(schedules));
-  } catch (error) {
+  } catch (_error) {
     // Silent error handling
   }
 }
@@ -221,7 +221,7 @@ export function importSchedules(jsonData: string): boolean {
     const schedules = JSON.parse(jsonData);
     localStorage.setItem(SCHEDULES_STORAGE_KEY, JSON.stringify(schedules));
     return true;
-  } catch (error) {
+  } catch (_error) {
     return false;
   }
 }
@@ -232,7 +232,7 @@ export function importSchedules(jsonData: string): boolean {
 export function clearAllSchedules(): void {
   try {
     localStorage.removeItem(SCHEDULES_STORAGE_KEY);
-  } catch (error) {
+  } catch (_error) {
     // Silent error handling
   }
 }

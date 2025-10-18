@@ -6,7 +6,6 @@
 
 import {
   findCanonicalSubjectName,
-  areSubjectsEquivalent,
   normalizeSubjectName as globalNormalizeSubjectName,
 } from "./subjectMapping";
 
@@ -139,7 +138,7 @@ function findBestMatchingSubject(
   let bestScore = 0;
 
   // First try exact match with normalized names
-  for (const [storedSubject, count] of Object.entries(aggregatedAbsences)) {
+  for (const [storedSubject, _count] of Object.entries(aggregatedAbsences)) {
     const normalizedStored = normalizeSubjectName(storedSubject);
     if (normalizedAcademicLoad === normalizedStored) {
       return storedSubject; // Perfect match, return immediately
@@ -147,7 +146,7 @@ function findBestMatchingSubject(
   }
 
   // If no exact match, try fuzzy matching
-  for (const [storedSubject, count] of Object.entries(aggregatedAbsences)) {
+  for (const [storedSubject, _count] of Object.entries(aggregatedAbsences)) {
     const normalizedStored = normalizeSubjectName(storedSubject);
 
     // Check if one contains the other (for cases where one is abbreviated)

@@ -29,6 +29,20 @@ export interface IGroup extends Document {
       };
     }[];
   }[];
+  universityRules?: {
+    lessonTimes: string[];
+    maxLessonsPerDay: number;
+    lessonDuration: number;
+    breakDuration: number;
+    lunchBreak?: {
+      start: string;
+      end: string;
+      duration: number;
+    };
+    specialRules?: {
+      [key: string]: unknown;
+    };
+  };
 }
 
 const GroupSchema = new Schema<IGroup>(
@@ -70,6 +84,18 @@ const GroupSchema = new Schema<IGroup>(
         ],
       },
     ],
+    universityRules: {
+      lessonTimes: [{ type: String }],
+      maxLessonsPerDay: { type: Number, default: 6 },
+      lessonDuration: { type: Number, default: 80 },
+      breakDuration: { type: Number, default: 10 },
+      lunchBreak: {
+        start: { type: String },
+        end: { type: String },
+        duration: { type: Number },
+      },
+      specialRules: { type: Schema.Types.Mixed },
+    },
   },
   {
     strict: false, // Allow additional fields

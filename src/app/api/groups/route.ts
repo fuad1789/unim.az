@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import mongoose from "mongoose";
+import { getUniversityRules } from "@/utils/universityRules";
 
 // Dynamic Group model creation
 function getGroupModel(universityId: number) {
@@ -50,6 +51,18 @@ function getGroupModel(universityId: number) {
           ],
         },
       ],
+      universityRules: {
+        lessonTimes: [{ type: String }],
+        maxLessonsPerDay: { type: Number, default: 6 },
+        lessonDuration: { type: Number, default: 80 },
+        breakDuration: { type: Number, default: 10 },
+        lunchBreak: {
+          start: { type: String },
+          end: { type: String },
+          duration: { type: Number },
+        },
+        specialRules: { type: mongoose.Schema.Types.Mixed },
+      },
     },
     {
       strict: false,
@@ -126,6 +139,24 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Get university-specific rules
+    const universityRules = getUniversityRules(body.universityId);
+
+    // Add university rules to the group data
+    const groupData = {
+      ...body,
+      universityRules: universityRules
+        ? {
+            lessonTimes: universityRules.lessonTimes,
+            maxLessonsPerDay: universityRules.rules.maxLessonsPerDay,
+            lessonDuration: universityRules.rules.lessonDuration,
+            breakDuration: universityRules.rules.breakDuration,
+            lunchBreak: universityRules.rules.lunchBreak,
+            specialRules: universityRules.rules.specialRules,
+          }
+        : undefined,
+    };
+
     // Get the correct model for this university
     const Group = getGroupModel(body.universityId);
 
@@ -138,7 +169,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const group = new Group(body);
+    const group = new Group(groupData);
     const savedGroup = await group.save();
 
     return NextResponse.json(

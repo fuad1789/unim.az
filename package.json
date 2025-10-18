@@ -11,6 +11,7 @@
     "migrate-all": "node scripts/migrate-all-groups.mjs"
   },
   "dependencies": {
+    "@playwright/test": "^1.56.1",
     "@types/uuid": "^10.0.0",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.23.14",

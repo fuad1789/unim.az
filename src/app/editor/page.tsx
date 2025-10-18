@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { loadUniversityData } from "@/utils/dataManager";
-import { Day, Group, Lesson, AcademicLoadItem } from "@/types";
+import { Day, Group, Lesson } from "@/types";
 
 type Mutable<T> = { -readonly [K in keyof T]: Mutable<T[K]> };
 

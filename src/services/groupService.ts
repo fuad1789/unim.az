@@ -26,6 +26,20 @@ export interface Group {
       };
     }[];
   }[];
+  universityRules?: {
+    lessonTimes: string[];
+    maxLessonsPerDay: number;
+    lessonDuration: number;
+    breakDuration: number;
+    lunchBreak?: {
+      start: string;
+      end: string;
+      duration: number;
+    };
+    specialRules?: {
+      [key: string]: unknown;
+    };
+  };
 }
 
 export interface ApiResponse<T> {

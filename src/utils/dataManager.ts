@@ -14,7 +14,7 @@ export async function loadUniversityData(
       }
     }
     return [];
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }

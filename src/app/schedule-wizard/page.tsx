@@ -16,6 +16,10 @@ import {
   type SubLesson,
 } from "@/utils/scheduleManager";
 import { saveUserPreferences } from "@/utils/dataManager";
+import {
+  getUniversityLessonTimes,
+  getMaxLessonsPerDay,
+} from "@/utils/universityRules";
 
 const DAYS = ["B.e.", "Ç.a.", "Çər.", "C.a.", "Cümə"];
 const DAY_NAMES = {
@@ -25,7 +29,8 @@ const DAY_NAMES = {
   "C.a.": "Cümə axşamı",
   Cümə: "Cümə",
 };
-const TIME_SLOTS = [
+// Default time slots (will be overridden by university-specific rules)
+const DEFAULT_TIME_SLOTS = [
   "08:30-09:50",
   "10:05-11:25",
   "11:40-13:00",
@@ -69,10 +74,10 @@ function ScheduleWizardContent() {
     number | null
   >(null);
   const [typeDropdownOpen, setTypeDropdownOpen] = useState<number | null>(null);
-  const [focusedSubjectIndex, setFocusedSubjectIndex] = useState<number | null>(
-    null
-  );
-  const [focusedAcademicSubjectIndex, setFocusedAcademicSubjectIndex] =
+  const [_focusedSubjectIndex, _setFocusedSubjectIndex] = useState<
+    number | null
+  >(null);
+  const [_focusedAcademicSubjectIndex, _setFocusedAcademicSubjectIndex] =
     useState<number | null>(null);
   const [customTimeInput, setCustomTimeInput] = useState("");
   const [showCustomTimeInput, setShowCustomTimeInput] = useState(false);
@@ -86,14 +91,28 @@ function ScheduleWizardContent() {
     })),
   });
 
+  // Get university-specific time slots
+  const [timeSlots, setTimeSlots] = useState<string[]>(DEFAULT_TIME_SLOTS);
+  const [maxLessonsPerDay, setMaxLessonsPerDay] = useState<number>(6);
+
   // Load university ID from localStorage on mount
   useEffect(() => {
     const universityId = localStorage.getItem("universityId");
     if (universityId) {
+      const id = parseInt(universityId);
       setScheduleData((prev) => ({
         ...prev,
-        universityId: parseInt(universityId),
+        universityId: id,
       }));
+
+      // Update time slots and max lessons based on university
+      const universityTimeSlots = getUniversityLessonTimes(id);
+      const universityMaxLessons = getMaxLessonsPerDay(id);
+
+      if (universityTimeSlots.length > 0) {
+        setTimeSlots(universityTimeSlots);
+      }
+      setMaxLessonsPerDay(universityMaxLessons);
     }
   }, []);
 
@@ -169,6 +188,14 @@ function ScheduleWizardContent() {
     const currentDay = scheduleData.week_schedule[dayIndex];
     const existingLessons = currentDay.lessons;
 
+    // Check if already at maximum lessons per day
+    if (existingLessons.length >= maxLessonsPerDay) {
+      alert(
+        `Bu gün üçün maksimum ${maxLessonsPerDay} dərs əlavə edə bilərsiniz.`
+      );
+      return;
+    }
+
     // Find the next available time slot
     let nextTimeSlot = "";
 
@@ -176,38 +203,38 @@ function ScheduleWizardContent() {
       // Get all used time slots
       const usedTimeSlots = existingLessons
         .map((lesson) => lesson.time)
-        .filter((time) => time && TIME_SLOTS.includes(time))
-        .sort((a, b) => TIME_SLOTS.indexOf(a) - TIME_SLOTS.indexOf(b));
+        .filter((time) => time && timeSlots.includes(time))
+        .sort((a, b) => timeSlots.indexOf(a) - timeSlots.indexOf(b));
 
       if (usedTimeSlots.length > 0) {
         // Find the last used time slot
         const lastUsedTime = usedTimeSlots[usedTimeSlots.length - 1];
-        const lastUsedIndex = TIME_SLOTS.indexOf(lastUsedTime);
+        const lastUsedIndex = timeSlots.indexOf(lastUsedTime);
 
         // Find the next available slot
-        for (let i = lastUsedIndex + 1; i < TIME_SLOTS.length; i++) {
-          if (!usedTimeSlots.includes(TIME_SLOTS[i])) {
-            nextTimeSlot = TIME_SLOTS[i];
+        for (let i = lastUsedIndex + 1; i < timeSlots.length; i++) {
+          if (!usedTimeSlots.includes(timeSlots[i])) {
+            nextTimeSlot = timeSlots[i];
             break;
           }
         }
 
         // If no slot found after the last one, try to find any available slot
         if (!nextTimeSlot) {
-          for (let i = 0; i < TIME_SLOTS.length; i++) {
-            if (!usedTimeSlots.includes(TIME_SLOTS[i])) {
-              nextTimeSlot = TIME_SLOTS[i];
+          for (let i = 0; i < timeSlots.length; i++) {
+            if (!usedTimeSlots.includes(timeSlots[i])) {
+              nextTimeSlot = timeSlots[i];
               break;
             }
           }
         }
       } else {
         // If no lessons have time set, use the first time slot
-        nextTimeSlot = TIME_SLOTS[0];
+        nextTimeSlot = timeSlots[0];
       }
     } else {
       // If no lessons exist, use the first time slot
-      nextTimeSlot = TIME_SLOTS[0];
+      nextTimeSlot = timeSlots[0];
     }
 
     setScheduleData((prev) => ({
@@ -388,7 +415,7 @@ function ScheduleWizardContent() {
   };
 
   // Check if any subject is empty (for step 2 validation)
-  const hasEmptySubjects = () => {
+  const _hasEmptySubjects = () => {
     return scheduleData.academic_load.some(
       (subject) => subject.subject.trim() === ""
     );
@@ -651,20 +678,20 @@ function ScheduleWizardContent() {
     closeTypeDropdown();
   };
 
-  const handleSubjectFocus = (lessonIndex: number) => {
-    setFocusedSubjectIndex(lessonIndex);
+  const _handleSubjectFocus = (lessonIndex: number) => {
+    _setFocusedSubjectIndex(lessonIndex);
   };
 
-  const handleSubjectBlur = () => {
-    setFocusedSubjectIndex(null);
+  const _handleSubjectBlur = () => {
+    _setFocusedSubjectIndex(null);
   };
 
   const handleAcademicSubjectFocus = (index: number) => {
-    setFocusedAcademicSubjectIndex(index);
+    _setFocusedAcademicSubjectIndex(index);
   };
 
   const handleAcademicSubjectBlur = () => {
-    setFocusedAcademicSubjectIndex(null);
+    _setFocusedAcademicSubjectIndex(null);
   };
 
   const renderStep1 = () => (
@@ -962,7 +989,7 @@ function ScheduleWizardContent() {
 
   const renderStep2 = () => {
     const currentDay = scheduleData.week_schedule[currentDayIndex];
-    const hasLessons = currentDay.lessons.length > 0;
+    const _hasLessons = currentDay.lessons.length > 0;
 
     return (
       <div className="space-y-6">
@@ -1472,29 +1499,41 @@ function ScheduleWizardContent() {
             ))}
 
             {/* Add Lesson Button - Enhanced */}
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.99 }}
-              onClick={() => addLesson(currentDayIndex)}
-              className="w-full py-3 sm:py-4 px-4 sm:px-6 border-2 border-dashed border-gray-300 rounded-xl text-sm sm:text-base font-semibold transition-all duration-200 text-gray-600 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50/30 hover:shadow-md overflow-hidden"
-            >
-              <div className="flex items-center justify-center gap-2">
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                  />
-                </svg>
-                Dərs əlavə et
+            {scheduleData.week_schedule[currentDayIndex].lessons.length <
+              maxLessonsPerDay && (
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.99 }}
+                onClick={() => addLesson(currentDayIndex)}
+                className="w-full py-3 sm:py-4 px-4 sm:px-6 border-2 border-dashed border-gray-300 rounded-xl text-sm sm:text-base font-semibold transition-all duration-200 text-gray-600 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50/30 hover:shadow-md overflow-hidden"
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                    />
+                  </svg>
+                  Dərs əlavə et
+                </div>
+              </motion.button>
+            )}
+
+            {/* Max lessons reached message */}
+            {scheduleData.week_schedule[currentDayIndex].lessons.length >=
+              maxLessonsPerDay && (
+              <div className="w-full py-3 px-4 bg-yellow-50 border border-yellow-200 rounded-xl text-sm text-yellow-700 text-center">
+                Bu gün üçün maksimum {maxLessonsPerDay} dərs əlavə edə
+                bilərsiniz.
               </div>
-            </motion.button>
+            )}
           </div>
         )}
 
@@ -1856,7 +1895,7 @@ function ScheduleWizardContent() {
             </div>
 
             <div className="grid grid-cols-1 gap-2 max-h-60 overflow-y-auto">
-              {TIME_SLOTS.map((time) => (
+              {timeSlots.map((time) => (
                 <button
                   key={time}
                   onClick={() => selectTime(time)}
