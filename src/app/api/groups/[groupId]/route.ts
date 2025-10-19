@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
-import Group from "@/models/Group";
+import { getGroupModel } from "@/models/groupFactory";
+import { z } from "zod";
+
+const ParamsSchema = z.object({ groupId: z.string().min(1) });
+const QuerySchema = z.object({ universityId: z.coerce.number().optional() });
 
 export async function GET(
   request: NextRequest,
@@ -9,7 +13,13 @@ export async function GET(
   try {
     await connectDB();
 
-    const { groupId } = await params;
+    const { groupId } = ParamsSchema.parse(await params);
+    const { searchParams } = new URL(request.url);
+    const { universityId } = QuerySchema.parse({
+      universityId: searchParams.get("universityId") ?? undefined,
+    });
+    const uniId = universityId ?? 11; // default SDU as current behavior
+    const Group = getGroupModel(uniId);
     const group = await Group.findOne({ group_id: groupId });
 
     if (!group) {
@@ -36,7 +46,13 @@ export async function PUT(
   try {
     await connectDB();
 
-    const { groupId } = await params;
+    const { groupId } = ParamsSchema.parse(await params);
+    const { searchParams } = new URL(request.url);
+    const { universityId } = QuerySchema.parse({
+      universityId: searchParams.get("universityId") ?? undefined,
+    });
+    const uniId = universityId ?? 11;
+    const Group = getGroupModel(uniId);
     const body = await request.json();
     const group = await Group.findOneAndUpdate({ group_id: groupId }, body, {
       new: true,
@@ -67,7 +83,13 @@ export async function DELETE(
   try {
     await connectDB();
 
-    const { groupId } = await params;
+    const { groupId } = ParamsSchema.parse(await params);
+    const { searchParams } = new URL(request.url);
+    const { universityId } = QuerySchema.parse({
+      universityId: searchParams.get("universityId") ?? undefined,
+    });
+    const uniId = universityId ?? 11;
+    const Group = getGroupModel(uniId);
     const group = await Group.findOneAndDelete({ group_id: groupId });
 
     if (!group) {

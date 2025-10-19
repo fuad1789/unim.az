@@ -640,7 +640,26 @@ export default function Home() {
               >
                 <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
                   {/* Header */}
-                  <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-4 sm:px-6 py-3 sm:py-4 flex-shrink-0">
+                  <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-4 sm:px-6 py-3 sm:py-4 flex-shrink-0 relative">
+                    <button
+                      onClick={() => setIsGroupSelectorOpen(false)}
+                      className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors duration-200 touch-manipulation"
+                      aria-label="Bağla"
+                    >
+                      <svg
+                        className="w-4 h-4 sm:w-5 sm:h-5 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
                     <h2 className="text-lg sm:text-xl font-bold text-white text-center">
                       Qrup Seçimi
                     </h2>

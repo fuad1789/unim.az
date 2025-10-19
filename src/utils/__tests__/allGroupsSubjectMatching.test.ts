@@ -9,8 +9,9 @@ import {
   clearAllUserData,
 } from "../localStorage";
 
-// Sample data from different groups to test
-const _testGroups = [
+// Sample data from different groups to test - removed unused variable
+/*
+const testGroups = [
   {
     groupId: "681",
     subjects: [
@@ -52,6 +53,7 @@ const _testGroups = [
     ],
   },
 ];
+*/
 
 describe("All Groups Subject Matching", () => {
   beforeEach(() => {

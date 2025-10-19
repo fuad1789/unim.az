@@ -74,11 +74,7 @@ function ScheduleWizardContent() {
     number | null
   >(null);
   const [typeDropdownOpen, setTypeDropdownOpen] = useState<number | null>(null);
-  const [_focusedSubjectIndex, _setFocusedSubjectIndex] = useState<
-    number | null
-  >(null);
-  const [_focusedAcademicSubjectIndex, _setFocusedAcademicSubjectIndex] =
-    useState<number | null>(null);
+  // Removed unused focused subject state variables
   const [customTimeInput, setCustomTimeInput] = useState("");
   const [showCustomTimeInput, setShowCustomTimeInput] = useState(false);
   const [scheduleData, setScheduleData] = useState<ScheduleData>({
@@ -414,12 +410,7 @@ function ScheduleWizardContent() {
     );
   };
 
-  // Check if any subject is empty (for step 2 validation)
-  const _hasEmptySubjects = () => {
-    return scheduleData.academic_load.some(
-      (subject) => subject.subject.trim() === ""
-    );
-  };
+  // Check if any subject is empty (for step 2 validation) - removed unused function
 
   // Validation for step 2 - check if current day is completed
   const isStep2Valid = () => {
@@ -678,21 +669,9 @@ function ScheduleWizardContent() {
     closeTypeDropdown();
   };
 
-  const _handleSubjectFocus = (lessonIndex: number) => {
-    _setFocusedSubjectIndex(lessonIndex);
-  };
+  // Removed unused subject focus handlers
 
-  const _handleSubjectBlur = () => {
-    _setFocusedSubjectIndex(null);
-  };
-
-  const handleAcademicSubjectFocus = (index: number) => {
-    _setFocusedAcademicSubjectIndex(index);
-  };
-
-  const handleAcademicSubjectBlur = () => {
-    _setFocusedAcademicSubjectIndex(null);
-  };
+  // Removed unused academic subject focus handlers
 
   const renderStep1 = () => (
     <div className="space-y-6">
@@ -839,8 +818,7 @@ function ScheduleWizardContent() {
                           onChange={(e) =>
                             updateSubject(index, "subject", e.target.value)
                           }
-                          onFocus={() => handleAcademicSubjectFocus(index)}
-                          onBlur={handleAcademicSubjectBlur}
+                          // Removed unused focus handlers
                           placeholder="Məsələn: Proqramlaşdırmanın əsasları"
                           className="w-full pl-10 pr-4 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white"
                           list={`subjects-${index}`}
@@ -989,7 +967,6 @@ function ScheduleWizardContent() {
 
   const renderStep2 = () => {
     const currentDay = scheduleData.week_schedule[currentDayIndex];
-    const _hasLessons = currentDay.lessons.length > 0;
 
     return (
       <div className="space-y-6">
@@ -1886,7 +1863,7 @@ function ScheduleWizardContent() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="bg-white rounded-xl p-4 sm:p-6 w-80 max-w-[90vw] shadow-xl"
+            className="bg-white rounded-xl p-4 sm:p-6 w-96 max-w-[90vw] shadow-xl"
           >
             <div className="text-center mb-4">
               <h3 className="text-base sm:text-lg font-semibold text-gray-800">
@@ -1922,7 +1899,7 @@ function ScheduleWizardContent() {
                 <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                   Vaxt daxil edin (məs: 08:30-09:50)
                 </label>
-                <div className="flex gap-2">
+                <div className="space-y-2">
                   <input
                     type="text"
                     value={customTimeInput}
@@ -1945,25 +1922,27 @@ function ScheduleWizardContent() {
                       }
                     }}
                     placeholder="08:30-09:50"
-                    className="flex-1 px-3 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 text-xs sm:text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                     autoFocus
                   />
-                  <button
-                    onClick={handleCustomTimeSubmit}
-                    disabled={!customTimeInput.trim()}
-                    className="px-3 py-2 text-xs sm:text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
-                  >
-                    Təsdiq
-                  </button>
-                  <button
-                    onClick={() => {
-                      setShowCustomTimeInput(false);
-                      setCustomTimeInput("");
-                    }}
-                    className="px-3 py-2 text-xs sm:text-sm bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors"
-                  >
-                    Ləğv
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={handleCustomTimeSubmit}
+                      disabled={!customTimeInput.trim()}
+                      className="flex-1 px-3 py-2 text-xs sm:text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                    >
+                      Təsdiq
+                    </button>
+                    <button
+                      onClick={() => {
+                        setShowCustomTimeInput(false);
+                        setCustomTimeInput("");
+                      }}
+                      className="flex-1 px-3 py-2 text-xs sm:text-sm bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors"
+                    >
+                      Ləğv
+                    </button>
+                  </div>
                 </div>
               </div>
             )}

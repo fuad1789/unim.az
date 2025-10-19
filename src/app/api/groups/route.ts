@@ -1,76 +1,46 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
-import mongoose from "mongoose";
+import { z } from "zod";
 import { getUniversityRules } from "@/utils/universityRules";
+import { getGroupModel } from "@/models/groupFactory";
 
-// Dynamic Group model creation
-function getGroupModel(universityId: number) {
-  const collectionName = `university_${universityId}_groups`;
-
-  // Clear existing model to avoid conflicts
-  if (mongoose.models[`Group_${universityId}`]) {
-    delete mongoose.models[`Group_${universityId}`];
-  }
-
-  const GroupSchema = new mongoose.Schema(
-    {
-      group_id: { type: String, required: true, unique: true },
-      universityId: { type: Number, required: true },
-      faculty: { type: String, required: false },
-      academic_load: [
-        {
-          subject: { type: String, required: true },
-          total_hours: { type: Number, required: true },
-        },
-      ],
-      week_schedule: [
-        {
-          day: { type: String, required: true },
-          lessons: [
-            {
-              time: { type: String, required: true },
-              subject: { type: String, default: "" },
-              teacher: { type: String, default: "" },
-              room: { type: String, default: "" },
-              lesson: {
-                type: {
-                  upper: {
-                    subject: { type: String, default: "" },
-                    teacher: { type: String, default: "" },
-                    room: { type: String, default: "" },
-                  },
-                  lower: {
-                    subject: { type: String, default: "" },
-                    teacher: { type: String, default: "" },
-                    room: { type: String, default: "" },
-                  },
-                },
-                required: false,
-              },
-            },
-          ],
-        },
-      ],
-      universityRules: {
-        lessonTimes: [{ type: String }],
-        maxLessonsPerDay: { type: Number, default: 6 },
-        lessonDuration: { type: Number, default: 80 },
-        breakDuration: { type: Number, default: 10 },
-        lunchBreak: {
-          start: { type: String },
-          end: { type: String },
-          duration: { type: Number },
-        },
-        specialRules: { type: mongoose.Schema.Types.Mixed },
-      },
-    },
-    {
-      strict: false,
-    }
-  );
-
-  return mongoose.model(`Group_${universityId}`, GroupSchema, collectionName);
-}
+const PostBodySchema = z.object({
+  group_id: z.string().min(1),
+  universityId: z.number(),
+  faculty: z.string().optional(),
+  academic_load: z
+    .array(z.object({ subject: z.string(), total_hours: z.number() }))
+    .optional(),
+  week_schedule: z
+    .array(
+      z.object({
+        day: z.string(),
+        lessons: z.array(
+          z.object({
+            time: z.string(),
+            subject: z.string().optional(),
+            teacher: z.string().optional(),
+            room: z.string().optional(),
+            lesson: z
+              .object({
+                upper: z.object({
+                  subject: z.string(),
+                  teacher: z.string(),
+                  room: z.string(),
+                }),
+                lower: z.object({
+                  subject: z.string(),
+                  teacher: z.string(),
+                  room: z.string(),
+                }),
+              })
+              .optional(),
+          })
+        ),
+      })
+    )
+    .optional(),
+});
 
 export async function GET(request: NextRequest) {
   try {
@@ -80,7 +50,7 @@ export async function GET(request: NextRequest) {
     const groupId = searchParams.get("groupId");
     const universityId = searchParams.get("universityId");
 
-    let query = {};
+    let query = {} as Record<string, unknown>;
     let Group;
 
     if (groupId) {
@@ -105,7 +75,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ success: true, data: groups });
     } else {
       // Return all groups from all universities
-      const allGroups = [];
+      const allGroups: unknown[] = [];
 
       // Get SDU groups
       const sduGroup = getGroupModel(11);
@@ -129,7 +99,19 @@ export async function POST(request: NextRequest) {
   try {
     await connectDB();
 
-    const body = await request.json();
+    const json = await request.json();
+    const parseResult = PostBodySchema.safeParse(json);
+    if (!parseResult.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Invalid request body",
+          details: parseResult.error.flatten(),
+        },
+        { status: 400 }
+      );
+    }
+    const body = parseResult.data;
 
     // Ensure universityId is present
     if (!body.universityId) {

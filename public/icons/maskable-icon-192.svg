@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <defs>
+    <mask id="m"><rect width="192" height="192" rx="36" fill="#fff"/></mask>
+  </defs>
+  <rect width="192" height="192" fill="#2563eb" mask="url(#m)"/>
+  <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="92" fill="#fff" mask="url(#m)">U</text>
+</svg>
+
