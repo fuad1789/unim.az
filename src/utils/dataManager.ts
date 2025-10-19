@@ -1,20 +1,51 @@
 import { Group, UserPreferences, DayName, Lesson } from "@/types";
+import {
+  isOffline,
+  loadOfflineGroupData,
+  saveOfflineGroupData,
+  loadOfflineUserPreferences,
+  saveOfflineUserPreferences,
+  getOfflineAvailableGroups,
+  getOfflineGroupData,
+  hasOfflineData,
+  setLastSyncTime,
+  getLastSyncTime,
+} from "./offlineManager";
 
-// Load university data from MongoDB
+// Load university data from MongoDB or offline cache
 export async function loadUniversityData(
   universityId: number
 ): Promise<Group[]> {
   try {
-    // Fetch from MongoDB API with university filter
-    const response = await fetch(`/api/groups?universityId=${universityId}`);
-    if (response.ok) {
-      const result = await response.json();
-      if (result.success && result.data && result.data.length > 0) {
-        return result.data as Group[];
+    // First check if we have offline data
+    if (hasOfflineData(universityId)) {
+      console.log(`Loading offline data for university ${universityId}`);
+      return loadOfflineGroupData(universityId) as Group[];
+    }
+
+    // If online, try to fetch from API
+    if (!isOffline()) {
+      const response = await fetch(`/api/groups?universityId=${universityId}`);
+      if (response.ok) {
+        const result = await response.json();
+        if (result.success && result.data && result.data.length > 0) {
+          const groups = result.data as Group[];
+          // Cache the data for offline use
+          saveOfflineGroupData(universityId, groups);
+          setLastSyncTime();
+          return groups;
+        }
       }
     }
+
+    // Fallback to empty array if no data available
     return [];
-  } catch {
+  } catch (error) {
+    console.error("Error loading university data:", error);
+    // Try offline data as fallback
+    if (hasOfflineData(universityId)) {
+      return loadOfflineGroupData(universityId) as Group[];
+    }
     return [];
   }
 }
@@ -23,10 +54,20 @@ export async function loadUniversityData(
 export async function getAvailableGroups(
   universityId: number
 ): Promise<string[]> {
-  const groups = await loadUniversityData(universityId);
-  const groupNames = groups.map((group) => group.group_id || group.group);
-  // Remove duplicates and filter out undefined/null values
-  return [...new Set(groupNames.filter(Boolean))];
+  // First try offline data
+  if (hasOfflineData(universityId)) {
+    return getOfflineAvailableGroups(universityId);
+  }
+
+  // If online, try to fetch from API
+  if (!isOffline()) {
+    const groups = await loadUniversityData(universityId);
+    const groupNames = groups.map((group) => group.group_id || group.group);
+    return [...new Set(groupNames.filter(Boolean))];
+  }
+
+  // Fallback to offline data
+  return getOfflineAvailableGroups(universityId);
 }
 
 // Get group data
@@ -34,12 +75,26 @@ export async function getGroupData(
   universityId: number,
   groupName: string
 ): Promise<Group | null> {
-  const groups = await loadUniversityData(universityId);
-  return (
-    groups.find((group) => group.group_id === groupName) ||
-    groups.find((group) => group.group === groupName) ||
-    null
-  );
+  // First try offline data
+  if (hasOfflineData(universityId)) {
+    const offlineGroup = getOfflineGroupData(universityId, groupName);
+    if (offlineGroup) {
+      return offlineGroup;
+    }
+  }
+
+  // If online, try to fetch from API
+  if (!isOffline()) {
+    const groups = await loadUniversityData(universityId);
+    return (
+      groups.find((group) => group.group_id === groupName) ||
+      groups.find((group) => group.group === groupName) ||
+      null
+    );
+  }
+
+  // Fallback to offline data
+  return getOfflineGroupData(universityId, groupName);
 }
 
 // Get current day lessons
@@ -91,7 +146,9 @@ export function getCurrentTimeInMinutes(): number {
 // Save user preferences to localStorage
 export function saveUserPreferences(preferences: UserPreferences): void {
   try {
+    // Save to both legacy location and offline manager
     localStorage.setItem("userPreferences", JSON.stringify(preferences));
+    saveOfflineUserPreferences(preferences);
   } catch (error) {
     console.error("Error saving user preferences:", error);
   }
@@ -100,11 +157,21 @@ export function saveUserPreferences(preferences: UserPreferences): void {
 // Load user preferences from localStorage
 export function loadUserPreferences(): UserPreferences | null {
   try {
+    // First try legacy location
     const stored = localStorage.getItem("userPreferences");
-    return stored ? JSON.parse(stored) : null;
+    if (stored) {
+      const preferences = JSON.parse(stored);
+      // Also save to offline manager for consistency
+      saveOfflineUserPreferences(preferences);
+      return preferences;
+    }
+
+    // Fallback to offline manager
+    return loadOfflineUserPreferences();
   } catch (error) {
     console.error("Error loading user preferences:", error);
-    return null;
+    // Try offline manager as fallback
+    return loadOfflineUserPreferences();
   }
 }
 
@@ -112,7 +179,32 @@ export function loadUserPreferences(): UserPreferences | null {
 export function clearUserPreferences(): void {
   try {
     localStorage.removeItem("userPreferences");
+    // Also clear from offline manager
+    localStorage.removeItem("unimaz-offline-user-preferences");
   } catch (error) {
     console.error("Error clearing user preferences:", error);
+  }
+}
+
+// Check if we're in offline mode
+export function isAppOffline(): boolean {
+  return isOffline();
+}
+
+// Get last sync time
+export function getLastDataSync(): number {
+  return getLastSyncTime();
+}
+
+// Force sync data when online
+export async function syncDataWhenOnline(universityId: number): Promise<void> {
+  if (!isOffline()) {
+    try {
+      console.log(`Syncing data for university ${universityId}`);
+      await loadUniversityData(universityId);
+      console.log("Data sync completed");
+    } catch (error) {
+      console.error("Error syncing data:", error);
+    }
   }
 }

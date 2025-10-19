@@ -13,6 +13,8 @@ import {
   saveUserPreferences,
   getAvailableGroups,
 } from "@/utils/dataManager";
+import { initializeOfflineMode } from "@/utils/offlineManager";
+import OfflineIndicator from "@/components/OfflineIndicator";
 
 // Azerbaijani-aware normalizer: maps special letters to Latin counterparts and lowercases
 function normalizeAz(input: string): string {
@@ -244,6 +246,9 @@ export default function Home() {
   }, [selectedUniversityId, universities]);
 
   useEffect(() => {
+    // Initialize offline mode
+    initializeOfflineMode();
+
     try {
       const stored = localStorage.getItem("universityId");
       const preferences = loadUserPreferences();
@@ -977,6 +982,9 @@ export default function Home() {
           )}
         </AnimatePresence>
       </div>
+
+      {/* Offline Indicator */}
+      <OfflineIndicator universityId={selectedUniversityId || undefined} />
     </main>
   );
 }

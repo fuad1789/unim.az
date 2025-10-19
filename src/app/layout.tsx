@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import PWAInstallClient from "./pwa-install-client";
+import InstallPrompt from "../components/InstallPrompt";
 import RegisterSW from "./register-sw";
 
 const inter = Inter({
@@ -51,7 +51,7 @@ export default function RootLayout({
       >
         {children}
         <RegisterSW />
-        <PWAInstallClient />
+        <InstallPrompt />
       </body>
     </html>
   );

@@ -12,6 +12,11 @@ import {
 export interface UserData {
   absences: Record<string, number>;
   grades: Record<string, number>;
+  offlineData?: {
+    lastSync: number;
+    universityId?: number;
+    groupName?: string;
+  };
 }
 
 const STORAGE_KEY = "unimaz-userdata";
@@ -23,6 +28,9 @@ function getEmptyUserData(): UserData {
   return {
     absences: {},
     grades: {},
+    offlineData: {
+      lastSync: 0,
+    },
   };
 }
 
@@ -43,6 +51,9 @@ export function readUserData(): UserData {
     return {
       absences: parsed.absences || {},
       grades: parsed.grades || {},
+      offlineData: parsed.offlineData || {
+        lastSync: 0,
+      },
     };
   } catch (error) {
     console.error("Error reading user data from localStorage:", error);
@@ -516,6 +527,9 @@ export function importUserData(jsonString: string): boolean {
         userData.grades && typeof userData.grades === "object"
           ? userData.grades
           : {},
+      offlineData: userData.offlineData || {
+        lastSync: 0,
+      },
     };
 
     writeUserData(validUserData);
@@ -524,6 +538,30 @@ export function importUserData(jsonString: string): boolean {
     console.error("Error importing user data:", error);
     return false;
   }
+}
+
+/**
+ * Update offline data metadata in user data
+ */
+export function updateOfflineData(
+  universityId?: number,
+  groupName?: string
+): void {
+  const userData = readUserData();
+  userData.offlineData = {
+    lastSync: Date.now(),
+    universityId,
+    groupName,
+  };
+  writeUserData(userData);
+}
+
+/**
+ * Get offline data metadata from user data
+ */
+export function getOfflineData(): UserData["offlineData"] {
+  const userData = readUserData();
+  return userData.offlineData;
 }
 
 /**

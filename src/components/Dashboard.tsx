@@ -6,6 +6,7 @@ import Image from "next/image";
 import { University, Group, UserPreferences, Lesson, WeekType } from "@/types";
 import { getGroupData, getCurrentTimeInMinutes } from "@/utils/dataManager";
 import { calculateCurrentWeekType } from "@/utils/weekCalculator";
+import { useOfflineSync } from "@/hooks/useOfflineSync";
 import {
   calculateAbsenceLimits,
   getAbsenceLimitForSubject,
@@ -95,6 +96,12 @@ export default function Dashboard({
   const [group, setGroup] = useState<Group | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Offline sync hook
+  useOfflineSync({
+    universityId: preferences.universityId,
+    autoSync: true,
+  });
   const [selectedDay, setSelectedDay] = useState(() => {
     const today = new Date().getDay();
     // Convert Sunday (0) to 6, Monday (1) to 0, etc.
