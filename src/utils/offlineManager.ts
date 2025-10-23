@@ -280,12 +280,31 @@ export function initializeOfflineMode(): void {
   window.addEventListener("online", () => {
     setOfflineMode(false);
     console.log("App is now online");
+    // Trigger sync when coming back online
+    if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ type: "ONLINE" });
+    }
   });
 
   window.addEventListener("offline", () => {
     setOfflineMode(true);
     console.log("App is now offline");
+    // Notify service worker about offline status
+    if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ type: "OFFLINE" });
+    }
   });
+
+  // Listen for service worker messages
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.addEventListener("message", (event) => {
+      if (event.data.type === "CACHE_UPDATED") {
+        console.log("Cache updated, refreshing data...");
+        // Trigger a custom event for components to listen to
+        window.dispatchEvent(new CustomEvent("offlineDataUpdated"));
+      }
+    });
+  }
 }
 
 /**
@@ -337,4 +356,79 @@ export function importOfflineData(jsonString: string): boolean {
     console.error("Error importing offline data:", error);
     return false;
   }
+}
+
+/**
+ * Check if the app can work offline with current data
+ */
+export function canWorkOffline(): boolean {
+  const hasUniversityData = loadOfflineUniversityData().length > 0;
+  const hasGroupData = Object.keys(loadOfflineGroupData()).length > 0;
+  return hasUniversityData || hasGroupData;
+}
+
+/**
+ * Get offline data statistics
+ */
+export function getOfflineStats(): {
+  hasUniversityData: boolean;
+  hasGroupData: boolean;
+  lastSync: number;
+  dataSize: number;
+  isStale: boolean;
+} {
+  const universityData = loadOfflineUniversityData();
+  const groupData = loadOfflineGroupData();
+  const lastSync = getLastSyncTime();
+
+  return {
+    hasUniversityData: universityData.length > 0,
+    hasGroupData: Object.keys(groupData).length > 0,
+    lastSync,
+    dataSize: getOfflineDataSize(),
+    isStale: isOfflineDataStale(),
+  };
+}
+
+/**
+ * Preload essential data for offline use
+ */
+export async function preloadOfflineData(): Promise<boolean> {
+  try {
+    // This would typically fetch and cache essential data
+    // For now, we'll just ensure the service worker is ready
+    if ("serviceWorker" in navigator) {
+      const registration = await navigator.serviceWorker.ready;
+      if (registration.active) {
+        registration.active.postMessage({ type: "PRELOAD_DATA" });
+        return true;
+      }
+    }
+    return false;
+  } catch (error) {
+    console.error("Error preloading offline data:", error);
+    return false;
+  }
+}
+
+/**
+ * Clear stale offline data
+ */
+export function clearStaleOfflineData(): void {
+  const lastSync = getLastSyncTime();
+  const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+
+  if (lastSync < thirtyDaysAgo) {
+    console.log("Clearing stale offline data...");
+    clearOfflineData();
+  }
+}
+
+/**
+ * Check if offline data needs refresh
+ */
+export function needsOfflineRefresh(): boolean {
+  const lastSync = getLastSyncTime();
+  const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
+  return lastSync < oneDayAgo;
 }

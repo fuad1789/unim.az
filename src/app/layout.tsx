@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import InstallPrompt from "../components/InstallPrompt";
 import RegisterSW from "./register-sw";
+import OfflineIndicator from "../components/OfflineIndicator";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -52,6 +53,7 @@ export default function RootLayout({
         {children}
         <RegisterSW />
         <InstallPrompt />
+        <OfflineIndicator />
       </body>
     </html>
   );
