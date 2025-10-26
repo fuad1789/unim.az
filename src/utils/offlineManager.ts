@@ -1,24 +1,29 @@
 /**
  * Offline Manager - Handles offline data storage and synchronization
  * Provides offline-first functionality for university and group data
+ *
+ * BASIT YAPILANDIRMA:
+ * - Kullanıcı bir university + group seçerse
+ * - O grubun TÜM datası (haftalık ders programı) tek bir key'de kaydedilir
+ * - Key: `unimaz-current-group-data`
+ * - Value: Group object (tüm haftalık program, academic load, vs.)
  */
 
 import { Group, University, UserPreferences } from "@/types";
 
-// Storage keys for offline data
+// Storage keys for offline data - BASIT YAPILANDIRMA
 const OFFLINE_KEYS = {
-  UNIVERSITY_DATA: "unimaz-offline-university-data",
-  GROUP_DATA: "unimaz-offline-group-data",
+  CURRENT_GROUP_DATA: "unimaz-current-group-data", // Tek bir key: seçilen grubun tüm datası
   USER_PREFERENCES: "unimaz-offline-user-preferences",
   LAST_SYNC: "unimaz-offline-last-sync",
   OFFLINE_MODE: "unimaz-offline-mode",
 } as const;
 
-export interface OfflineData {
-  universities: University[];
-  groups: Record<number, Group[]>; // universityId -> groups
+export interface CurrentGroupData {
+  universityId: number;
+  groupName: string;
+  group: Group; // Tüm haftalık program, academic_load, vs.
   lastSync: number;
-  version: string;
 }
 
 export interface OfflineUserPreferences extends UserPreferences {
@@ -58,76 +63,49 @@ export function getOfflineMode(): boolean {
 }
 
 /**
- * Save university data for offline use
+ * BASIT YAPI: Seçilen grubun tüm datasını kaydet
+ * Kullanıcı university + group seçtiğinde, o grubun tüm haftalık program datası kaydedilir
  */
-export function saveOfflineUniversityData(universities: University[]): void {
-  try {
-    const data = {
-      universities,
-      lastSync: Date.now(),
-      version: "1.0.0",
-    };
-    localStorage.setItem(OFFLINE_KEYS.UNIVERSITY_DATA, JSON.stringify(data));
-  } catch (error) {
-    console.error("Error saving offline university data:", error);
-  }
-}
-
-/**
- * Load university data from offline storage
- */
-export function loadOfflineUniversityData(): University[] {
-  try {
-    const stored = localStorage.getItem(OFFLINE_KEYS.UNIVERSITY_DATA);
-    if (!stored) return [];
-
-    const data = JSON.parse(stored);
-    return data.universities || [];
-  } catch (error) {
-    console.error("Error loading offline university data:", error);
-    return [];
-  }
-}
-
-/**
- * Save group data for a specific university offline
- */
-export function saveOfflineGroupData(
+export function saveCurrentGroupData(
   universityId: number,
-  groups: Group[]
+  groupName: string,
+  group: Group
 ): void {
   try {
-    const existingData = loadOfflineGroupData();
-    const updatedData = {
-      ...existingData,
-      [universityId]: groups,
+    const data: CurrentGroupData = {
+      universityId,
+      groupName,
+      group,
       lastSync: Date.now(),
-      version: "1.0.0",
     };
-    localStorage.setItem(OFFLINE_KEYS.GROUP_DATA, JSON.stringify(updatedData));
+    localStorage.setItem(OFFLINE_KEYS.CURRENT_GROUP_DATA, JSON.stringify(data));
+    console.log(`Saved current group data for ${groupName}`);
   } catch (error) {
-    console.error("Error saving offline group data:", error);
+    console.error("Error saving current group data:", error);
   }
 }
 
 /**
- * Load group data for a specific university from offline storage
+ * BASIT YAPI: Kaydedilen grubun datasını yükle
  */
-export function loadOfflineGroupData(
-  universityId?: number
-): Record<number, Group[]> | Group[] {
+export function loadCurrentGroupData(): CurrentGroupData | null {
   try {
-    const stored = localStorage.getItem(OFFLINE_KEYS.GROUP_DATA);
-    if (!stored) return universityId ? [] : {};
+    const stored = localStorage.getItem(OFFLINE_KEYS.CURRENT_GROUP_DATA);
+    if (!stored) return null;
 
-    const data = JSON.parse(stored);
-    const groups = data[universityId || ""] || data;
-
-    return universityId ? (Array.isArray(groups) ? groups : []) : groups;
+    const data: CurrentGroupData = JSON.parse(stored);
+    return data;
   } catch (error) {
-    console.error("Error loading offline group data:", error);
-    return universityId ? [] : {};
+    console.error("Error loading current group data:", error);
+    return null;
   }
+}
+
+/**
+ * Mevcut kaydedilmiş grup datası var mı kontrol et
+ */
+export function hasCurrentGroupData(): boolean {
+  return loadCurrentGroupData() !== null;
 }
 
 /**
@@ -168,41 +146,8 @@ export function loadOfflineUserPreferences(): UserPreferences | null {
   }
 }
 
-/**
- * Get available groups for a university from offline storage
- */
-export function getOfflineAvailableGroups(universityId: number): string[] {
-  const groups = loadOfflineGroupData(universityId) as Group[];
-  if (!Array.isArray(groups)) return [];
-
-  const groupNames = groups.map((group) => group.group_id || group.group);
-  return [...new Set(groupNames.filter(Boolean))];
-}
-
-/**
- * Get specific group data from offline storage
- */
-export function getOfflineGroupData(
-  universityId: number,
-  groupName: string
-): Group | null {
-  const groups = loadOfflineGroupData(universityId) as Group[];
-  if (!Array.isArray(groups)) return null;
-
-  return (
-    groups.find(
-      (group) => group.group_id === groupName || group.group === groupName
-    ) || null
-  );
-}
-
-/**
- * Check if offline data exists for a university
- */
-export function hasOfflineData(universityId: number): boolean {
-  const groups = loadOfflineGroupData(universityId) as Group[];
-  return Array.isArray(groups) && groups.length > 0;
-}
+// Eski fonksiyonlar - artık kullanılmıyor (basitleştirme için kaldırıldı)
+// Bunlar yerine saveCurrentGroupData / loadCurrentGroupData kullanılmalı
 
 /**
  * Get last sync timestamp
@@ -308,15 +253,16 @@ export function initializeOfflineMode(): void {
 }
 
 /**
- * Export offline data for backup
+ * BASIT YAPI: Offline data export et
  */
 export function exportOfflineData(): string {
   try {
+    const currentGroup = loadCurrentGroupData();
+    const userPreferences = loadOfflineUserPreferences();
+
     const data = {
-      universities: loadOfflineUniversityData(),
-      groups: loadOfflineGroupData(),
-      userPreferences: loadOfflineUserPreferences(),
-      lastSync: getLastSyncTime(),
+      currentGroup,
+      userPreferences,
       exportDate: new Date().toISOString(),
     };
     return JSON.stringify(data, null, 2);
@@ -327,28 +273,19 @@ export function exportOfflineData(): string {
 }
 
 /**
- * Import offline data from backup
+ * BASIT YAPI: Offline data import et
  */
 export function importOfflineData(jsonString: string): boolean {
   try {
     const data = JSON.parse(jsonString);
 
-    if (data.universities) {
-      saveOfflineUniversityData(data.universities);
-    }
-
-    if (data.groups) {
-      Object.entries(data.groups).forEach(([universityId, groups]) => {
-        saveOfflineGroupData(parseInt(universityId), groups as Group[]);
-      });
+    if (data.currentGroup) {
+      const { universityId, groupName, group, lastSync } = data.currentGroup;
+      saveCurrentGroupData(universityId, groupName, group);
     }
 
     if (data.userPreferences) {
       saveOfflineUserPreferences(data.userPreferences);
-    }
-
-    if (data.lastSync) {
-      setLastSyncTime(data.lastSync);
     }
 
     return true;
@@ -359,16 +296,14 @@ export function importOfflineData(jsonString: string): boolean {
 }
 
 /**
- * Check if the app can work offline with current data
+ * BASIT YAPI: Offline modda çalışabilir mi kontrol et
  */
 export function canWorkOffline(): boolean {
-  const hasUniversityData = loadOfflineUniversityData().length > 0;
-  const hasGroupData = Object.keys(loadOfflineGroupData()).length > 0;
-  return hasUniversityData || hasGroupData;
+  return hasCurrentGroupData();
 }
 
 /**
- * Get offline data statistics
+ * BASIT YAPI: Offline data istatistikleri
  */
 export function getOfflineStats(): {
   hasUniversityData: boolean;
@@ -377,14 +312,11 @@ export function getOfflineStats(): {
   dataSize: number;
   isStale: boolean;
 } {
-  const universityData = loadOfflineUniversityData();
-  const groupData = loadOfflineGroupData();
-  const lastSync = getLastSyncTime();
-
+  const currentGroup = loadCurrentGroupData();
   return {
-    hasUniversityData: universityData.length > 0,
-    hasGroupData: Object.keys(groupData).length > 0,
-    lastSync,
+    hasUniversityData: currentGroup !== null,
+    hasGroupData: currentGroup !== null,
+    lastSync: currentGroup?.lastSync || 0,
     dataSize: getOfflineDataSize(),
     isStale: isOfflineDataStale(),
   };

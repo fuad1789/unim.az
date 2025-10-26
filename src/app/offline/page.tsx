@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import {
   getLastSyncTime,
   isOfflineDataStale,
-  hasOfflineData,
+  hasCurrentGroupData,
 } from "@/utils/offlineManager";
 
 export const dynamic = "force-static";
@@ -18,7 +18,7 @@ export default function OfflinePage() {
   useEffect(() => {
     const lastSyncTime = getLastSyncTime();
     const stale = isOfflineDataStale();
-    const hasOfflineDataResult = hasOfflineData(1); // Check for any university data
+    const hasOfflineDataResult = hasCurrentGroupData(); // Check if current group data exists
 
     setLastSync(lastSyncTime);
     setIsStale(stale);

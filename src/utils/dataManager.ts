@@ -1,100 +1,95 @@
 import { Group, UserPreferences, DayName, Lesson } from "@/types";
 import {
   isOffline,
-  loadOfflineGroupData,
-  saveOfflineGroupData,
+  loadCurrentGroupData,
+  saveCurrentGroupData,
   loadOfflineUserPreferences,
   saveOfflineUserPreferences,
-  getOfflineAvailableGroups,
-  getOfflineGroupData,
-  hasOfflineData,
   setLastSyncTime,
   getLastSyncTime,
+  hasCurrentGroupData,
 } from "./offlineManager";
 
-// Load university data from MongoDB or offline cache
+// BASIT YAPI: University data yükle (tüm grupları)
 export async function loadUniversityData(
   universityId: number
 ): Promise<Group[]> {
   try {
-    // First check if we have offline data
-    if (hasOfflineData(universityId)) {
-      console.log(`Loading offline data for university ${universityId}`);
-      return loadOfflineGroupData(universityId) as Group[];
-    }
-
-    // If online, try to fetch from API
+    // If online, fetch from API
     if (!isOffline()) {
       const response = await fetch(`/api/groups?universityId=${universityId}`);
       if (response.ok) {
         const result = await response.json();
         if (result.success && result.data && result.data.length > 0) {
           const groups = result.data as Group[];
-          // Cache the data for offline use
-          saveOfflineGroupData(universityId, groups);
           setLastSyncTime();
           return groups;
         }
       }
     }
 
-    // Fallback to empty array if no data available
     return [];
   } catch (error) {
     console.error("Error loading university data:", error);
-    // Try offline data as fallback
-    if (hasOfflineData(universityId)) {
-      return loadOfflineGroupData(universityId) as Group[];
-    }
     return [];
   }
 }
 
-// Get available groups for a university
+// BASIT YAPI: Available groups listesi al
 export async function getAvailableGroups(
   universityId: number
 ): Promise<string[]> {
-  // First try offline data
-  if (hasOfflineData(universityId)) {
-    return getOfflineAvailableGroups(universityId);
+  try {
+    if (!isOffline()) {
+      const groups = await loadUniversityData(universityId);
+      const groupNames = groups.map((group) => group.group_id || group.group);
+      return [...new Set(groupNames.filter(Boolean))];
+    }
+    return [];
+  } catch (error) {
+    console.error("Error getting available groups:", error);
+    return [];
   }
-
-  // If online, try to fetch from API
-  if (!isOffline()) {
-    const groups = await loadUniversityData(universityId);
-    const groupNames = groups.map((group) => group.group_id || group.group);
-    return [...new Set(groupNames.filter(Boolean))];
-  }
-
-  // Fallback to offline data
-  return getOfflineAvailableGroups(universityId);
 }
 
-// Get group data
+// BASIT YAPI: Grup datası al ve kaydet
 export async function getGroupData(
   universityId: number,
   groupName: string
 ): Promise<Group | null> {
-  // First try offline data
-  if (hasOfflineData(universityId)) {
-    const offlineGroup = getOfflineGroupData(universityId, groupName);
-    if (offlineGroup) {
-      return offlineGroup;
+  try {
+    // First check offline data (current group)
+    const currentData = loadCurrentGroupData();
+    if (
+      currentData &&
+      currentData.universityId === universityId &&
+      currentData.groupName === groupName
+    ) {
+      console.log("Loading from offline cache");
+      return currentData.group;
     }
-  }
 
-  // If online, try to fetch from API
-  if (!isOffline()) {
-    const groups = await loadUniversityData(universityId);
-    return (
-      groups.find((group) => group.group_id === groupName) ||
-      groups.find((group) => group.group === groupName) ||
-      null
-    );
-  }
+    // If online, fetch from API
+    if (!isOffline()) {
+      const groups = await loadUniversityData(universityId);
+      const group =
+        groups.find((g) => g.group_id === groupName) ||
+        groups.find((g) => g.group === groupName);
 
-  // Fallback to offline data
-  return getOfflineGroupData(universityId, groupName);
+      if (group) {
+        // ÖNEMLI: Grup datasını offline'a kaydet
+        saveCurrentGroupData(universityId, groupName, group);
+        console.log(`Saved group data for offline: ${groupName}`);
+      }
+
+      return group || null;
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Error getting group data:", error);
+    return null;
+  }
 }
 
 // Get current day lessons

@@ -2,14 +2,14 @@
  * Sync Manager - Handles data synchronization when online
  */
 
-import { Group } from "@/types";
 import {
   isOffline,
-  saveOfflineGroupData,
   setLastSyncTime,
   getLastSyncTime,
   isOfflineDataStale,
+  loadCurrentGroupData,
 } from "./offlineManager";
+import { getGroupData } from "./dataManager";
 
 export interface SyncStatus {
   isOnline: boolean;
@@ -59,7 +59,7 @@ class SyncManager {
   }
 
   /**
-   * Sync university data
+   * Sync current group data
    */
   async syncUniversityData(universityId: number): Promise<boolean> {
     if (isOffline() || this.syncInProgress) {
@@ -72,27 +72,24 @@ class SyncManager {
     try {
       console.log(`Syncing data for university ${universityId}`);
 
-      // Fetch groups data
-      const response = await fetch(`/api/groups?universityId=${universityId}`);
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      // Check if we have a current group to sync
+      const currentGroup = loadCurrentGroupData();
+      if (!currentGroup || currentGroup.universityId !== universityId) {
+        console.log("No current group to sync");
+        return false;
       }
 
-      const result = await response.json();
-      if (!result.success || !result.data) {
-        throw new Error("Invalid response format");
+      // Fetch fresh group data from API
+      const groupData = await getGroupData(universityId, currentGroup.groupName);
+      
+      if (groupData) {
+        // Data is already saved by getGroupData
+        setLastSyncTime();
+        console.log(`Successfully synced group ${currentGroup.groupName}`);
+        return true;
       }
 
-      const groups = result.data as Group[];
-
-      // Save to offline storage
-      saveOfflineGroupData(universityId, groups);
-      setLastSyncTime();
-
-      console.log(
-        `Successfully synced ${groups.length} groups for university ${universityId}`
-      );
-      return true;
+      return false;
     } catch (error) {
       console.error("Sync failed:", error);
       this.notifyListeners();
@@ -132,17 +129,15 @@ class SyncManager {
       for (const chunk of chunks) {
         const promises = chunk.map(async (universityId) => {
           try {
-            const response = await fetch(
-              `/api/groups?universityId=${universityId}`
-            );
-            if (response.ok) {
-              const result = await response.json();
-              if (result.success && result.data) {
-                saveOfflineGroupData(universityId, result.data);
-                return true;
-              }
+            // Check if we have current group data for this university
+            const currentGroup = loadCurrentGroupData();
+            if (!currentGroup || currentGroup.universityId !== universityId) {
+              return true; // Skip if no group to sync
             }
-            return false;
+
+            // Sync the current group
+            const groupData = await getGroupData(universityId, currentGroup.groupName);
+            return groupData !== null;
           } catch {
             return false;
           }
