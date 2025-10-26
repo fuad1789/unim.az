@@ -69,23 +69,16 @@ export default withPWA({
         },
       },
     },
-    // API routes - Network first with better offline handling
+    // API routes - Cache first for offline support
     {
       urlPattern: /^\/api\//,
-      handler: "NetworkFirst",
+      handler: "CacheFirst",
       options: {
         cacheName: "api",
-        networkTimeoutSeconds: 5,
         expiration: {
           maxEntries: 200,
           maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
           purgeOnQuotaError: true,
-        },
-        backgroundSync: {
-          name: "api-queue",
-          options: {
-            maxRetentionTime: 24 * 60, // 24 hours
-          },
         },
       },
     },

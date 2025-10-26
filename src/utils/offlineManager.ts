@@ -9,7 +9,7 @@
  * - Value: Group object (tüm haftalık program, academic load, vs.)
  */
 
-import { Group, University, UserPreferences } from "@/types";
+import { Group, UserPreferences } from "@/types";
 
 // Storage keys for offline data - BASIT YAPILANDIRMA
 const OFFLINE_KEYS = {
@@ -280,7 +280,7 @@ export function importOfflineData(jsonString: string): boolean {
     const data = JSON.parse(jsonString);
 
     if (data.currentGroup) {
-      const { universityId, groupName, group, lastSync } = data.currentGroup;
+      const { universityId, groupName, group } = data.currentGroup;
       saveCurrentGroupData(universityId, groupName, group);
     }
 

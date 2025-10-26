@@ -7,7 +7,6 @@ import {
   saveOfflineUserPreferences,
   setLastSyncTime,
   getLastSyncTime,
-  hasCurrentGroupData,
 } from "./offlineManager";
 
 // BASIT YAPI: University data yükle (tüm grupları)
@@ -58,7 +57,7 @@ export async function getGroupData(
   groupName: string
 ): Promise<Group | null> {
   try {
-    // First check offline data (current group)
+    // ÖNEMLI: Önce her zaman offline cache'den oku
     const currentData = loadCurrentGroupData();
     if (
       currentData &&
@@ -69,25 +68,39 @@ export async function getGroupData(
       return currentData.group;
     }
 
-    // If online, fetch from API
-    if (!isOffline()) {
-      const groups = await loadUniversityData(universityId);
-      const group =
-        groups.find((g) => g.group_id === groupName) ||
-        groups.find((g) => g.group === groupName);
+    // Cache'de yoksa, sadece online ise API'den al
+    if (isOffline()) {
+      console.log("Offline mode - no cache data available");
+      return null;
+    }
 
-      if (group) {
-        // ÖNEMLI: Grup datasını offline'a kaydet
-        saveCurrentGroupData(universityId, groupName, group);
-        console.log(`Saved group data for offline: ${groupName}`);
-      }
+    // Online ise API'den al
+    const groups = await loadUniversityData(universityId);
+    const group =
+      groups.find((g) => g.group_id === groupName) ||
+      groups.find((g) => g.group === groupName);
 
-      return group || null;
+    if (group) {
+      saveCurrentGroupData(universityId, groupName, group);
+      console.log(`Saved group data for offline: ${groupName}`);
+      return group;
     }
 
     return null;
   } catch (error) {
     console.error("Error getting group data:", error);
+
+    // Hata durumunda cache'den dene
+    const currentData = loadCurrentGroupData();
+    if (
+      currentData &&
+      currentData.universityId === universityId &&
+      currentData.groupName === groupName
+    ) {
+      console.log("Falling back to cached data");
+      return currentData.group;
+    }
+
     return null;
   }
 }
