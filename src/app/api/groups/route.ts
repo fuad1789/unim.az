@@ -44,11 +44,43 @@ const PostBodySchema = z.object({
 
 export async function GET(request: NextRequest) {
   try {
-    await connectDB();
-
     const { searchParams } = new URL(request.url);
     const groupId = searchParams.get("groupId");
     const universityId = searchParams.get("universityId");
+
+    // FORCE STATIC DATA for SDU (ID 11) or when no params (all groups)
+    // This bypasses MongoDB completely as requested by user
+    if (universityId === "11" || (!universityId && !groupId)) {
+        try {
+          const path = require("path");
+          const fs = require("fs").promises;
+          
+          const jsonPath = path.join(process.cwd(), "src", "data", "sdu.json");
+          const fileContents = await fs.readFile(jsonPath, "utf8");
+          const sduGroups = JSON.parse(fileContents);
+          
+          if (groupId) {
+            const group = sduGroups.find((g: any) => g.group_id === groupId || g.group === groupId);
+            return NextResponse.json({ success: true, data: group ? [group] : [] });
+          }
+          
+          return NextResponse.json({ success: true, data: sduGroups });
+        } catch (fileError) {
+          console.error("Static file read error:", fileError);
+          return NextResponse.json(
+            { success: false, error: "Failed to load static data" },
+            { status: 500 }
+          );
+        }
+    }
+
+    let isConnected = false;
+    try {
+      await connectDB();
+      isConnected = true;
+    } catch (e) {
+      console.warn("MongoDB connection failed", e);
+    }
 
     let query = {} as Record<string, unknown>;
     let Group;
@@ -79,8 +111,12 @@ export async function GET(request: NextRequest) {
 
       // Get SDU groups
       const sduGroup = getGroupModel(11);
-      const sduGroups = await sduGroup.find({});
-      allGroups.push(...sduGroups);
+      try {
+        const sduGroups = await sduGroup.find({});
+        allGroups.push(...sduGroups);
+      } catch (e) {
+        console.error("Error fetching SDU groups:", e);
+      }
 
       // TODO: Add other universities as they are created
 

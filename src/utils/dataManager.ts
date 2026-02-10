@@ -16,14 +16,28 @@ export async function loadUniversityData(
   try {
     // If online, fetch from API
     if (!isOffline()) {
-      const response = await fetch(`/api/groups?universityId=${universityId}`);
-      if (response.ok) {
-        const result = await response.json();
-        if (result.success && result.data && result.data.length > 0) {
-          const groups = result.data as Group[];
-          setLastSyncTime();
-          return groups;
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+
+      try {
+        const response = await fetch(
+          `/api/groups?universityId=${universityId}`,
+          { signal: controller.signal }
+        );
+        clearTimeout(timeoutId);
+
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success && result.data && result.data.length > 0) {
+            const groups = result.data as Group[];
+            setLastSyncTime();
+            return groups;
+          }
         }
+      } catch (e) {
+        clearTimeout(timeoutId);
+        console.error("Fetch failed or timed out:", e);
+        // Fallthrough to return empty array
       }
     }
 
