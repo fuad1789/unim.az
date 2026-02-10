@@ -3,6 +3,8 @@ import connectDB from "@/lib/mongodb";
 import { z } from "zod";
 import { getUniversityRules } from "@/utils/universityRules";
 import { getGroupModel } from "@/models/groupFactory";
+import path from "path";
+import { promises as fs } from "fs";
 
 const PostBodySchema = z.object({
   group_id: z.string().min(1),
@@ -52,14 +54,12 @@ export async function GET(request: NextRequest) {
     // This bypasses MongoDB completely as requested by user
     if (universityId === "11" || (!universityId && !groupId)) {
         try {
-          const path = require("path");
-          const fs = require("fs").promises;
-          
           const jsonPath = path.join(process.cwd(), "src", "data", "sdu.json");
           const fileContents = await fs.readFile(jsonPath, "utf8");
           const sduGroups = JSON.parse(fileContents);
           
           if (groupId) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const group = sduGroups.find((g: any) => g.group_id === groupId || g.group === groupId);
             return NextResponse.json({ success: true, data: group ? [group] : [] });
           }
@@ -74,10 +74,8 @@ export async function GET(request: NextRequest) {
         }
     }
 
-    let isConnected = false;
     try {
       await connectDB();
-      isConnected = true;
     } catch (e) {
       console.warn("MongoDB connection failed", e);
     }

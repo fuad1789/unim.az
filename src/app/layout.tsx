@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import InstallPrompt from "../components/InstallPrompt";
@@ -10,12 +10,15 @@ const inter = Inter({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#2563eb",
+};
+
 export const metadata: Metadata = {
   title: "unim.az",
   description: "Azerbaijan university week type checker",
   applicationName: "unim.az",
   manifest: "/manifest.json",
-  themeColor: "#2563eb",
   icons: [
     {
       rel: "icon",
